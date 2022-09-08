@@ -1,9 +1,19 @@
+@font-face {
+  font-family: Big;
+  font-weight: 800;
+  src: url('../assets/fonts/The\ Bigger\ The\ Better.ttf');
+}
+:root{
+  --primary-color:#Fff;
+  --secondary-color:#fff;
+  --body-bg:#fff;
+  --text-color:#fff;
+}
 html,
 body {
   padding: 0;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  font-family: 'Big';
 }
 
 a {
