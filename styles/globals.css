@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 @font-face {
   font-family: Big;
   font-weight: 800;
@@ -6,8 +10,9 @@
 :root{
   --primary-color:#Fff;
   --secondary-color:#fff;
-  --body-bg:#fff;
+  --body-bg:linear-gradient(180deg,rgb(3, 4, 52) 0%,rgb(55, 38, 70));
   --text-color:#fff;
+  --gray:#828282;
 }
 html,
 body {
