@@ -56,7 +56,7 @@ export default function Layout({ children, title }) {
 
                 <main>
                     <h1 className='text-center text-3xl py-10'>Requisições do banco de dados</h1>
-                    <div className=''>
+                    <div className='container m-auto mt-4  px-4'>
                         {children}
                     </div>
 

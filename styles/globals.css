@@ -20,6 +20,18 @@ body {
   margin: 0;
   font-family: 'Big';
 }
+/* APPLY */
+.card{
+  @apply mb-5 block rounded-lg border border-gray-200 shadow-md;
+  transition: 300ms ease-in-out;
+  
+}
+.card:hover{
+  transform: scale(1.05);
+  
+  
+}
+
 
 a {
   color: inherit;
@@ -35,7 +47,7 @@ a {
     color-scheme: dark;
   }
   body {
-    color: white;
-    background: black;
+    color: rgb(0, 0, 0);
+    background: aliceblue;
   }
 }

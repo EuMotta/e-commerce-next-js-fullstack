@@ -11,7 +11,7 @@ export default function ProductItem({ product }) {
                     <img
                         src={product.image}
                         alt={product.name}
-                        className="rounded shadow"
+                        className="rounded card shadow"
                     />
                 </a>
             </Link>
