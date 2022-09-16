@@ -10,7 +10,8 @@ const data = {
             rating: 4.5,
             numReviews: 11,
             countInStock:24,
-            publisher:'José'
+            publisher:'José',
+            category:'nft'
         },
         {
             name: 'Produto 2',
@@ -21,7 +22,8 @@ const data = {
             rating: 4.5,
             numReviews: 11,
             countInStock:24,
-            publisher:'José'
+            publisher:'José',
+            category:'nft'
         },
         {
             name: 'Produto 3',
@@ -32,7 +34,8 @@ const data = {
             rating: 4.5,
             numReviews: 11,
             countInStock:24,
-            publisher:'José'
+            publisher:'José',
+            category:'nft'
         },
         {
             name: 'Produto 4',
@@ -43,7 +46,8 @@ const data = {
             rating: 4.5,
             numReviews: 11,
             countInStock:24,
-            publisher:'José'
+            publisher:'José',
+            category:'nft'
         },
         {
             name: 'Produto 5',
@@ -54,7 +58,8 @@ const data = {
             rating: 4.5,
             numReviews: 11,
             countInStock:24,
-            publisher:'José'
+            publisher:'José',
+            category:'nft'
         },
         {
             name: 'Produto 6',
@@ -65,7 +70,8 @@ const data = {
             rating: 4.5,
             numReviews: 11,
             countInStock:24,
-            publisher:'José'
+            publisher:'José',
+            category:'nft'
         }
     ]
 }

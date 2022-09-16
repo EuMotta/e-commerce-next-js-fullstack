@@ -26,10 +26,9 @@ body {
   transition: 300ms ease-in-out;
   
 }
-.card:hover{
+.card img:hover{
   transform: scale(1.05);
-  
-  
+  @apply shadow-xl;
 }
 
 
