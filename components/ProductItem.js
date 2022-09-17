@@ -1,4 +1,4 @@
-import react from "react";
+import React from "react";
 import Link from "next/link";
 import 'remixicon/fonts/remixicon.css'
 
@@ -21,6 +21,11 @@ export default function ProductItem({ product }) {
                         <h2 className="text-lg">{product.name}</h2>
                     </a>
                 </Link>
+                <p className="mb-2">{product.publisher}</p>
+                <div className="flex justify-between w-full">
+                    <p className="text-xl">R$: {product.price}</p>
+                    <button className="primary-button" type="button"><i class='ri-shopping-cart-line'></i></button>
+                </div>
             </div>
         </div>
 

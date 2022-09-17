@@ -1,5 +1,6 @@
 import Head from 'next/head'
-import React from 'react'
+import React, { useContext, useEffect, useState } from 'react'
+import { Store } from '../utils/Store'
 
 const navbar_links = [
     {
@@ -20,6 +21,13 @@ const navbar_links = [
     },
 ]
 export default function Layout({ children, title }) {
+    const { state } = useContext(Store)
+    const { cart } = state
+    const year = new Date().getFullYear()
+    const { cartItemsCount, setCartItensCount } = useState(0)
+    useEffect(() => {
+        setCartItensCount(cart.cartItems.reduce((a, c) => a + c.quantity, 0))
+    }, [cart.cartItems])
     return (
         <>
             <Head>
@@ -46,9 +54,17 @@ export default function Layout({ children, title }) {
                                     ))}
                             </ul>
                             <div>
-                                <p>Login</p>
-                            </div>
+                                <Link href='/cart'>
+                                    <a className='p-2 text-2xl'>
+                                        {cartItemsCount > 0 && (
+                                            <span>{cartItemsCount}</span>   
+                                        )}
+                                    </a>
+                                </Link>
+                                {/* <Link href='/login'>
 
+                                </Link> */}
+                            </div>
                         </div>
                     </nav>
                 </header>
@@ -64,8 +80,8 @@ export default function Layout({ children, title }) {
 
 
 
-                <footer>
-                    footer
+                <footer className="flex text-xl h-10 justify-center items-center shadow-inner">
+                    <p style={{ color: 'var(--primary-color)' }}>Copyright © {year} José Antonio</p>
                 </footer>
             </div>
         </>

@@ -1,16 +1,17 @@
 import data from '../../utils/data'
 import Layout from '../../components/Layout'
-import React from 'react'
+import React, { useContext } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
+import { Store } from '../../utils/Store'
 
 export default function productScreen() {
     const { state, dispatch } = useContext(Store);
     const { query } = useRouter
     const { slug } = query
     const router = useRouter()
-    const product = data.products.find(x => x.slug === slug)
+    const product = data.products.find((x) => x.slug === slug)
     if (!product) {
         return (
             <div>
