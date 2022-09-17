@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import React, { useContext, useEffect, useState } from 'react'
-import { Store } from '../utils/Storee'
+import { Store } from '../utils/Store'
 
 const navbar_links = [
     {
