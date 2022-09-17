@@ -4,7 +4,7 @@ import React, { useContext } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
-import { Store } from '../../utils/Store'
+import { Store } from '../../utils/Storee'
 
 export default function productScreen() {
     const { state, dispatch } = useContext(Store);
