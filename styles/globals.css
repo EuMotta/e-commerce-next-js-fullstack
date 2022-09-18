@@ -4,33 +4,28 @@
 
 @font-face {
   font-family: Big;
-  font-weight: 800;
   src: url('../assets/fonts/The\ Bigger\ The\ Better.ttf');
+  font-weight: 600;
 }
-:root{
-  --primary-color:#Fff;
-  --secondary-color:#fff;
-  --body-bg:linear-gradient(180deg,rgb(3, 4, 52) 0%,rgb(55, 38, 70));
-  --text-color:#fff;
-  --gray:#828282;
-}
+
 html,
 body {
   padding: 0;
   margin: 0;
-  font-family: 'Big';
-}
-/* APPLY */
-.card{
-  @apply mb-5 block rounded-lg border border-gray-200 shadow-md;
-  transition: 300ms ease-in-out;
-  
-}
-.card img:hover{
-  transform: scale(1.05);
-  @apply shadow-xl;
+  font-family: 'Big'
 }
 
+:root {
+  --primary-color: #fff;
+  --secondary-color: #fff;
+  --body-bg: linear-gradient(180deg, rgb(3, 4, 52) 0%, rgb(55, 38, 70));
+  --text-color: #fff;
+  --gray: #828282;
+}
+
+.menu {
+  @apply text-xl text-black justify-between;
+}
 
 a {
   color: inherit;
@@ -41,12 +36,45 @@ a {
   box-sizing: border-box;
 }
 
+.card {
+  @apply mb-5 block rounded-lg border border-gray-200 shadow-md;
+  transition: 300ms ease-in-out;
+}
+
+.card img:hover {
+  transform: scale(1.1);
+}
+
 @media (prefers-color-scheme: dark) {
   html {
-    color-scheme: dark;
+    color-scheme: var(dark);
   }
+
   body {
-    color: rgb(0, 0, 0);
+    color: black;
     background: aliceblue;
   }
 }
+
+button {
+  @apply rounded bg-sky-100 py-2 px-4 shadow outline-none;
+}
+
+.primary-button {
+  @apply rounded py-0 bg-sky-100 px-5 shadow m-2;
+}
+
+button:hover,
+.primary-button:hover {
+  --tw-bg-opacity: 1;
+  @apply bg-sky-200 text-white shadow;
+}
+.img_ef{
+  overflow: hidden;
+  transition: 300ms ease-in-out;
+  
+}
+.img_ef:hover{
+  transform: scale(1.05);
+}
+

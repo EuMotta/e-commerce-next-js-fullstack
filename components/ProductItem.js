@@ -1,7 +1,6 @@
-import React from "react";
-import Link from "next/link";
+import React from "react"
+import Link from 'next/link'
 import 'remixicon/fonts/remixicon.css'
-
 
 export default function ProductItem({ product }) {
     return (
@@ -11,7 +10,7 @@ export default function ProductItem({ product }) {
                     <img
                         src={product.image}
                         alt={product.name}
-                        className="rounded card shadow"
+                        className="rounded card"
                     />
                 </a>
             </Link>
@@ -23,11 +22,14 @@ export default function ProductItem({ product }) {
                 </Link>
                 <p className="mb-2">{product.publisher}</p>
                 <div className="flex justify-between w-full">
-                    <p className="text-xl">R$: {product.price}</p>
-                    <button className="primary-button" type="button"><i class='ri-shopping-cart-line'></i></button>
+                    <p className="text-xl">R$ {product.price}</p>
+                    <button
+                        className="primary-button"
+                        type="button">
+                        <i class="ri-shopping-cart-line"></i>
+                    </button>
                 </div>
             </div>
         </div>
-
     );
 }

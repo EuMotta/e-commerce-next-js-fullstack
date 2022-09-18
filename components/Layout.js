@@ -1,87 +1,81 @@
 import Head from 'next/head'
+import Link from 'next/link'
 import React, { useContext, useEffect, useState } from 'react'
 import { Store } from '../utils/Store'
 
-const navbar_links = [
+const nav_links = [
     {
-        path: "#home",
+        path: "/",
         display: "Home",
     },
     {
-        path: "#shop",
-        display: "About",
+        path: "categoria",
+        display: "Categorias",
     },
     {
-        path: "#features",
-        display: "Services",
+        path: "sobre",
+        display: "Sobre",
     },
     {
-        path: "#contact",
-        display: "contato",
+        path: "contato",
+        display: "Contatos",
     },
 ]
-export default function Layout({ children, title }) {
+
+export default function Layout({ title, children }) {
     const { state } = useContext(Store)
     const { cart } = state
-    const year = new Date().getFullYear()
-    const { cartItemsCount, setCartItensCount } = useState(0)
+    const year = new Date().getFullYear();
+    const [cartItemsCount, setCartItemsCount] = useState(0)
     useEffect(() => {
-        setCartItensCount(cart.cartItems.reduce((a, c) => a + c.quantity, 0))
+        setCartItemsCount(cart.cartItems.reduce((a, c) => a + c.quantity, 0))
     }, [cart.cartItems])
+
     return (
         <>
             <Head>
-                <title>{title ? title + ' e-commerce' : ' e-commerce'}</title>
-                <meta name="description" content="e-commerce shop created by Next app" />
+                <title>{title ? title + ' e-commerce' : ' e-commerce'} </title>
+                <meta name="description" content="E-commerce shop created by create next app" />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
             <div>
                 <header>
-                    <nav class="relative w-full flex flex-wrap items-center justify-between py-3 bg-gray-100 text-gray-500  shadow-lg">
+                    <nav class="relative w-full flex flex-wrap items-center justify-between py-3 bg-gray-100 text-gray-500 shadow-lg">
                         <div class="container-fluid w-full flex flex-wrap items-center justify-between px-6">
                             <div class="container-fluid">
-                                <a class="text-xl text-black" href="#">e-commerce shop</a>
-
+                                <a class="text-xl text-black" href="/">E-commerce</a>
                             </div>
-                            <ul className="flex gap-6 ">
+                            <div className='menu flex gap-5'>
                                 {
-                                    navbar_links.map((item, index) => (
-                                        <li key={index}>
-                                            <a className='menu ' href={item.path}>
-                                                {item.display}
-                                            </a>
-                                        </li>
-                                    ))}
-                            </ul>
+                                    nav_links.map((item, index) => (
+                                        <ul>
+                                            <li key={index}>
+                                                <a href={item.path}>
+                                                    {item.display}
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    ))
+                                }
+                            </div>
                             <div>
-                                <Link href='/cart'>
+                                <Link href="/cart">
                                     <a className='p-2 text-2xl'>
-                                        {cartItemsCount > 0 && (
-                                            <span>{cartItemsCount}</span>   
-                                        )}
+                                        {cartItemsCount > 0 && ({ cartItemsCount })}
                                     </a>
                                 </Link>
-                                {/* <Link href='/login'>
-
-                                </Link> */}
                             </div>
                         </div>
                     </nav>
                 </header>
-
-
                 <main>
-                    <h1 className='text-center text-3xl py-10'>Requisições do banco de dados</h1>
-                    <div className='container m-auto mt-4  px-4'>
+                   
+                    <div className='container m-auto mt-4 px-10'>
                         {children}
                     </div>
-
                 </main>
-
-
-
                 <footer className="flex text-xl h-10 justify-center items-center shadow-inner">
-                    <p style={{ color: 'var(--primary-color)' }}>Copyright © {year} José Antonio</p>
+                    <p>Copyright © {year}, José Antonio Motta</p>
                 </footer>
             </div>
         </>
