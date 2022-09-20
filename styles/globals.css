@@ -58,6 +58,7 @@ a {
 
 button {
   @apply rounded bg-sky-100 py-2 px-4 shadow outline-none;
+  transition: 150ms ease-in-out;
 }
 
 .primary-button {
@@ -67,7 +68,8 @@ button {
 button:hover,
 .primary-button:hover {
   --tw-bg-opacity: 1;
-  @apply bg-sky-200 text-white shadow;
+  @apply bg-slate-700 text-white shadow;
+
 }
 .img_ef{
   overflow: hidden;

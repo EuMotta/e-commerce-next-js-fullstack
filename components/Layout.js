@@ -38,7 +38,7 @@ export default function Layout({ title, children }) {
                 <meta name="description" content="E-commerce shop created by create next app" />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
-            <div>
+            <div className='flex min-h-screen flex-col justify-between'>
                 <header>
                     <nav class="relative w-full flex flex-wrap items-center justify-between py-3 bg-gray-100 text-gray-500 shadow-lg">
                         <div class="container-fluid w-full flex flex-wrap items-center justify-between px-6">
@@ -60,22 +60,28 @@ export default function Layout({ title, children }) {
                             </div>
                             <div>
                                 <Link href="/cart">
-                                    <a className='p-2 text-2xl'>
+                                    <a className='p-2 text-black text-2xl'>
                                         {cartItemsCount > 0 && ({ cartItemsCount })}
+                                        <i class="ri-shopping-cart-line"></i>
                                     </a>
+                                </Link>
+                                <Link href='/login'>
+                                    <a><i class="ri-login-box-line"></i></a>
                                 </Link>
                             </div>
                         </div>
                     </nav>
                 </header>
                 <main>
+                    
                    
                     <div className='container m-auto mt-4 px-10'>
                         {children}
                     </div>
                 </main>
-                <footer className="flex text-xl h-10 justify-center items-center shadow-inner">
+                <footer className="flex text-xl h-10 justify-center items-center  shadow-inner">
                     <p>Copyright © {year}, José Antonio Motta</p>
+                    
                 </footer>
             </div>
         </>
