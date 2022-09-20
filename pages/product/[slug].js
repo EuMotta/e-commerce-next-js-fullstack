@@ -5,7 +5,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
 import { Store } from '../../utils/Store'
-import 'remixicon/fonts/remixicon.css'
+import toast, { Toaster } from 'react-hot-toast'
 
 export default function ProductScreen() {
     const { state, dispatch } = useContext(Store)
@@ -24,7 +24,10 @@ export default function ProductScreen() {
         const existItem = state.cart.cartItems.find((x) => x.slug === product.slug)
         const quantity = existItem ? existItem.quantity + 1 : 1
         if (product.countInStock < quantity) {
-            alert('Este produto está indisponível, ORE!')
+            toast.error(
+                'Produto indisponível! Ore!'
+                )
+            return
         }
         dispatch({
             type: 'CART_ADD_ITEM',
@@ -34,28 +37,26 @@ export default function ProductScreen() {
     }
     return (
         <Layout title={product.name}>
-            <div className='flex justify-between'>
+            <div className='flex'>
                 <div className='py-2'>
                     <Link href="/">
-                        <button className='bg-red-300 hover:bg-red-500'>Voltar</button>
+                        <button className='bg-red-300 hover:bg-red-500'> Voltar</button>
                     </Link>
                 </div>
-                <h1 className='container m-auto mt-4 px-4 text-center py-3 text-3xl'>{product.name}</h1>
-
+                <h1 className='container mt-4 px-4 py-5 text-center text-3xl'>{product.name}</h1>
             </div>
             <div className='grid md:grid-cols-4 md:gap-3'>
-                <div className='md:col-span-2 rounded shadow-gray-900 shadow-md mb-5 border-8 '>
+                <div className='md:col-span-2 mb-5 shadow-gray-900 shadow-xl rounded border-8'>
                     <Image
                         src={product.image}
                         alt={product.name}
                         width={640}
                         height={640}
                         layout="responsive"
-                        className='img_ef'
                     >
                     </Image>
                 </div>
-                <div className='text-xl' >
+                <div className='text-xl'>
                     <ul>
                         <li>
                             {product.category}
@@ -64,27 +65,29 @@ export default function ProductScreen() {
                             Criador: {product.publisher}
                         </li>
                         <li>
-                            {product.rating} de {product.numReviews} Avaliações
+                            {product.rating} de {product.numReviews} avalizações
                         </li>
                         <li>
                             Descrição: {product.description}
                         </li>
                     </ul>
                 </div>
-                <div >
-                    <div className='card p-6'>
-                        <div className='mb-2   flex  justify-between'>
-                            <div className='text-2xl'>Preço </div>
+                <div>
+                    <div className='p-6 card'>
+                        <div className='mb-2 flex justify-between'>
+                            <div className='text-2xl' >Preço</div>
                             <div className='text-2xl text-red-600'>
                                 {product.countInStock > 0 ? `R$ ${product.price}` : "Vendido"}
                             </div>
                         </div>
                         <div className='mb-2 flex justify-between'>
-                            <div className='text-md'>Status </div>
+                            <div className='text-md'>Status</div>
                             <div>
-                                {product.countInStock ?
-                                    "Disponível" :
-                                    <span className='text-red-500'>Indisponível</span>}
+                                {
+                                    product.countInStock ?
+                                        "Disponivel" :
+                                        <span className='text-red-500'> Indisponível</span>
+                                }
                             </div>
                         </div>
                         <div className='flex mt-7 text-center '>
@@ -95,8 +98,8 @@ export default function ProductScreen() {
                         </div>
                     </div>
                 </div>
+                <Toaster/>
             </div>
         </Layout >
-
     )
 }

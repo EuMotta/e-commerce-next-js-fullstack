@@ -57,7 +57,7 @@ a {
 }
 
 button {
-  @apply rounded bg-sky-100 py-2 px-4 shadow outline-none;
+  @apply rounded bg-sky-100 py-1 px-3 shadow outline-none;
   transition: 150ms ease-in-out;
 }
 

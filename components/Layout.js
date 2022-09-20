@@ -2,6 +2,7 @@ import Head from 'next/head'
 import Link from 'next/link'
 import React, { useContext, useEffect, useState } from 'react'
 import { Store } from '../utils/Store'
+import 'remixicon/fonts/remixicon.css'
 
 const nav_links = [
     {
@@ -25,7 +26,7 @@ const nav_links = [
 export default function Layout({ title, children }) {
     const { state } = useContext(Store)
     const { cart } = state
-    const year = new Date().getFullYear();
+    const year = new Date().getFullYear()
     const [cartItemsCount, setCartItemsCount] = useState(0)
     useEffect(() => {
         setCartItemsCount(cart.cartItems.reduce((a, c) => a + c.quantity, 0))
@@ -61,27 +62,30 @@ export default function Layout({ title, children }) {
                             <div>
                                 <Link href="/cart">
                                     <a className='p-2 text-black text-2xl'>
-                                        {cartItemsCount > 0 && ({ cartItemsCount })}
+                                        {cartItemsCount > 0 && (
+                                            <span style={{ color: 'white', background: 'red' }} className=' ml-1 rounded-full px-0.5 text-xs font-bold'>
+                                                {cartItemsCount}
+                                            </span>
+                                        )}
                                         <i class="ri-shopping-cart-line"></i>
                                     </a>
                                 </Link>
-                                <Link href='/login'>
-                                    <a><i class="ri-login-box-line"></i></a>
+                                <Link href="/login">
+                                    <a className='p-2'>
+                                        <i class="ri-login-box-line"></i>
+                                    </a>
                                 </Link>
                             </div>
                         </div>
                     </nav>
                 </header>
                 <main>
-                    
-                   
                     <div className='container m-auto mt-4 px-10'>
                         {children}
                     </div>
                 </main>
-                <footer className="flex text-xl h-10 justify-center items-center  shadow-inner">
-                    <p>Copyright © {year}, José Antonio Motta</p>
-                    
+                <footer className="flex text-xl h-10 justify-center items-center shadow-inner">
+                    <p>Copyright © {year}, José Antonio</p>
                 </footer>
             </div>
         </>
