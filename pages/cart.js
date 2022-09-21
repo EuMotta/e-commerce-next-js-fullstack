@@ -16,10 +16,11 @@ function CartScreen() {
 
     const updateCartHandler = (item, qty) => {
         const quantity = Number(qty)
-        dispatch({ type: 'CART_ADD_ITEM', payload: { ...item, quantity } })
+        dispatch({ type: 'CART_ADD_ITEM', payload: { ...item, quantity }})
     }
     return (
         <Layout title="Carrinho">
+            <div>
             <h1 className="mb-5 text-3xl text-center">Carrinho de compras</h1>
             {
                 cartItems.length === 0 ? (
@@ -28,7 +29,7 @@ function CartScreen() {
                             O carrinho está vazio.
                         </div>
                         <Link href="/">
-                            <buton className="primary-button">Voltar</buton>
+                            <buton className="primary-button cursor-pointer">Voltar</buton>
                         </Link>
                     </div>
                 ) : (
@@ -63,7 +64,7 @@ function CartScreen() {
                                             <td className="p-5 text-right">
                                                 <select
                                                     className='bg-white text-xl'
-                                                    value={item.value}
+                                                    value={item.quantity}
                                                     onChange={(e) =>
                                                         updateCartHandler(item, e.target.value)
                                                     }
@@ -87,7 +88,7 @@ function CartScreen() {
                                 </tbody>
                             </table>
                         </div>
-                        <div className="card p-5">
+                        <div className="card p-5 max-h-32">
                             <ul>
                                 <li>
                                     <div className="pb-3 text-xl">
@@ -107,7 +108,7 @@ function CartScreen() {
                         </div>
                     </div>
                 )
-            }
+            }</div>
         </Layout >
     );
 }

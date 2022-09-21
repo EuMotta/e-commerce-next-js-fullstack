@@ -53,6 +53,7 @@ export default function ProductScreen() {
                         width={640}
                         height={640}
                         layout="responsive"
+                        className='img_ef'
                     >
                     </Image>
                 </div>
@@ -85,7 +86,7 @@ export default function ProductScreen() {
                             <div>
                                 {
                                     product.countInStock ?
-                                        "Disponivel" :
+                                        `Restantes ${product.countInStock}` :
                                         <span className='text-red-500'> Indisponível</span>
                                 }
                             </div>
