@@ -39,7 +39,7 @@ export default function Layout({ title, children }) {
                 <meta name="description" content="E-commerce shop created by create next app" />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
-            <div className='flex min-h-screen flex-col'>
+            <div className='flex flex-col'>
                 <header>
                     <nav class="relative w-full flex flex-wrap items-center justify-between py-3 bg-gray-100 text-gray-500 shadow-lg">
                         <div class="container-fluid w-full flex flex-wrap items-center justify-between px-6">
@@ -80,11 +80,9 @@ export default function Layout({ title, children }) {
                     </nav>
                 </header>
                 <main>
-                    <div className='container m-auto mt-4 px-10'>
-                        {children}
-                    </div>
+                    <div className='container min-h-screen m-auto mt-8 px-0'>{children}</div>
                 </main>
-                <footer className="flex text-xl h-10 justify-center absolute left-1/2 bottom-0 items-center shadow-inner">
+                <footer className="flex justify-center items-center h-10 shadow-inner">
                     <p>Copyright © {year}, José Antonio</p>
                 </footer>
             </div>

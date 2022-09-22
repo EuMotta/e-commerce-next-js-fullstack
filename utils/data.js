@@ -9,7 +9,7 @@ const data = {
             description: 'É um produto incrível',
             rating: 4.5,
             numReviews: 10,
-            countInStock: 0,
+            countInStock: 1,
             publisher: 'José Antonio'
         },
         {
