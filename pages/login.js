@@ -107,7 +107,7 @@ export default function LoginScreen() {
                                         id="email"
                                         autoFocus
                                     />
-                                    {errors.email && (<div classNameName='text-sm text-red-500'>{errors.email.message}</div>)}
+                                    {errors.email && (<div className='text-sm text-red-500'>{errors.email.message}</div>)}
                                 </div>
 
 
@@ -130,7 +130,7 @@ export default function LoginScreen() {
                                         placeholder="Senha"
                                         autoFocus
                                     />
-                                    {errors.password && (<div classNameName='text-sm text-red-500'>{errors.password.message}</div>)}
+                                    {errors.password && (<div className='text-sm text-red-500'>{errors.password.message}</div>)}
                                 </div>
 
                                 <div className="flex justify-between items-center mb-6">
