@@ -18,9 +18,21 @@ body {
 :root {
   --primary-color: #fff;
   --secondary-color: #fff;
+  --text-color:#5032d6;
   --body-bg: linear-gradient(180deg, rgb(3, 4, 52) 0%, rgb(55, 38, 70));
   --text-color: #fff;
   --gray: #828282;
+}
+/* ScrollBar */
+::-webkit-scrollbar-thumb{
+  background: #5032d6;
+  border-radius: 30px;
+}
+::-webkit-scrollbar{
+  width: 6px;
+}
+::-webkit-scrollbar-track{
+  background: transparent;
 }
 
 .menu {
@@ -35,7 +47,6 @@ a {
 * {
   box-sizing: border-box;
 }
-
 .card {
   @apply mb-5 block rounded-lg border border-gray-200 shadow-md;
   transition: 300ms ease-in-out;
@@ -78,5 +89,21 @@ button:hover,
 }
 .img_ef:hover{
   transform: scale(1.05);
+}
+.login_img{
+  animation: updown 3s linear infinite;
+}
+@keyframes updown{
+  0%{
+      transform: translateY(-5px);
+  }
+
+  50%{
+      transform: translateY(5px);
+  }
+
+  100%{
+      transform: translateY(-5px);
+  }
 }
 
