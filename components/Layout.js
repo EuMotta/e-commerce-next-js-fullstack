@@ -44,36 +44,38 @@ export default function Layout({ title, children }) {
                     <nav className="relative w-full flex flex-wrap items-center justify-between py-3 bg-gray-100 text-gray-500 shadow-lg">
                         <div className="container-fluid w-full flex flex-wrap items-center justify-between px-6">
                             <div className="container-fluid">
-                                <a className="text-xl text-black" href="/">E-commerce</a>
+                                <Link href="/">
+                                <div className="text-xl cursor-pointer text-black" >E-commerce</div>
+                                </Link>
                             </div>
                             <div className='menu flex gap-5'>
                                 {
                                     nav_links.map((item, index) => (
                                         <ul>
                                             <li key={index}>
-                                                <a href={item.path}>
+                                                <Link href={item.path}>
                                                     {item.display}
-                                                </a>
+                                                </Link>
                                             </li>
                                         </ul>
                                     ))
                                 }
                             </div>
-                            <div>
+                            <div className='flex'>
                                 <Link href="/cart">
-                                    <a className='p-2 text-black text-2xl'>
+                                    <div className='p-2 cursor-pointer text-black text-2xl'>
                                         {cartItemsCount > 0 && (
                                             <span style={{ color: 'white', background: 'red' }} className=' ml-1 rounded-full px-0.5 text-xs font-bold'>
                                                 {cartItemsCount}
                                             </span>
                                         )}
                                         <i className="ri-shopping-cart-line"></i>
-                                    </a>
+                                    </div>
                                 </Link>
                                 <Link href="/login">
-                                    <a className='p-2 text-2xl text-black'>
+                                    <div className='p-2 cursor-pointer text-2xl text-black'>
                                         <i className="ri-login-box-line"></i>
-                                    </a>
+                                    </div>
                                 </Link>
                             </div>
                         </div>
