@@ -14,7 +14,7 @@ export default function ProductItem({ product }) {
                     />
                 </a>
             </Link>
-            <div>
+            <div className="mx-3">
                 <Link href={`/product/${product.slug}`}>
                     <a>
                         <h2 className="text-lg">{product.name}</h2>
