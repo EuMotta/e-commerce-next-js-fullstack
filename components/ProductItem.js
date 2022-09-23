@@ -1,14 +1,17 @@
 import React from "react"
 import Link from 'next/link'
 import 'remixicon/fonts/remixicon.css'
+import Image from "next/image";
 
 export default function ProductItem({ product }) {
     return (
         <div className="card">
             <Link href={`/product/${product.slug}`}>
-                    <img
+                    <Image
                         src={product.image}
                         alt={product.name}
+                        width={350}
+                        height={350}
                         className="rounded cursor-pointer card"
                     />
             </Link>
