@@ -1,7 +1,8 @@
+
 import Layout from "../components/Layout"
 import ProductItem from "../components/productItem"
 import data from '../utils/data'
-// index
+
 export default function Home() {
   return (
     <div>
