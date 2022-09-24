@@ -1,24 +1,22 @@
-import Image from 'next/image'
 import React from 'react'
 import Layout from '../components/Layout'
-import loginimg from '../public/img/log.svg'
 import { useForm } from 'react-hook-form'
-
-
+import Link from 'next/link';
+import Image from 'next/image';
+import loginimg from '../public/img/log.svg'
 
 export default function LoginScreen() {
     const {
         handleSubmit,
         register,
         formState: { errors },
-    } = useForm()
+    } = useForm();
     const submitHandler = ({ email, password }) => {
-        console.log(email, password);
+        console.log(email, password)
     }
-
     return (
         <Layout>
-            <section className="h-screen">
+            <section className="h-full">
                 <div className="px-6 h-full text-gray-800">
                     <div
                         className="flex xl:justify-center lg:justify-between justify-center items-center flex-wrap h-full g-6"
@@ -26,22 +24,19 @@ export default function LoginScreen() {
                         <div
                             className="grow-0 shrink-1 md:shrink-0 basis-auto xl:w-6/12 lg:w-6/12 md:w-9/12 mb-12 md:mb-0"
                         >
-                            <div className='login_img'>
-                                <Image
-                                    src={loginimg}
-                                    className="w-full"
-                                    alt="Sample image"
-                                ></Image></div>
+                            <Image
+                                src={loginimg}
+                                className="w-full"
+                                alt="Sample image"
+                            />
                         </div>
                         <div className="xl:ml-20 xl:w-5/12 lg:w-5/12 md:w-8/12 mb-12 md:mb-0">
-
                             <form onSubmit={handleSubmit(submitHandler)}>
-                                <div className='text-5xl text-center mb-10'>
+                            <div className='text-5xl text-center mb-10'>
                                     <h1>Acessar Conta</h1>
                                 </div>
-
                                 <div className="flex flex-row items-center justify-center lg:justify-start">
-                                    <p className="text-lg mb-0 mr-4">Entrar com</p>
+                                    <p className="text-lg mb-0 mr-4">Conecte-se com</p>
                                     <button
                                         type="button"
                                         data-mdb-ripple="true"
@@ -55,7 +50,6 @@ export default function LoginScreen() {
                                             />
                                         </svg>
                                     </button>
-
                                     <button
                                         type="button"
                                         data-mdb-ripple="true"
@@ -69,7 +63,6 @@ export default function LoginScreen() {
                                             />
                                         </svg>
                                     </button>
-
                                     <button
                                         type="button"
                                         data-mdb-ripple="true"
@@ -84,80 +77,68 @@ export default function LoginScreen() {
                                         </svg>
                                     </button>
                                 </div>
-
                                 <div
-                                    className="flex items-center my-4 before:flex-1 before:border-t before:border-gray-300 before:mt-0.5 after:flex-1 after:border-t after:border-gray-300 after:mt-0.5">
+                                    className="flex items-center my-4 before:flex-1 before:border-t before:border-gray-300 before:mt-0.5 after:flex-1 after:border-t after:border-gray-300 after:mt-0.5"
+                                >
                                     <p className="text-center font-semibold mx-4 mb-0">Ou</p>
                                 </div>
-
-
                                 <div className="mb-6">
                                     <label
                                         htmlFor='email'
                                     >Email</label>
                                     <input
                                         {...register('email', {
-                                            required: 'Por favor, insira um email valido', pattern: {
+                                            required: 'Por favor, digite seu email', pattern: {
                                                 value: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$/i,
-                                                message: 'Por favor, insira um email válido',
+                                                message: 'Por favor, digite seu email',
                                             }
                                         })}
                                         type="email"
                                         className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                                         id="email"
                                         autoFocus
-                                    />
-                                    {errors.email && (<div className='text-sm text-red-500'>{errors.email.message}</div>)}
+                                    /> {errors.email && (<div className='text-sm text-red-500'>{errors.email.message}</div>)}
                                 </div>
-
-
                                 <div className="mb-6">
                                     <label
                                         htmlFor='password'
                                     >Senha</label>
                                     <input
-                                        {...register('password', {
-                                            required: 'Por favor, insira uma senha',
-                                            minLength: { value: 6, message: 'A senha deve ter no mínimo 6 caracteres' },
+                                        {...register('passord', {
+                                            required: 'Por favor, digite sua senha',
+                                            minLength: { value: 6, message: 'A senha deve ter mais de 5 caracteres' },
                                             pattern: {
                                                 value: /^[a-zA-Z0-9_.+-]+$/i,
-                                                message: 'Por favor, digite uma senha válida',
+                                                message: 'Por favor, digite sua senha',
                                             }
                                         })}
                                         type="password"
                                         className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                                         id="password"
-                                        placeholder="Senha"
                                         autoFocus
-                                    />
-                                    {errors.password && (<div className='text-sm text-red-500'>{errors.password.message}</div>)}
+                                    />{errors.password && (<div className='text-sm text-red-500'>{errors.password.message}</div>)}
                                 </div>
-
                                 <div className="flex justify-between items-center mb-6">
                                     <div className="form-group form-check">
-                                        <label></label>
                                         <input
                                             type="checkbox"
                                             className="form-check-input appearance-none h-4 w-4 border border-gray-300 rounded-sm bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer"
-                                            id="checkbox" />
-                                        <label className="form-check-label inline-block text-gray-800" htmlFor="ckeckbox"
-                                        >Lembrar</label>
+                                            id="checkbox"
+                                        />
+                                        <label className="form-check-label inline-block text-gray-800" htmlFor="checkbox">Lembrar-me</label>
                                     </div>
+                                    <p className="text-md font-semibold mt-2 pt-1 mb-0">
+                                        Não possui uma conta?
+                                        <Link
+                                            href="#!"
+                                            className="text-red-600 hover:text-red-700 focus:text-red-700 transition duration-200 ease-in-out">Registre-se</Link>
+                                    </p>
                                 </div>
-
                                 <div className="text-center lg:text-left">
                                     <button
-                                        href="/"
-                                        className="inline-block px-7 py-3 bg-blue-600 text-white font-medium text-sm leading-snug  rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out">
-                                        Entrar
+                                        className="inline-block px-7 py-3 bg-blue-600 text-white font-medium text-md leading-snug rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
+                                    >Entrar
                                     </button>
-                                    <p className="text-sm font-semibold mt-2 pt-1 mb-0">
-                                        Não tem uma conta?
-                                        <button
-                                            href="#!"
-                                            className="text-red-600 hover:text-red-700 focus:text-red-700 transition duration-200 ease-in-out"
-                                        > Registre-se</button>
-                                    </p>
                                 </div>
                             </form>
                         </div>
@@ -167,4 +148,3 @@ export default function LoginScreen() {
         </Layout>
     )
 }
-
