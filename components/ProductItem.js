@@ -2,7 +2,8 @@ import React from "react"
 import Link from 'next/link'
 import 'remixicon/fonts/remixicon.css'
 import Image from "next/image";
-
+// npm cache clean --force
+// npm install
 export default function ProductItem({ product }) {
     return (
         <div className="card">
