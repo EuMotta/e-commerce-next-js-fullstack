@@ -1,18 +1,41 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Layout from '../components/Layout'
 import { useForm } from 'react-hook-form'
 import Link from 'next/link';
 import Image from 'next/image';
 import loginimg from '../public/img/log.svg'
+import { signIn, useSession } from 'next-auth/react'
+import { toast } from 'react-toastify';
+import { getError } from '../utils/error';
+import { useRouter } from 'next/router';
 
 export default function LoginScreen() {
+    const { data: session } = useSession()
+    const router = useRouter()
+    const { redirect } = router.query
+    useEffect(() => {
+        if (session?.user) {
+            router.push(redirect || '/')
+        }
+    }, [router,session,redirect])
     const {
         handleSubmit,
         register,
         formState: { errors },
     } = useForm();
-    const submitHandler = ({ email, password }) => {
-        console.log(email, password)
+    const submitHandler = async ({ email, password }) => {
+        try {
+            const result = await signIn('credentials', {
+                redirect: false,
+                email,
+                password,
+            })
+            if (result.error) {
+                toast.error(result.error)
+            }
+        } catch (err) {
+            toast.error(getError.error)
+        }
     }
     return (
         <Layout>
@@ -32,7 +55,7 @@ export default function LoginScreen() {
                         </div>
                         <div className="xl:ml-20 xl:w-5/12 lg:w-5/12 md:w-8/12 mb-12 md:mb-0">
                             <form onSubmit={handleSubmit(submitHandler)}>
-                            <div className='text-5xl text-center mb-10'>
+                                <div className='text-5xl text-center mb-10'>
                                     <h1>Acessar Conta</h1>
                                 </div>
                                 <div className="flex flex-row items-center justify-center lg:justify-start">

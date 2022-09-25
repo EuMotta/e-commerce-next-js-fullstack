@@ -3,6 +3,8 @@ import Link from 'next/link'
 import React, { useContext, useEffect, useState } from 'react'
 import { Store } from '../utils/Store'
 import 'remixicon/fonts/remixicon.css'
+import { ToastContainer } from 'react-toastify'
+import { useSession } from 'next-auth/react'
 
 const nav_links = [
     {
@@ -25,6 +27,7 @@ const nav_links = [
 
 export default function Layout({ title, children }) {
     const { state } = useContext(Store)
+    const { status, data: session } = useSession()
     const { cart } = state
     const year = new Date().getFullYear()
     const [cartItemsCount, setCartItemsCount] = useState(0)
@@ -39,13 +42,16 @@ export default function Layout({ title, children }) {
                 <meta name="description" content="E-commerce shop created by create next app" />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
+
+            <ToastContainer position='button-center' limit={1} />
+
             <div className='flex flex-col'>
                 <header>
                     <nav className="relative w-full flex flex-wrap items-center justify-between py-3 bg-gray-100 text-gray-500 shadow-lg">
                         <div className="container-fluid w-full flex flex-wrap items-center justify-between px-6">
                             <div className="container-fluid">
                                 <Link href="/">
-                                <div className="text-xl cursor-pointer text-black" >E-commerce</div>
+                                    <div className="text-xl cursor-pointer text-black" >E-commerce</div>
                                 </Link>
                             </div>
                             <div className='menu flex gap-5'>
@@ -72,11 +78,14 @@ export default function Layout({ title, children }) {
                                         <i className="ri-shopping-cart-line"></i>
                                     </div>
                                 </Link>
-                                <Link href="/login">
-                                    <div className='p-2 cursor-pointer text-2xl text-black'>
-                                        <i className="ri-login-box-line"></i>
-                                    </div>
-                                </Link>
+                                    {status === 'loading' ? ('Carregando') : (<Link href='Login'>
+                                        <div className='p-2 cursor-pointer text-2xl text-black'>
+                                            <a className='e-2'>
+                                                <i className="ri-login-box-line"></i>
+                                            </a>
+                                        </div>
+                                    </Link>)}
+                                
                             </div>
                         </div>
                     </nav>
