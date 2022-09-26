@@ -3,8 +3,8 @@
 @tailwind utilities;
 
 @font-face {
-  font-family: Big;
-  src: url('../assets/fonts/The\ Bigger\ The\ Better.ttf');
+  font-family: made;
+  src: url('../assets/fonts/MADEMellowPERSONALUSE-Medium.otf');
   font-weight: 600;
 }
 
@@ -12,7 +12,7 @@ html,
 body {
   padding: 0;
   margin: 0;
-  font-family: 'Big'
+  font-family: 'made'
 }
 
 :root {
@@ -63,7 +63,7 @@ a {
 
   body {
     color: black;
-    background: aliceblue;
+    background: #F3F3F3;
   }
 }
 
@@ -73,7 +73,7 @@ button {
 }
 
 .primary-button {
-  @apply rounded py-0 bg-sky-100 px-5 shadow m-2;
+  @apply rounded py-0 bg-sky-50 pt-1 px-5 shadow m-2;
 }
 
 button:hover,

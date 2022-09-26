@@ -78,14 +78,17 @@ export default function Layout({ title, children }) {
                                         <i className="ri-shopping-cart-line"></i>
                                     </div>
                                 </Link>
-                                    {status === 'loading' ? ('Carregando') : (<Link href='Login'>
-                                        <div className='p-2 cursor-pointer text-2xl text-black'>
-                                            <a className='e-2'>
-                                                <i className="ri-login-box-line"></i>
-                                            </a>
-                                        </div>
-                                    </Link>)}
-                                
+                                {status === 'loading'
+                                    ? ('Carregando') :
+                                    (
+                                        <Link href='/login'>
+                                            <div className='p-2 wra text-black text-2xl'>
+                                                <a className='p-2'>
+                                                    <i className="ri-login-box-line"></i>
+                                                </a>
+                                            </div>
+                                        </Link>
+                                    )}    
                             </div>
                         </div>
                     </nav>
