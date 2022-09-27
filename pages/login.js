@@ -127,7 +127,7 @@ export default function LoginScreen() {
                                         htmlFor='password'
                                     >Senha</label>
                                     <input
-                                        {...register('passord', {
+                                        {...register('password', {
                                             required: 'Por favor, digite sua senha',
                                             minLength: { value: 6, message: 'A senha deve ter mais de 5 caracteres' },
                                             pattern: {
