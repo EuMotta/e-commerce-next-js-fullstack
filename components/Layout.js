@@ -5,6 +5,9 @@ import { Store } from '../utils/Store'
 import 'remixicon/fonts/remixicon.css'
 import { ToastContainer } from 'react-toastify'
 import { useSession } from 'next-auth/react'
+import { Menu } from '@headlessui/react'
+import DropdownLink from './DropdownLink'
+import 'react-toastify/dist/ReactToastify.css'
 
 const nav_links = [
     {
@@ -43,7 +46,7 @@ export default function Layout({ title, children }) {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
 
-            <ToastContainer position='button-center' limit={1} />
+            <ToastContainer position='bottom-center' limit={1} />
 
             <div className='flex flex-col'>
                 <header>
@@ -78,17 +81,32 @@ export default function Layout({ title, children }) {
                                         <i className="ri-shopping-cart-line"></i>
                                     </div>
                                 </Link>
-                                {status === 'loading'
-                                    ? ('Carregando') :
-                                    (
-                                        <Link href='/login'>
-                                            <div className='p-2 wra text-black text-2xl'>
-                                                <a className='p-2'>
-                                                    <i className="ri-login-box-line"></i>
-                                                </a>
-                                            </div>
-                                        </Link>
-                                    )}    
+                                {status === 'loading' ?
+                                    ('Carregando') :
+                                    session?.user ?
+                                        (
+                                            <Menu as='div' className='relative inline-block'>
+                                                <Menu.Button className='text-xl text-red-600'>
+                                                    {session.user.name}
+                                                </Menu.Button>
+                                                <Menu.Items className='bg-white absolute right-0 w-56 origin-top-right shadow-lg'>
+                                                    <Menu.Item>
+                                                        <DropdownLink className='dropdown-link' href='/profile'>
+                                                            Perfil
+                                                        </DropdownLink>
+                                                    </Menu.Item>
+                                                </Menu.Items>
+                                            </Menu>
+                                        ):(
+                                            <Link href='/login'>
+                                                <div className='p-2 wra text-black text-2xl'>
+                                                    <a className='p-2'>
+                                                        <i className="ri-login-box-line"></i>
+                                                    </a>
+                                                </div>
+                                            </Link>
+                                        )
+                                }
                             </div>
                         </div>
                     </nav>

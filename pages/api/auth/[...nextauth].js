@@ -15,8 +15,8 @@ export default NextAuth({
             return token
         },
         async session({ session, token }) {
-            if (token._id) session._id = token._id
-            if (token?.isAadmin) session.isAadmin = token.isAadmin
+            if (token._id) session.user._id = token._id
+            if (token?.isAadmin) session.user.isAadmin = token.isAadmin
             return session
         },
     },
@@ -28,13 +28,13 @@ export default NextAuth({
                     email: credentials.email,
                 })
                 await db.disconnect()
-                if(user&&bcryptjs.compareSync(credentials.password,user.password)){
-                    return{
-                        _id:user._id,
-                        name:user.name,
-                        email:user.email,
-                        image:'foto',
-                        isAdmin:user.isAdmin,
+                if (user && bcryptjs.compareSync(credentials.password, user.password)) {
+                    return {
+                        _id: user._id,
+                        name: user.name,
+                        email: user.email,
+                        image: 'f',
+                        isAdmin: user.isAdmin, 
                     }
                 }
                 throw new Error('email ou senha inválidos')

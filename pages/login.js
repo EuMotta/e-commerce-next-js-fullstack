@@ -17,7 +17,7 @@ export default function LoginScreen() {
         if (session?.user) {
             router.push(redirect || '/')
         }
-    }, [router,session,redirect])
+    }, [router, session, redirect])
     const {
         handleSubmit,
         register,
@@ -34,7 +34,7 @@ export default function LoginScreen() {
                 toast.error(result.error)
             }
         } catch (err) {
-            toast.error(getError.error)
+            toast.error(getError(err))
         }
     }
     return (
@@ -45,7 +45,7 @@ export default function LoginScreen() {
                         className="flex xl:justify-center lg:justify-between justify-center items-center flex-wrap h-full g-6"
                     >
                         <div
-                            className="grow-0 shrink-1 md:shrink-0 basis-auto xl:w-6/12 lg:w-6/12 md:w-9/12 mb-12 md:mb-0"
+                            className="grow-0 login_img shrink-1 md:shrink-0 basis-auto xl:w-6/12 lg:w-6/12 md:w-9/12 mb-12 md:mb-0"
                         >
                             <Image
                                 src={loginimg}
