@@ -105,7 +105,7 @@ export default function LoginScreen() {
                                 >
                                     <p className="text-center font-semibold mx-4 mb-0">Ou</p>
                                 </div>
-                                <div className="mb-6">
+                                <div className="mb-6 ">
                                     <label
                                         htmlFor='email'
                                     >Email</label>
@@ -117,7 +117,7 @@ export default function LoginScreen() {
                                             }
                                         })}
                                         type="email"
-                                        className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                                        className="form-control focus:shadow-lg block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-slate-50 focus:border-blue-600 focus:outline-none"
                                         id="email"
                                         autoFocus
                                     /> {errors.email && (<div className='text-sm text-red-500'>{errors.email.message}</div>)}

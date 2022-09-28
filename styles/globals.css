@@ -18,20 +18,23 @@ body {
 :root {
   --primary-color: #fff;
   --secondary-color: #fff;
-  --text-color:#5032d6;
+  --text-color: #5032d6;
   --body-bg: linear-gradient(180deg, rgb(3, 4, 52) 0%, rgb(55, 38, 70));
   --text-color: #fff;
   --gray: #828282;
 }
+
 /* ScrollBar */
-::-webkit-scrollbar-thumb{
+::-webkit-scrollbar-thumb {
   background: #5032d6;
   border-radius: 30px;
 }
-::-webkit-scrollbar{
+
+::-webkit-scrollbar {
   width: 6px;
 }
-::-webkit-scrollbar-track{
+
+::-webkit-scrollbar-track {
   background: transparent;
 }
 
@@ -40,13 +43,21 @@ body {
 }
 
 a {
-  color: inherit;
-  text-decoration: none;
+  @apply text-blue-600;
+}
+
+a:hover {
+  @apply text-blue-800;
+}
+
+.dropdown-link {
+  @apply flex p-2 relative z-20 bg-slate-50 rounded shadow-lg;
 }
 
 * {
   box-sizing: border-box;
 }
+
 .card {
   @apply mb-5 block rounded-lg border border-gray-200 shadow-md;
   transition: 300ms ease-in-out;
@@ -82,28 +93,31 @@ button:hover,
   @apply bg-slate-700 text-white shadow;
 
 }
-.img_ef{
+
+.img_ef {
   overflow: hidden;
   transition: 300ms ease-in-out;
-  
+
 }
-.img_ef:hover{
+
+.img_ef:hover {
   transform: scale(1.05);
 }
-.login_img{
+
+.login_img {
   animation: updown 3s linear infinite;
 }
-@keyframes updown{
-  0%{
-      transform: translateY(-5px);
+
+@keyframes updown {
+  0% {
+    transform: translateY(-5px);
   }
 
-  50%{
-      transform: translateY(5px);
+  50% {
+    transform: translateY(5px);
   }
 
-  100%{
-      transform: translateY(-5px);
+  100% {
+    transform: translateY(-5px);
   }
 }
-

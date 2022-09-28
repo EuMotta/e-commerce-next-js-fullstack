@@ -4,10 +4,12 @@ import React, { useContext, useEffect, useState } from 'react'
 import { Store } from '../utils/Store'
 import 'remixicon/fonts/remixicon.css'
 import { ToastContainer } from 'react-toastify'
-import { useSession } from 'next-auth/react'
+import { signOut, useSession } from 'next-auth/react'
 import { Menu } from '@headlessui/react'
 import DropdownLink from './DropdownLink'
 import 'react-toastify/dist/ReactToastify.css'
+import Cookies from 'js-cookie'
+
 
 const nav_links = [
     {
@@ -29,7 +31,7 @@ const nav_links = [
 ]
 
 export default function Layout({ title, children }) {
-    const { state } = useContext(Store)
+    const { state, dispatch } = useContext(Store)
     const { status, data: session } = useSession()
     const { cart } = state
     const year = new Date().getFullYear()
@@ -37,7 +39,11 @@ export default function Layout({ title, children }) {
     useEffect(() => {
         setCartItemsCount(cart.cartItems.reduce((a, c) => a + c.quantity, 0))
     }, [cart.cartItems])
-
+    const logoutClickHandler = () => {
+        Cookies.remove('cart')
+        dispatch({ type: 'CART_RESET' })
+        signOut({ callbackUrl: '/login' })
+    }
     return (
         <>
             <Head>
@@ -85,22 +91,39 @@ export default function Layout({ title, children }) {
                                     ('Carregando') :
                                     session?.user ?
                                         (
-                                            <Menu as='div' className='relative inline-block'>
-                                                <Menu.Button className='text-xl text-red-600'>
+                                            <Menu as="div" className="relative inline-block">
+                                                <Menu.Button className="text-blue-600">
                                                     {session.user.name}
                                                 </Menu.Button>
-                                                <Menu.Items className='bg-white absolute right-0 w-56 origin-top-right shadow-lg'>
+                                                <Menu.Items className="absolute right-0 w-56 origin-top-right bg-white  shadow-lg ">
                                                     <Menu.Item>
-                                                        <DropdownLink className='dropdown-link' href='/profile'>
+                                                        <DropdownLink className="dropdown-link" href="/profile">
                                                             Perfil
                                                         </DropdownLink>
                                                     </Menu.Item>
+                                                    <Menu.Item>
+                                                        <DropdownLink
+                                                            className="dropdown-link"
+                                                            href="/order-history"
+                                                        >
+                                                            Histórico de pedidos
+                                                        </DropdownLink>
+                                                    </Menu.Item>
+                                                    <Menu.Item>
+                                                        <a
+                                                            className="dropdown-link"
+                                                            href="#"
+                                                            onClick={logoutClickHandler}
+                                                        >
+                                                            Sair
+                                                        </a>
+                                                    </Menu.Item>
                                                 </Menu.Items>
                                             </Menu>
-                                        ):(
+                                        ) : (
                                             <Link href='/login'>
-                                                <div className='p-2 wra text-black text-2xl'>
-                                                    <a className='p-2'>
+                                                <div className='p-2 text-black text-2xl'>
+                                                    <a className='p-2 cursor-pointer'>
                                                         <i className="ri-login-box-line"></i>
                                                     </a>
                                                 </div>
