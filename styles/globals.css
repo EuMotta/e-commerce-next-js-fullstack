@@ -59,8 +59,9 @@ a:hover {
 }
 
 .card {
-  @apply mb-5 block rounded-lg border border-gray-200 shadow-md;
+  @apply mb-5 block rounded-lg border border-gray-200 shadow-md bg-white;
   transition: 300ms ease-in-out;
+  
 }
 
 .card img:hover {
