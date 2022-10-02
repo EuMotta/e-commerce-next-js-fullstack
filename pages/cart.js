@@ -90,8 +90,8 @@ function CartScreen() {
                                     </tbody>
                                 </table>
                             </div>
-                            <div className="card p-5">
-                                <ul>
+                            <div>
+                                <ul className="card p-5">
                                     <li>
                                         <div className="pb-3 text-xl">
                                             Total ({cartItems.reduce((a, c) => a + c.quantity, 0)}) {" "}:
