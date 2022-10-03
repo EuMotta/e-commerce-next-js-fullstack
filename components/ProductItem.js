@@ -4,7 +4,7 @@ import 'remixicon/fonts/remixicon.css'
 import Image from "next/image";
 // npm cache clean --force
 // npm install
-export default function ProductItem({ product }) {
+export default function ProductItem({ product, addToCartHandler }) {
     return (
         <div className="card">
             <Link href={`/product/${product.slug}`}>
@@ -29,7 +29,9 @@ export default function ProductItem({ product }) {
                     <p className="text-xl">R$ {product.price}</p>
                     <button
                         className="primary-button"
-                        type="button">
+                        type="button"
+                        onClick={()=> addToCartHandler(product)}
+                        >
                         <i className="ri-shopping-cart-line"></i>
                     </button>
                 </div>

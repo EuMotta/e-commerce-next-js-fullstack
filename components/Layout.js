@@ -52,7 +52,7 @@ export default function Layout({ title, children }) {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
 
-            <ToastContainer position='bottom-center' limit={1} />
+            <ToastContainer position='bottom-center' limit={3} />
 
             <div className='flex flex-col'>
                 <header>

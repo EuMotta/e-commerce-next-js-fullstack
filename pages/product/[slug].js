@@ -1,33 +1,53 @@
-import data from '../../utils/data'
 import React, { useContext } from 'react'
 import Layout from '../../components/Layout'
 import Link from 'next/link'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
 import { Store } from '../../utils/Store'
-import toast, { Toaster } from 'react-hot-toast'
+import db from '../../utils/db'
+import Product from '../../models/Product'
+import imgErro from '../../public/img/404.svg'
+import axios from 'axios'
+import { toast } from 'react-toastify'
 
-export default function ProductScreen() {
+export default function ProductScreen(props) {
     const { state, dispatch } = useContext(Store)
-    const { query } = useRouter()
-    const { slug } = query
     const router = useRouter()
-    const product = data.products.find((x) => x.slug === slug)
+    const { product } = props
     if (!product) {
         return (
-            <div>
-                O produto não existe, Ore!
-            </div>
+            <Layout title="Produto não encontrado">
+                <div className='text-5xl text-center'>
+                    <h1>Você se perdeu!</h1>
+                </div>
+                <div className='flex items-center flex-col'>
+                    <Image
+                        src={imgErro}
+                        alt="imagem do produto"
+                        width={500}
+                        height={500}
+                    ></Image>
+                    <div className='text-9xl'>
+                        <div className='py-2 text-2xl text-center'>
+                            <Link href="/">
+                                <button className=' bg-white hover:bg-red-500'> Voltar</button>
+                            </Link>
+                        </div>
+                    </div>
+                </div>
+            </Layout>
         )
     }
-    const addToCartHandler = () => {
+    const addToCartHandler = async () => {
         const existItem = state.cart.cartItems.find((x) => x.slug === product.slug)
         const quantity = existItem ? existItem.quantity + 1 : 1
-        if (product.countInStock < quantity) {
-            toast.error(
-                'Produto indisponível! Ore!'
+        const { data } = await axios.get(`/api/products/${product._id}`)
+        if (data.countInStock < quantity) {
+            return (
+                toast.error(
+                    'Produto indisponível!'
                 )
-            return
+            )
         }
         dispatch({
             type: 'CART_ADD_ITEM',
@@ -99,8 +119,19 @@ export default function ProductScreen() {
                         </div>
                     </div>
                 </div>
-                <Toaster/>
             </div>
         </Layout >
     )
+}
+export async function getServerSideProps(context) {
+    const { params } = context
+    const { slug } = params
+    await db.connect()
+    const product = await Product.findOne({ slug }).lean()
+    await db.disconnect()
+    return {
+        props: {
+            product: product ? db.convertDocToObject(product) : null
+        }
+    }
 }

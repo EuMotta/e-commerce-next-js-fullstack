@@ -5,6 +5,8 @@ import Layout from '../components/Layout'
 import { Store } from '../utils/Store'
 import { useRouter } from 'next/router'
 import dynamic from 'next/dynamic'
+import axios from 'axios'
+import { toast } from 'react-toastify'
 
 function CartScreen() {
     const router = useRouter()
@@ -14,10 +16,16 @@ function CartScreen() {
         dispatch({ type: 'CART_REMOVE_ITEM', payload: item });
     };
 
-    const updateCartHandler = (item, qty) => {
-        const quantity = Number(qty)
-        dispatch({ type: 'CART_ADD_ITEM', payload: { ...item, quantity } })
+    const updateCartHandler = async (item, qty) => {
+        const quantity = Number(qty);
+        const { data } = await axios.get(`/api/products/${item._id}`);
+        if (data.countInStock < quantity) {
+            return toast.error('Não possuimos mais desse produto em estoque');
+        }
+        dispatch({ type: 'CART_ADD_ITEM', payload: { ...item, quantity } });
+        toast.success('Produto atualizado!');
     }
+
     return (
         <Layout title="Carrinho">
             <h1 className="mb-5 text-3xl">Carrinho de compras</h1>

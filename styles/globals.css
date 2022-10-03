@@ -59,7 +59,7 @@ a:hover {
 }
 
 .card {
-  @apply mb-5 block rounded-lg border border-gray-200 shadow-md bg-white;
+  @apply mb-5 block rounded-lg border-spacing-2 border-gray-200 shadow-md shadow-black bg-neutral-100;
   transition: 300ms ease-in-out;
   
 }
@@ -75,7 +75,7 @@ a:hover {
 
   body {
     color: black;
-    background: aliceblue;
+    @apply bg-sky-50;
   }
 }
 
@@ -85,14 +85,14 @@ button {
 }
 
 .primary-button {
-  @apply rounded py-0 bg-sky-50 pt-1 px-5 shadow m-2;
+  @apply rounded py-0 bg-indigo-50 pt-1 px-5 shadow-sm shadow-slate-700 m-2;
 }
 
 button:hover,
 .primary-button:hover {
   --tw-bg-opacity: 1;
-  @apply bg-slate-700 text-white shadow;
-
+  transform: scale(1.05);
+  @apply bg-slate-700 text-white  shadow-md shadow-slate-700;
 }
 
 .img_ef {
