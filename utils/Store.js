@@ -62,7 +62,7 @@ function reducer(state, action) {
                 }
             }
         }
-        case 'CART_CLEAN_ITEMS':{
+        case 'CART_CLEAR_ITEMS':{
             return{
                 ...state,
                 cart:{

@@ -71,19 +71,19 @@ export default function ShippingScreen() {
                 >
                     <h1 className="mb-4 text-2xl text-center text-indigo-600">Formulário para Entrega do Produto</h1>
                     <div className="mb-4 grid col-span-1">
-                        <label className='text-xl text-indigo-700' htmlFor="name">Nome completo</label>
+                        <label className='text-xl text-indigo-700' htmlFor="fullName">Nome completo</label>
                         <input
                             className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                            id="name"
+                            id="fullName"
                             label="Nome completo"
                             autoFocus
-                            {...register('name', {
+                            {...register('fullName', {
                                 required: 'Por favor, digite seu nome completo',
                                 minLength: { value: 10, message: 'Por favor, digite também seu sobrenome' },
                             })}
                         />
-                        {errors.name && (
-                            <div className="text-red-500">{errors.name.message}</div>
+                        {errors.fullName && (
+                            <div className="text-red-500">{errors.fullName.message}</div>
                         )}
                     </div>
                     <div className='flex gap-10 justify-between'>

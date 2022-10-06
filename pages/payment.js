@@ -63,7 +63,7 @@ export default function PaymentScreen() {
                         <button
                             onClick={() => router.push('/shipping')}
                             type="button"
-                            className=" bg-red-400"
+                            className=" bg-red-400 rounded py-0 pt-1 px-5 shadow-sm shadow-slate-700 m-2"
                         >
                             Voltar
                         </button>

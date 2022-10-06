@@ -59,7 +59,7 @@ a:hover {
 }
 
 .card {
-  @apply mb-5 block rounded-lg border-spacing-2 border-gray-200 shadow-md shadow-black bg-neutral-100;
+  @apply mb-5 block rounded-lg border-spacing-2 border-gray-200 shadow-sm shadow-black bg-neutral-100;
   transition: 300ms ease-in-out;
   
 }
