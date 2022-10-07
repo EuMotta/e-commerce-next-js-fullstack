@@ -98,6 +98,8 @@ export default function PlaceOrderScreen() {
                                     ))}
                                 </tbody>
                             </table>
+                            
+                            <div className='text-end mr-16 pr-2'>R$:{itemsPrice}</div>
                         </div>
                         <div className='grid ml-12 mx-2 grid-cols-2'>
                             <div>
@@ -106,7 +108,7 @@ export default function PlaceOrderScreen() {
                                     <div className=' items-left grid grid-cols-2 gap-4 flex-col  mb-2'>
                                         <div class="col-span-1">
                                             <div className='text-indigo-800'>Nome:&nbsp;
-                                                <span className='text-black'>{shippingAddress.fullName}</span>
+                                                <span className='text-black'>{shippingAddress.name}</span>
                                             </div>
                                             <div className='text-indigo-800 gap'>Endereço:&nbsp;
                                                 <span className='text-black'>{shippingAddress.address}</span>
@@ -148,7 +150,7 @@ export default function PlaceOrderScreen() {
                                         </span>
                                     </Link>
                                 </div>
-                                <div className="mt-8 text-center text-xl">
+                                <div className="mt-10 grid text-center text-xl">
                                     <Link href='/payment'>
                                         <button className='cursor-pointer w-full'>
                                             Editar

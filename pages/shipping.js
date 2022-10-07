@@ -20,7 +20,7 @@ export default function ShippingScreen() {
   const router = useRouter()
 
   useEffect(() => {
-    setValue('fullName', shippingAddress.fullName)
+    setValue('name', shippingAddress.name)
     setValue('postalCode', shippingAddress.postalCode)
     setValue('number', shippingAddress.number)
     setValue('address', shippingAddress.address)
@@ -29,17 +29,17 @@ export default function ShippingScreen() {
     setValue('state', shippingAddress.state)
   }, [setValue, shippingAddress])
 
-  const submitHandler = ({ fullName, postalCode, number, address, neighborhood, city, state }) => {
+  const submitHandler = ({ name, postalCode, number, address, neighborhood, city, state }) => {
     dispatch({
       type: 'SAVE_SHIPPING_ADDRESS',
-      payload: { fullName, postalCode, number, address, neighborhood, city, state }
+      payload: { name, postalCode, number, address, neighborhood, city, state }
     })
     Cookies.set(
       'cart',
       JSON.stringify({
         ...cart,
         shippingAddress: {
-          fullName,
+          name,
           postalCode,
           number,
           address,
@@ -71,19 +71,19 @@ export default function ShippingScreen() {
                 >
                     <h1 className="mb-4 text-2xl text-center text-indigo-600">Formulário para Entrega do Produto</h1>
                     <div className="mb-4 grid col-span-1">
-                        <label className='text-xl text-indigo-700' htmlFor="fullName">Nome completo</label>
+                        <label className='text-xl text-indigo-700' htmlFor="name">Nome completo</label>
                         <input
                             className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                            id="fullName"
+                            id="name"
                             label="Nome completo"
                             autoFocus
-                            {...register('fullName', {
+                            {...register('name', {
                                 required: 'Por favor, digite seu nome completo',
                                 minLength: { value: 10, message: 'Por favor, digite também seu sobrenome' },
                             })}
                         />
-                        {errors.fullName && (
-                            <div className="text-red-500">{errors.fullName.message}</div>
+                        {errors.name && (
+                            <div className="text-red-500">{errors.name.message}</div>
                         )}
                     </div>
                     <div className='flex gap-10 justify-between'>

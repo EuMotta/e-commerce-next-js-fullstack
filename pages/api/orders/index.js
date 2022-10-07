@@ -14,7 +14,7 @@ const handler = async (req, res) => {
         user: user._id,
     })
     const order = await newOrder.save()
-    ras.status(201).send(order)
+    res.status(201).send(order)
 }
 
 export default handler
