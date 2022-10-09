@@ -106,7 +106,7 @@ export default function PlaceOrderScreen() {
                                 <div className='card p-5'>
                                     <h2 className='text-center text-2xl text-indigo-800'>Endereço de entrega</h2>
                                     <div className=' items-left grid grid-cols-2 gap-4 flex-col  mb-2'>
-                                        <div class="col-span-1">
+                                        <div className="col-span-1">
                                             <div className='text-indigo-800'>Nome:&nbsp;
                                                 <span className='text-black'>{shippingAddress.name}</span>
                                             </div>
@@ -141,9 +141,10 @@ export default function PlaceOrderScreen() {
                                     </div>
                                 </div>
                             </div>
-                            <div className='card p-5 mx-10  w-auto'>
+                            <div className='card p-5 mx-10   w-auto'>
+                                
                                 <h2 className="mb-2 text-center text-2xl text-indigo-800">Método de pagamento</h2>
-                                <div className="mt-8   text-center text-xl ">
+                                <div className="mt-8    text-center text-xl ">
                                     <Link href='/payment'>
                                         <span className='border border-indigo-800 shadow-sm bg-slate-100 hover:cursor-pointer hover:bg-slate-50 shadow-slate-900 p-3'>
                                             {paymentMethod}
@@ -205,7 +206,6 @@ export default function PlaceOrderScreen() {
                         </div>
                     </div>
                 </div>
-
             )}
         </Layout>
     )

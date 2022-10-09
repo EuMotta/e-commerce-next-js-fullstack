@@ -7,7 +7,8 @@ export default function CheckoutWizard({ activeStep = 0 }) {
         <div className='mb-5 flex flex-wrap'>
             {['Login do usuário', 'Endereço de entrega', 'Método de pagamento', 'Revisão do pedido'].map(
                 (step, index) => (
-                    <a onClick={() => router.push('login?redirect=shipping')} className='cursor-pointer flex-1 border-b-2 text-center text-2xl'>
+                    <a onClick={() => router.push('login?redirect=shipping')} 
+                    className='cursor-pointer flex-1 border-b-2 text-center text-2xl'>
                         <div
                             key={index}
                             className={`flex-1 border-b-2 text-center text-2xl 

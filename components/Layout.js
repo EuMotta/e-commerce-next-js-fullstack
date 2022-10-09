@@ -138,8 +138,23 @@ export default function Layout({ title, children }) {
                     <div className='container min-h-screen m-auto mt-8 px-0'>{children}</div>
                 </main>
                 <footer className="flex justify-center items-center h-10 shadow-inner">
-                    <p>Copyright © {year}, José Antonio</p>
+                    <div className=" bg-white  md:flex md:items-center md:justify-between  ">
+                        <span className="text-sm text-gray-500 sm:text-center">© {year} <span className='text-indigo-600'>nf</span>Trade. Todos os direitos reservados.
+                        </span>
+                        <ul className="flex flex-wrap items-center text-sm text-gray-500 dark:text-gray-400 sm:mt-0">
+                            <li>
+                                <a href="#" className="mr-4 hover:underline md:mx-6 ">José Antonio Motta</a>
+                            </li>
+                            <li>
+                                <a href="#" className="hover:underline">Contato</a>
+                            </li>
+                        </ul>
+                    </div>
+
                 </footer>
+                <div class=" p-1 text-sm text-center  text-red-700 bg-red-100 rounded-lg dark:bg-red-200 dark:text-red-800" role="alert">
+                    <span class="font-medium">Aviso!</span> Site em desenvolvimento.
+                </div>
             </div>
         </>
     )

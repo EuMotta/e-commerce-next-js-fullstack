@@ -6,8 +6,7 @@ import ProductItem from "../components/productItem"
 import Product from "../models/Product"
 import db from "../utils/db"
 import { Store } from "../utils/Store"
-import nftimg from '../public/img/NFT-bro.svg'
-import Image from "next/image"
+import Hero from '../components/Hero'
 
 export default function Home({ products }) {
   const { state, dispatch } = useContext(Store)
@@ -32,29 +31,7 @@ export default function Home({ products }) {
   return (
     <div>
       <Layout title="Home">
-        <div class="grid grid-cols-4 mb-32  gap-4">
-          <div class="col-span-2 text-right">
-            <Image
-              src={nftimg}
-              className="w-full login_img"
-              alt="Sample image"
-            />
-          </div>
-          <div class="col-span-2">
-            <div className=" my-10">
-              <h1 className="text-5xl">Descubra, colecione e venda <span className="text-indigo-600">NFT'S Incríveis!</span></h1>
-              <p className="text-2xl mt-10 w-96">em uma uma das maiores plataformas NFT do mundo.</p>
-              <div className="flex mt-10">
-                <div className="mr-4">
-                  <button className="p-5 px-16 text-xl">Descobrir</button>
-                </div>
-                <div className="mx-4">
-                  <button className="p-5 px-16 bg-indigo-600 text-white text-xl">Descobrir</button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+       <Hero/>
         {/* <div className="text-center my-10">
           <h1 className="text-5xl">Procurando <span className="text-indigo-600">NFT'S</span>? Confira abaixo!</h1>
         </div> */}

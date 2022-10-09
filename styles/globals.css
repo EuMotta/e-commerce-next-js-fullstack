@@ -12,7 +12,7 @@ html,
 body {
   padding: 0;
   margin: 0;
-  font-family: 'made'
+  font-family: 'made';
 }
 
 :root {
@@ -59,7 +59,7 @@ a:hover {
 }
 
 .card {
-  @apply mb-5 block rounded-lg border-spacing-2 border-gray-200 shadow-sm shadow-slate-400 bg-slate-200;
+  @apply mb-5 block rounded-lg border-spacing-2 border-gray-200 shadow-lg shadow-slate-400 bg-slate-50;
   transition: 300ms ease-in-out;
   
 }
@@ -75,9 +75,15 @@ a:hover {
 
   body {
     color: black;
-    @apply bg-cyan-50;
+    @apply bg-slate-50;
     background-position: center
   }
+}
+.alert-error{
+  @apply my-3 rounded-lg bg-red-100 p-3 text-red-700 text-xl ;
+}
+.alert-success{
+  @apply my-3 rounded-lg bg-green-100 p-3 text-green-700 text-xl ;
 }
 
 button {
@@ -86,7 +92,7 @@ button {
 }
 
 .primary-button {
-  @apply rounded py-0 bg-sky-50 pt-1 px-5 shadow-sm shadow-slate-700 m-2;
+  @apply rounded py-0 bg-sky-50 pt-1 px-5 shadow-md shadow-slate-400 m-2;
 }
 
 button:hover,
