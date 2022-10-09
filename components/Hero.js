@@ -29,9 +29,8 @@ export default function Hero() {
             </div>
             <div className="mx-4">
               {session?.user ? ('') : (
-                <Link href={'./login'}>
+                <Link href={'/register'}>
                   <button
-                    href={'./login'}
                     className="p-5 px-8 bg-indigo-600 text-white text-xl">Cadastre-se
                   </button>
                 </Link>)}

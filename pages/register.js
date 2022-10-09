@@ -8,6 +8,7 @@ import { signIn, useSession } from 'next-auth/react'
 import { toast } from 'react-toastify';
 import { getError } from '../utils/error';
 import { useRouter } from 'next/router';
+import axios from 'axios';
 
 export default function LoginScreen() {
     const { data: session } = useSession()
@@ -21,12 +22,20 @@ export default function LoginScreen() {
     const {
         handleSubmit,
         register,
+        getValues,
         formState: { errors },
     } = useForm();
-    const submitHandler = async ({ email, password }) => {
+    const submitHandler = async ({ name, lastName, email, password }) => {
         try {
+            await axios.post('/api/auth/signup', {
+                name,
+                lastName,
+                email,
+                password,
+            })
             const result = await signIn('credentials', {
                 redirect: false,
+                lastName,
                 email,
                 password,
             })
@@ -38,7 +47,7 @@ export default function LoginScreen() {
         }
     }
     return (
-        <Layout>
+        <Layout title='Registro'>
             <section className="h-full">
                 <div className="px-6 h-full text-gray-800">
                     <div
@@ -56,10 +65,10 @@ export default function LoginScreen() {
                         <div className="xl:ml-20 xl:w-5/12 lg:w-5/12 md:w-8/12 mb-12 md:mb-0">
                             <form onSubmit={handleSubmit(submitHandler)}>
                                 <div className='text-5xl text-center mb-10'>
-                                    <h1>Acessar Conta</h1>
+                                    <h1>Efetuar cadastro</h1>
                                 </div>
                                 <div className="flex flex-row items-center justify-center lg:justify-start">
-                                    <p className="text-lg mb-0 mr-4">Conecte-se com</p>
+                                    <p className="text-lg mb-0 mr-4">Cadastre-se com</p>
                                     <button
                                         type="button"
                                         data-mdb-ripple="true"
@@ -105,10 +114,43 @@ export default function LoginScreen() {
                                 >
                                     <p className="text-center font-semibold mx-4 mb-0">Ou</p>
                                 </div>
+                                <div className='flex justify-between'>
+                                    <div className="mb-6 ">
+                                        <label
+                                            htmlFor='name'
+                                        >Nome</label>
+                                        <input
+                                            {...register('name', {
+                                                required: 'Por favor, digite seu nome',
+                                                minLength: { value: 3, message: 'O nome deve ser maior que 2 caracteres' }
+                                            })}
+                                            type="name"
+                                            className="form-control focus:shadow-lg block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-slate-50 focus:border-blue-600 focus:outline-none"
+                                            id="name"
+                                            autoFocus
+                                        /> {errors.name && (<div className='text-sm text-red-500'>{errors.name.message}</div>)}
+                                    </div>
+
+                                    <div className="mb-6 ">
+                                        <label
+                                            htmlFor='lastName'
+                                        >Sobrenome</label>
+                                        <input
+                                            {...register('lastName', {
+                                                required: 'Por favor, digite seu sobrenome',
+                                                minLength: { value: 3, message: 'O sobrenome deve ter mais de 2 caracteres' }
+                                            })}
+                                            type="lastName"
+                                            className="form-control focus:shadow-lg block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-slate-50 focus:border-blue-600 focus:outline-none"
+                                            id="lastName"
+                                            autoFocus
+                                        /> {errors.lastName && (<div className='text-sm text-red-500'>{errors.lastName.message}</div>)}
+                                    </div>
+                                </div>
                                 <div className="mb-6 ">
                                     <label
                                         htmlFor='email'
-                                    >Email</label>
+                                    >E-mail</label>
                                     <input
                                         {...register('email', {
                                             required: 'Por favor, digite seu email', pattern: {
@@ -122,24 +164,49 @@ export default function LoginScreen() {
                                         autoFocus
                                     /> {errors.email && (<div className='text-sm text-red-500'>{errors.email.message}</div>)}
                                 </div>
-                                <div className="mb-6">
-                                    <label
-                                        htmlFor='password'
-                                    >Senha</label>
-                                    <input
-                                        {...register('password', {
-                                            required: 'Por favor, digite sua senha',
-                                            minLength: { value: 6, message: 'A senha deve ter mais de 5 caracteres' },
-                                            pattern: {
-                                                value: /^[a-zA-Z0-9_.+-]+$/i,
-                                                message: 'Por favor, digite sua senha',
-                                            }
-                                        })}
-                                        type="password"
-                                        className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                                        id="password"
-                                        autoFocus
-                                    />{errors.password && (<div className='text-sm text-red-500'>{errors.password.message}</div>)}
+                                <div className='flex justify-between'>
+                                    <div className="mb-6">
+                                        <label
+                                            htmlFor='password'
+                                        >Senha</label>
+                                        <input
+                                            {...register('password', {
+                                                required: 'Por favor, digite sua senha',
+                                                minLength: { value: 6, message: 'A senha deve ter mais de 6 caracteres' },
+                                                pattern: {
+                                                    value: /^[a-zA-Z0-9_.+-]+$/i,
+                                                    // para alterar o que eu quero, regex + o que eu quero
+                                                    message: 'Por favor, digite sua senha',
+                                                }
+                                            })}
+                                            type="password"
+                                            className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                                            id="password"
+                                            autoFocus
+                                        />{errors.password && (<div className='text-sm text-red-500'>{errors.password.message}</div>)}
+                                    </div>
+                                    <div className="mb-6">
+                                        <label
+                                            htmlFor='passwordIsValid'
+                                        >Confirmar Senha</label>
+                                        <input
+                                            {...register('passwordIsValid', {
+                                                required: 'Por favor, digite sua senha novamente',
+                                                validate: (value) => value === getValues('password'),
+                                                minLength: { value: 6, message: 'A senha deve ter mais de 6 caracteres' },
+                                                pattern: {
+                                                    value: /^[a-zA-Z0-9_.+-]+$/i,
+                                                    // para alterar o que eu quero, regex + o que eu quero
+                                                    message: 'As senhas devem ser iguais',
+                                                }
+                                            })}
+                                            type="password"
+                                            className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                                            id="passwordIsValid"
+                                            autoFocus
+                                        />{errors.passwordIsValid && (<div className='text-sm text-red-500'>{errors.passwordIsValid.message}</div>)}
+                                        {errors.passwordIsValid && (<div className='text-sm text-red-500'>As senhas digitadas não são Iguais</div>)}
+                                    </div>
                                 </div>
                                 <div className="flex justify-between items-center mb-6">
                                     <div className="form-group form-check">
@@ -151,15 +218,15 @@ export default function LoginScreen() {
                                         <label className="form-check-label inline-block text-gray-800" htmlFor="checkbox">Lembrar-me</label>
                                     </div>
                                     <p className="text-md font-semibold mt-2 pt-1 mb-0">
-                                        Não possui uma conta?
-                                        <Link href={`/register?redirect=${redirect || '/'} `}
-                                            className="text-red-600 hover:text-red-700 focus:text-red-700 transition duration-200 ease-in-out"> Registre-se</Link>
+                                        Já possui uma conta?
+                                        <Link href={`/login?redirect=${redirect || '/'} `}
+                                            className="text-red-600 hover:text-red-700 focus:text-red-700 transition duration-200 ease-in-out"> Entrar</Link>
                                     </p>
                                 </div>
                                 <div className="text-center lg:text-left">
                                     <button
                                         className="inline-block px-7 py-3 bg-blue-600 text-white font-medium text-md leading-snug rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
-                                    >Entrar
+                                    >Cadastrar-se
                                     </button>
                                 </div>
                             </form>
