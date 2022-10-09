@@ -21,17 +21,22 @@ export default function ProductItem({ product, addToCartHandler }) {
             <div className="mx-2">
                 <Link href={`/product/${product.slug}`}>
                     <a>
-                        <h2 className="text-lg">{product.name}</h2>
+                        <h2 className="text-xl text-center text-blue-800">{product.name}</h2>
                     </a>
                 </Link>
-                <p className="mb-2">{product.publisher}</p>
-                <div className="flex justify-between w-full">
-                    <p className="text-xl">R$ {product.price}</p>
+                <p className="mb-2 text-center text-sm">Dono atual: {product.publisher}</p>
+                <div className="flex justify-between w-full pb-2">
+                    <div className='flex items-center flex-col ml-2'>
+                        <span className='text-sm text-red-600 line-through'>de: R$&nbsp;
+                            {product.price}</span>
+                        <span className='text-xl  text-green-600'>por: R$&nbsp;
+                            {product.price * 0.9}</span>
+                    </div>
                     <button
                         className="primary-button"
                         type="button"
-                        onClick={()=> addToCartHandler(product)}
-                        >
+                        onClick={() => addToCartHandler(product)}
+                    >
                         <i className="ri-shopping-cart-line"></i>
                     </button>
                 </div>

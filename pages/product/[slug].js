@@ -78,9 +78,9 @@ export default function ProductScreen(props) {
                     </Image>
                 </div>
                 <div className='text-xl'>
-                    <ul>
-                        <li>
-                            {product.category}
+                    <ul className='card p-5'>
+                        <li className='card text-center'>
+                            Tipo: <span className='text-indigo-600'>{product.category}</span>
                         </li>
                         <li>
                             Criador: {product.publisher}
@@ -88,8 +88,13 @@ export default function ProductScreen(props) {
                         <li>
                             {product.rating} de {product.numReviews} avalizações
                         </li>
+                    </ul>
+                    <ul className='card p-5'>
+                        <li className='text-center card'>
+                            <h2>Descrição:</h2>
+                        </li>
                         <li>
-                            Descrição: {product.description}
+                            {product.description}
                         </li>
                     </ul>
                 </div>
@@ -98,7 +103,12 @@ export default function ProductScreen(props) {
                         <div className='mb-2 flex justify-between'>
                             <div className='text-2xl' >Preço</div>
                             <div className='text-2xl text-red-600'>
-                                {product.countInStock > 0 ? `R$ ${product.price}` : "Vendido"}
+                                {product.countInStock > 0 ? <div className='flex items-center flex-col ml-2'>
+                                    <span className='text-sm text-red-600 line-through'>de: R$&nbsp;
+                                        {product.price}</span>
+                                    <span className='text-xl  text-green-600'>por: R$&nbsp;
+                                        {product.price * 0.9}</span>
+                                </div> : "Vendido"}
                             </div>
                         </div>
                         <div className='mb-2 flex justify-between'>

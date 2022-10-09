@@ -57,7 +57,7 @@ function CartScreen() {
                                             <tr key={item.slug} className="border-b border-indigo-800">
                                                 <td>
                                                     <Link href={`/product/${item.slug}`}>
-                                                        <div className="flex cursor-pointer items-center">
+                                                        <div className="flex  cursor-pointer items-center">
                                                             <Image
                                                                 src={item.image}
                                                                 alt={item.name}

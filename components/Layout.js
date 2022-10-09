@@ -60,7 +60,7 @@ export default function Layout({ title, children }) {
                         <div className="container-fluid w-full flex flex-wrap items-center justify-between px-6">
                             <div className="container-fluid">
                                 <Link href="/">
-                                    <div className="text-xl cursor-pointer text-black" >E-commerce</div>
+                                    <div className="text-4xl cursor-pointer text-black" ><span className='text-indigo-500 '>nf</span>Trade</div>
                                 </Link>
                             </div>
                             <div className='menu flex gap-5'>

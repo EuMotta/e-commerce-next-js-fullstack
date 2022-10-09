@@ -4,7 +4,7 @@
 
 @font-face {
   font-family: made;
-  src: url('../assets/fonts/MADEMellowPERSONALUSE-Medium.otf');
+  src: url('../assets/fonts/BiennaleMedium.otf');
   font-weight: 600;
 }
 
@@ -59,7 +59,7 @@ a:hover {
 }
 
 .card {
-  @apply mb-5 block rounded-lg border-spacing-2 border-gray-200 shadow-sm shadow-black bg-neutral-100;
+  @apply mb-5 block rounded-lg border-spacing-2 border-gray-200 shadow-sm shadow-slate-400 bg-slate-200;
   transition: 300ms ease-in-out;
   
 }
@@ -75,7 +75,8 @@ a:hover {
 
   body {
     color: black;
-    @apply bg-sky-50;
+    @apply bg-cyan-50;
+    background-position: center
   }
 }
 
@@ -85,7 +86,7 @@ button {
 }
 
 .primary-button {
-  @apply rounded py-0 bg-indigo-50 pt-1 px-5 shadow-sm shadow-slate-700 m-2;
+  @apply rounded py-0 bg-sky-50 pt-1 px-5 shadow-sm shadow-slate-700 m-2;
 }
 
 button:hover,
