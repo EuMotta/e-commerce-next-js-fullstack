@@ -152,8 +152,8 @@ export default function Layout({ title, children }) {
                     </div>
 
                 </footer>
-                <div class=" p-1 text-sm text-center  text-red-700 bg-red-100 rounded-lg dark:bg-red-200 dark:text-red-800" role="alert">
-                    <span class="font-medium">Aviso!</span> Site em desenvolvimento.
+                <div className=" p-1 text-sm text-center  text-red-700 bg-red-100 rounded-lg dark:bg-red-200 dark:text-red-800" role="alert">
+                    <span className="font-medium">Aviso!</span> Site em desenvolvimento.
                 </div>
             </div>
         </>

@@ -20,7 +20,7 @@ export default function ProductScreen(props) {
                 <div className='text-5xl text-center'>
                     <h1>Você se perdeu!</h1>
                 </div>
-                <div className='flex items-center flex-col'>
+                <div className='flex flex-col items-center'>
                     <Image
                         src={imgErro}
                         alt="imagem do produto"

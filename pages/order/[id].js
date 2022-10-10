@@ -7,69 +7,69 @@ import Layout from '../../components/Layout'
 import { getError } from '../../utils/error';
 
 function reducer(state, action) {
-  switch (action.type) {
-    case 'FETCH_REQUEST':
-      return { ...state, loading: true, error: '' };
-    case 'FETCH_SUCCESS':
-      return { ...state, loading: false, order: action.payload, error: '' };
-    case 'FETCH_FAIL':
-      return { ...state, loading: false, error: action.payload };
-    default:
-      state
-  }
+    switch (action.type) {
+        case 'FETCH_REQUEST':
+            return { ...state, loading: true, error: '' };
+        case 'FETCH_SUCCESS':
+            return { ...state, loading: false, order: action.payload, error: '' };
+        case 'FETCH_FAIL':
+            return { ...state, loading: false, error: action.payload };
+        default:
+            state
+    }
 }
 function OrderScreen() {
-  const { query } = useRouter()
-  const orderId = query.id
+    const { query } = useRouter()
+    const orderId = query.id
 
-  const [{ loading, error, order, /* successPay, loadingDeliver, successDeliver */ },
-    dispatch,
-  ] = useReducer(reducer, {
-    loading: true,
-    order: {},
-    error: '',
-  })
-  useEffect(() => {
-    const fetchOrder = async () => {
-      try {
-        dispatch({ type: 'FETCH_REQUEST' })
-        const { data } = await axios.get(`/api/orders/${orderId}`)
-        dispatch({ type: 'FETCH_SUCCESS', payload: data })
-      } catch (err) {
-        dispatch({ type: 'FETCH_FAIL', payload: getError(err) })
-      }
-    }
-    if (!order._id || (order._id && order._id !== orderId)) {
+    const [{ loading, error, order, /* successPay, loadingDeliver, successDeliver */ },
+        dispatch,
+    ] = useReducer(reducer, {
+        loading: true,
+        order: {},
+        error: '',
+    })
+    useEffect(() => {
+        const fetchOrder = async () => {
+            try {
+                dispatch({ type: 'FETCH_REQUEST' })
+                const { data } = await axios.get(`/api/orders/${orderId}`)
+                dispatch({ type: 'FETCH_SUCCESS', payload: data })
+            } catch (err) {
+                dispatch({ type: 'FETCH_FAIL', payload: getError(err) })
+            }
+        }
+        if (!order._id || (order._id && order._id !== orderId)) {
 
-      fetchOrder()
-    }
-  }, [orderId, order])
+            fetchOrder()
+        }
+    }, [orderId, order])
 
-  const {
-    shippingAddress,
-    paymentMethod,
-    orderItems,
-    itemsPrice,
-    taxPrice,
-    shippingPrice,
-    totalPrice,
-    descount,
-    isPaid,
-    paidAt,
-    isDelivered,
-    deliveredAt,
+    const {
+        shippingAddress,
+        paymentMethod,
+        orderItems,
+        itemsPrice,
+        taxPrice,
+        shippingPrice,
+        totalPrice,
+        descount,
+        // isPaid,
+        // paidAt,
+        // isDelivered,
+        // deliveredAt,
 
-  } = order
+    } = order
 
-  return (
-    <Layout title={`Pedido ${orderId}`}>
-      <h1>{`Id: ${orderId}`}</h1>
-      {loading ? (
-        <div>Carregando...</div>
-      ) : (error ? (
-        <div className='alert-error'>{error}</div>
-      ) : (
-        <div className='grid md:grid-cols-4 md:gap-5'>
+    return (
+        <Layout title={`Pedido ${orderId}`}>
+            <h1>{`Id: ${orderId}`}</h1>
+            {loading ? (
+                <div>Carregando...</div>
+            ) : (error ? (
+                <div className='alert-error'>{error}</div>
+            ) : (
+                <div className='grid md:grid-cols-4 md:gap-5'>
                     <div className='overflow-x-auto md:col-span-3'>
                         <div className='card p-5 m-2 text-2xl text-indigo-500 text-center '> <h2>Lista de produtos</h2>
                             <table className='min-w-full'>
@@ -98,7 +98,7 @@ function OrderScreen() {
                                     ))}
                                 </tbody>
                             </table>
-                            
+
                             <div className='text-end mr-16 pr-2'>R$:{itemsPrice}</div>
                         </div>
                         <div className='grid ml-12 mx-2 grid-cols-2'>
@@ -132,31 +132,15 @@ function OrderScreen() {
                                             </div>
                                         </div>
                                     </div>
-                                    <div>
-                                        <Link href='/shipping'>
-                                            <button className='cursor-pointer  w-full'>
-                                                Editar
-                                            </button>
-                                        </Link>
-                                    </div>
                                 </div>
                             </div>
                             <div className='card p-5 mx-10   w-auto'>
-                                
+
                                 <h2 className="mb-2 text-center text-2xl text-indigo-800">Método de pagamento</h2>
                                 <div className="mt-8    text-center text-xl ">
-                                    <Link href='/payment'>
-                                        <span className='border border-indigo-800 shadow-sm bg-slate-100 hover:cursor-pointer hover:bg-slate-50 shadow-slate-900 p-3'>
-                                            {paymentMethod}
-                                        </span>
-                                    </Link>
-                                </div>
-                                <div className="mt-10 grid text-center text-xl">
-                                    <Link href='/payment'>
-                                        <button className='cursor-pointer w-full'>
-                                            Editar
-                                        </button>
-                                    </Link>
+                                    <span className='border border-indigo-800 shadow-sm bg-slate-100 hover:cursor-pointer hover:bg-slate-50 shadow-slate-900 p-3'>
+                                        {paymentMethod}
+                                    </span>
                                 </div>
                             </div>
                         </div>
@@ -199,10 +183,10 @@ function OrderScreen() {
                         </div>
                     </div>
                 </div>
-      )
-      )}
-    </Layout>
-  )
+            )
+            )}
+        </Layout>
+    )
 }
 
 OrderScreen.auth = true

@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import React, { useEffect } from 'react'
+import React from 'react'
 import nftimg from '../public/img/bg_img.png'
 import { useSession } from 'next-auth/react'
 
@@ -20,7 +20,7 @@ export default function Hero() {
         <div className="my-10">
           <h1 className="text-5xl lg:ml-10 lg:text-left md:text-center sm:text-center text-center  text-slate-600">
             Descubra, colecione e venda
-            <span className="text-indigo-600">NFT'S Incríveis!</span>
+            <span className="text-indigo-600">NFT&apos;S Incríveis!</span>
           </h1>
           <p className="text-2xl lg:ml-10 lg:text-left md:text-center sm:text-center text-center text-slate-600 mt-10 lg:w-4/5">nfTrade é uma das maiores plataformas NFT do mercado, descubra as Melhores Coleções de NFTs Únicas e Exclusivas! </p>
           <div className="flex lg:ml-10 lg:justify-start md:justify-around sm:justify-around justify-around mt-10">
