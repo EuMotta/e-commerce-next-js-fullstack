@@ -4,7 +4,7 @@ import 'remixicon/fonts/remixicon.css'
 import Image from "next/image";
 // npm cache clean --force
 // npm install
-export default function ProductItem({ product, addToCartHandler }) {
+export default function productItem({ product, addToCartHandler }) {
     return (
         <div className="card">
             <Link href={`/product/${product.slug}`}>
