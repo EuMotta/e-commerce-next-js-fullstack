@@ -36,7 +36,7 @@ export default function Home({ products }) {
           <h1 className="text-5xl">Procurando <span className="text-indigo-600">NFT'S</span>? Confira abaixo!</h1>
         </div> */}
         <div className="mb-7"><h1 className="text-4xl">Destaques</h1></div>
-        <div className="grid sm:grid-cols-3 grid-cols-2 gap-4 md:grid-cols-4 lg:grid-cols-5">
+        <div className="grid sm:grid-cols-3  grid-cols-2 gap-2 md:grid-cols-3 lg:grid-cols-4">
           {
             products.map((product) => (
               <ProductItem product={product} key={product.slug} addToCartHandler={addToCartHandler}>

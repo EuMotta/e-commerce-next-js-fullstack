@@ -1,20 +1,20 @@
 import React from "react"
 import Link from 'next/link'
-import 'remixicon/fonts/remixicon.css'
 import Image from "next/image";
-// npm cache clean --force
-// npm install
+import { toast } from "react-toastify";
 export default function productItem({ product, addToCartHandler }) {
     return (
-        <div className="card">
+        <div className="card p-5 hover:-translate-y-2 ">
+            <p className="mb-2 px-2 pt-2 text-sm">Vendedor: <span className="text-xl">@</span>{product.publisher}</p>
             <Link href={`/product/${product.slug}`}>
                 <div className="cursor-pointer">
                     <Image
                         src={product.image}
                         alt={product.name}
-                        width={350}
-                        height={350}
-                        className="rounded card"
+                        width={400}
+                        height={400}
+                        layout='responsive'
+                        className="card"
                     />
                 </div>
             </Link>
@@ -23,8 +23,8 @@ export default function productItem({ product, addToCartHandler }) {
                     <a>
                         <h2 className="text-xl text-center text-blue-800">{product.name}</h2>
                     </a>
-                </Link>
-                <p className="mb-2 text-center text-sm">Dono atual: {product.publisher}</p>
+                </Link> 
+                <div className="text-center text-sm">Restam: {product.countInStock}</div>
                 <div className="flex justify-between w-full pb-2">
                     <div className='flex items-center flex-col ml-2'>
                         <span className='text-sm text-red-600 line-through'>de: R$&nbsp;
@@ -32,6 +32,8 @@ export default function productItem({ product, addToCartHandler }) {
                         <span className='text-xl  text-green-600'>por: R$&nbsp;
                             {product.price * 0.9}</span>
                     </div>
+                    {product.countInStock > 0 ? 
+                    (
                     <button
                         className="primary-button"
                         type="button"
@@ -39,6 +41,18 @@ export default function productItem({ product, addToCartHandler }) {
                     >
                         <i className="ri-shopping-cart-line"></i>
                     </button>
+                    ):(
+                        <button
+                        className="primary-button cursor-not-allowed"
+                        type="button"
+                        onClick={() =>  toast.error(
+                            'Produto indisponível!'
+                        )}
+                    >
+                        <i className="ri-shopping-cart-line text-red-600"></i>
+                    </button>
+                    )}
+                    
                 </div>
             </div>
         </div>

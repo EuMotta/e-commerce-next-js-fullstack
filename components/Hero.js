@@ -14,9 +14,11 @@ export default function Hero() {
           className="w-full "
           alt="Sample image"
           layout="responsive"
+          width={350}
+          height={350}
         />
       </div>
-      <div className="col-span-1 flex flex-col justify-between">
+      <div className="col-span-1 mt-24  flex flex-col justify-between">
         <div className="my-10">
           <h1 className="text-5xl lg:ml-10 lg:text-left md:text-center sm:text-center text-center  text-slate-600">
             Descubra, colecione e venda

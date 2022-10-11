@@ -16,7 +16,7 @@ const data = {
     ],
     products: [
         {
-            name: 'Produto 1',
+            name: 'The girl with the firefly',
             image: '/img/produto01.png',
             slug: 'produto-01',
             category: "NFT",
@@ -28,7 +28,7 @@ const data = {
             publisher: 'José Antonio'
         },
         {
-            name: 'Produto 2',
+            name: 'Dodo hide the seek',
             image: '/img/produto02.png',
             slug: 'produto-02',
             category: "NFT",
@@ -37,10 +37,10 @@ const data = {
             rating: 4.5,
             numReviews: 10,
             countInStock: 3,
-            publisher: 'José Antonio'
+            publisher: 'Gustavo'
         },
         {
-            name: 'Produto 3',
+            name: 'Synthwave Painting',
             image: '/img/produto03.png',
             slug: 'produto-03',
             category: "NFT",
@@ -49,10 +49,10 @@ const data = {
             rating: 4.5,
             numReviews: 10,
             countInStock: 500,
-            publisher: 'José Antonio'
+            publisher: 'Louis'
         },
         {
-            name: 'Produto 4',
+            name: 'Spider Eyes Modern Art',
             image: '/img/produto04.png',
             slug: 'produto-04',
             category: "NFT",
@@ -61,10 +61,10 @@ const data = {
             rating: 4.5,
             numReviews: 10,
             countInStock: 3,
-            publisher: 'José Antonio'
+            publisher: 'Oliver Sanchez'
         },
         {
-            name: 'Produto 5',
+            name: 'Liquid Forest Princess',
             image: '/img/Produto05.png',
             slug: 'produto-05',
             category: "NFT",
@@ -73,10 +73,10 @@ const data = {
             rating: 4.5,
             numReviews: 10,
             countInStock: 3,
-            publisher: 'José Antonio'
+            publisher: 'Mary tipper'
         },
         {
-            name: 'Produto 6',
+            name: 'Colorful Abstract Painting',
             image: '/img/produto06.png',
             slug: 'produto-06',
             category: "NFT",
@@ -85,11 +85,11 @@ const data = {
             rating: 4.5,
             numReviews: 10,
             countInStock: 3,
-            publisher: 'José Antonio'
+            publisher: 'Zoe Stiffler'
         },
         {
-            name: 'Produto 7',
-            image: '/img/produto06.png',
+            name: 'Colorful Abstract',
+            image: '/img/produto07.png',
             slug: 'produto-07',
             category: "NFT",
             price: 150.00,
@@ -97,43 +97,19 @@ const data = {
             rating: 4.5,
             numReviews: 10,
             countInStock: 3,
-            publisher: 'José Antonio'
+            publisher: 'Mike Anderson'
         },
         {
-            name: 'Produto 8',
-            image: '/img/produto06.png',
+            name: 'The girl with the firefly',
+            image: '/img/produto08.png',
             slug: 'produto-08',
             category: "NFT",
             price: 150.00,
             description: 'É um produto incrível',
             rating: 4.5,
             numReviews: 10,
-            countInStock: 3,
-            publisher: 'José Antonio'
-        },
-        {
-            name: 'Produto 9',
-            image: '/img/produto06.png',
-            slug: 'produto-09',
-            category: "NFT",
-            price: 150.00,
-            description: 'É um produto incrível',
-            rating: 4.5,
-            numReviews: 10,
-            countInStock: 3,
-            publisher: 'José Antonio'
-        },
-        {
-            name: 'Produto 10',
-            image: '/img/produto06.png',
-            slug: 'produto-10',
-            category: "NFT",
-            price: 150.00,
-            description: 'É um produto incrível',
-            rating: 4.5,
-            numReviews: 10,
-            countInStock: 3,
-            publisher: 'José Antonio'
+            countInStock: 0,
+            publisher: 'Maik'
         },
     ]
 }
