@@ -109,7 +109,7 @@ function CartScreen() {
                                     <li>
                                         <button
                                             onClick={() => router.push('login?redirect=shipping')}
-                                            className="primary-button w-full"
+                                            className="primary-button shadow-sm w-full"
                                         >
                                             Confirmar
                                         </button>

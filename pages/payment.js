@@ -43,7 +43,7 @@ export default function PaymentScreen() {
                     <div className='flex items-center flex-col'>
                         {
                             ['PayPal', 'Pix', 'Boleto'].map((payment) => (
-                                <div key={payment} className="mb-4 cursor-pointer text-xl p-2 w-1/3 card bg-white hover:text-white hover:bg-blue-900">
+                                <div key={payment}  className="mb-4  cursor-pointer text-xl p-2 w-1/3 card bg-white hover:text-white focus:shadow-md hover:shadow-slate-500 hover:bg-indigo-500 hover:border-blue-600 hover:outline-none">
                                     <input
                                         name="paymentMethod"
                                         className="p-2 cursor-pointer outline-non focus:ring-0"
@@ -52,7 +52,7 @@ export default function PaymentScreen() {
                                         checked={selectedPaymentMethod === payment}
                                         onChange={() => setSelectedPaymentMethod(payment)}
                                     />
-                                    <label className="p-2 cursor-pointer" htmlFor={payment}>
+                                    <label className="p-2  cursor-pointer" htmlFor={payment}>
                                         {payment}
                                     </label>
                                 </div>

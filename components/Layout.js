@@ -78,13 +78,16 @@ export default function Layout({ title, children }) {
                             </div>
                             <div className='flex'>
                                 <Link href="/cart">
-                                    <div className='p-2 cursor-pointer text-black text-2xl'>
+                                    <div className='p-2 cursor-pointer flex text-black text-2xl'>
+                                         <i className="ri-shopping-cart-line"></i>
                                         {cartItemsCount > 0 && (
-                                            <span style={{ color: 'white', background: 'red' }} className=' ml-1 rounded-full px-0.5 text-xs font-bold'>
-                                                {cartItemsCount}
-                                            </span>
+                                            <span
+                                            style={{ color: 'white', background: 'red' }}
+                                            className=' mb-5 rounded-full px-2  text-sm  font-bold'>
+                                            {cartItemsCount}
+                                        </span>
                                         )}
-                                        <i className="ri-shopping-cart-line"></i>
+                                       
                                     </div>
                                 </Link>
                                 {status === 'loading' ?
@@ -95,7 +98,7 @@ export default function Layout({ title, children }) {
                                                 <Menu.Button className="text-blue-600 m-2">
                                                     {session.user.name}
                                                 </Menu.Button>
-                                                <Menu.Items className="absolute right-0 w-56 origin-top-right bg-white  shadow-lg ">
+                                                <Menu.Items className="absolute right-0  w-56 origin-top-right bg-white  shadow-lg ">
                                                     <Menu.Item>
                                                         <DropdownLink className="dropdown-link" href="/profile">
                                                             Perfil
@@ -104,7 +107,7 @@ export default function Layout({ title, children }) {
                                                     <Menu.Item>
                                                         <DropdownLink
                                                             className="dropdown-link"
-                                                            href="/order-history"
+                                                            href="/orderHistory"
                                                         >
                                                             Histórico de pedidos
                                                         </DropdownLink>

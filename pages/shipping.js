@@ -73,7 +73,7 @@ export default function ShippingScreen() {
                     <div className="mb-4 grid col-span-1">
                         <label className='text-xl text-indigo-700' htmlFor="name">Nome completo</label>
                         <input
-                            className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                            className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-white focus:shadow-md focus:shadow-slate-500 focus:bg-indigo-400 focus:border-blue-600 focus:outline-none"
                             id="name"
                             label="Nome completo"
                             autoFocus
@@ -90,7 +90,7 @@ export default function ShippingScreen() {
                         <div className="mb-4 grid col-span-1">
                             <label className='text-xl text-indigo-700' htmlFor="postalCode">CEP</label>
                             <input
-                                className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                                className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-white focus:shadow-md focus:shadow-slate-500 focus:bg-indigo-400 focus:border-blue-600 focus:outline-none"
                                 id="postalCode"
                                 onBlurCapture={checkCEP}
                                 {...register('postalCode', {
@@ -106,7 +106,7 @@ export default function ShippingScreen() {
                         <div className="mb-4 grid col-span-1">
                             <label className='text-xl text-indigo-700' htmlFor="number">Número</label>
                             <input
-                                className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                                className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-white focus:shadow-md focus:shadow-slate-500 focus:bg-indigo-400 focus:border-blue-600 focus:outline-none"
                                 id="number"
                                 {...register('number', {
                                     required: 'Por favor, digite o número de seu endereço',
@@ -122,7 +122,7 @@ export default function ShippingScreen() {
                         <div className="mb-4 grid col-span-1">
                             <label className='text-xl text-indigo-700' htmlFor="address">Rua</label>
                             <input
-                                className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                                className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-white focus:shadow-md focus:shadow-slate-500 focus:bg-indigo-400 focus:border-blue-600 focus:outline-none"
                                 id="address"
                                 {...register('address', {
                                     required: 'Por favor, digite o nome de sua rua',
@@ -138,7 +138,7 @@ export default function ShippingScreen() {
                         <div className="mb-4 grid col-span-1">
                             <label className='text-xl text-indigo-700' htmlFor="neighborhood">Bairro</label>
                             <input
-                                className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                                className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-white focus:shadow-md focus:shadow-slate-500 focus:bg-indigo-400 focus:border-blue-600 focus:outline-none"
                                 id="neighborhood"
                                 {...register('neighborhood', {
                                     required: 'Por favor, digite seu bairro',
@@ -153,7 +153,7 @@ export default function ShippingScreen() {
                         <div className="mb-4 grid col-span-1">
                             <label className='text-xl text-indigo-700' htmlFor="city">Cidade</label>
                             <input
-                                className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                                className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-white focus:shadow-md focus:shadow-slate-500 focus:bg-indigo-400 focus:border-blue-600 focus:outline-none"
                                 id="city"
                                 {...register('city', {
                                     required: 'Por favor, digite sua cidade',
@@ -166,7 +166,7 @@ export default function ShippingScreen() {
                         <div className="mb-4 grid col-span-1">
                             <label className='text-xl text-indigo-700' htmlFor="state">UF do Estado</label>
                             <input
-                                className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                                className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-white focus:shadow-md focus:shadow-slate-500 focus:bg-indigo-400 focus:border-blue-600 focus:outline-none"
                                 id="state"
                                 {...register('state', {
                                     required: 'Por favor, digite seu Estado',

@@ -98,7 +98,7 @@ export default function PlaceOrderScreen() {
                                     ))}
                                 </tbody>
                             </table>
-                            
+
                             <div className='text-end mr-16 pr-2'>R$:{itemsPrice}</div>
                         </div>
                         <div className='grid ml-12 mx-2 grid-cols-2'>
@@ -141,22 +141,21 @@ export default function PlaceOrderScreen() {
                                     </div>
                                 </div>
                             </div>
-                            <div className='card p-5 mx-10   w-auto'>
-                                
-                                <h2 className="mb-2 text-center text-2xl text-indigo-800">Método de pagamento</h2>
-                                <div className="mt-8    text-center text-xl ">
-                                    <Link href='/payment'>
-                                        <span className='border border-indigo-800 shadow-sm bg-slate-100 hover:cursor-pointer hover:bg-slate-50 shadow-slate-900 p-3'>
+                            <div className='card p-5 mx-10 w-auto'>
+                                <div className='flex flex-col justify-between h-full '>
+                                    <h2 className="mb-2 text-center text-2xl text-indigo-800">Método de pagamento</h2>
+                                    <div className="mt-8 text-center text-xl ">
+                                        <span className=''>
                                             {paymentMethod}
                                         </span>
-                                    </Link>
-                                </div>
-                                <div className="mt-10 grid text-center text-xl">
-                                    <Link href='/payment'>
-                                        <button className='cursor-pointer w-full'>
-                                            Editar
-                                        </button>
-                                    </Link>
+                                    </div>
+                                    <div className="mt-10 grid text-center text-xl">
+                                        <Link href='/payment'>
+                                            <button className='cursor-pointer w-full'>
+                                                Editar
+                                            </button>
+                                        </Link>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -167,21 +166,21 @@ export default function PlaceOrderScreen() {
                             <h2>Resumo do Pedido:</h2>
                             <ul>
                                 <li>
-                                    <div>
+                                    <div className="mb-2 gap-5 text-xl flex justify-between">
                                         <div>Itens</div>
-                                        <div>R$:{itemsPrice}</div>
+                                        <div>R$&nbsp;{itemsPrice}</div>
                                     </div>
                                 </li>
                                 <li>
-                                    <div>
+                                    <div className="mb-2 flex text-xl justify-between">
                                         <div>Taxa</div>
-                                        <div>R$:{taxPrice}</div>
+                                        <div>R$&nbsp;{taxPrice}</div>
                                     </div>
                                 </li>
                                 <li>
-                                    <div>
+                                    <div className="mb-2 flex text-xl justify-between">
                                         <div>Entrega</div>
-                                        <div>R$:{shippingPrice}</div>
+                                        <div>R$&nbsp;{shippingPrice}</div>
                                     </div>
                                 </li>
                                 <li>
@@ -196,9 +195,9 @@ export default function PlaceOrderScreen() {
                                     </div>
                                 </li>
                                 <li>
-                                    <div>
-                                        <button disabled={loading} onClick={placeOrderHandler} className='cursor-pointer w-full'>
-                                            {loading ? 'Carregando...':'Realizar pedido'}
+                                    <div className='mr-2'>
+                                        <button disabled={loading} onClick={placeOrderHandler} className='primary-button cursor-pointer w-full'>
+                                            {loading ? 'Carregando...' : 'Realizar pedido'}
                                         </button>
                                     </div>
                                 </li>

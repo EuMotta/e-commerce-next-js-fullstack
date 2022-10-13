@@ -79,18 +79,18 @@ export default function ProductScreen(props) {
                 </div>
                 <div className='text-xl'>
                     <ul className='card p-5'>
-                        <li className='card text-center'>
+                        <li className=' border rounded shadow-sm shadow-slate-400 text-center'>
                             Tipo: <span className='text-indigo-600'>{product.category}</span>
                         </li>
                         <li>
                             Criador: {product.publisher}
                         </li>
                         <li>
-                            {product.rating} de {product.numReviews} avalizações
+                            {product.rating} de {product.numReviews} avaliações
                         </li>
                     </ul>
                     <ul className='card p-5'>
-                        <li className='text-center card'>
+                        <li className='border rounded shadow-sm mb-2 shadow-slate-400 text-center'>
                             <h2>Descrição:</h2>
                         </li>
                         <li>

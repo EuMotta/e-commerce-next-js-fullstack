@@ -1,21 +1,22 @@
-import axios from 'axios';
-import Image from 'next/image';
-import Link from 'next/link';
+import axios from 'axios'
+import Image from 'next/image'
+import Link from 'next/link'
 import { useRouter } from 'next/router'
-import React, { useEffect, useReducer } from 'react'
+import { useSession } from 'next-auth/react';
+import { useEffect, useReducer } from 'react'
 import Layout from '../../components/Layout'
-import { getError } from '../../utils/error';
+import { getError } from '../../utils/error'
 import { PayPalButtons, usePayPalScriptReducer } from '@paypal/react-paypal-js'
-import { toast } from 'react-toastify';
+import { toast } from 'react-toastify'
 
 function reducer(state, action) {
     switch (action.type) {
         case 'FETCH_REQUEST':
-            return { ...state, loading: true, error: '' };
+            return { ...state, loading: true, error: '' }
         case 'FETCH_SUCCESS':
-            return { ...state, loading: false, order: action.payload, error: '' };
+            return { ...state, loading: false, order: action.payload, error: '' }
         case 'FETCH_FAIL':
-            return { ...state, loading: false, error: action.payload };
+            return { ...state, loading: false, error: action.payload }
         case 'PAY_REQUEST':
             return { ...state, loadingPay: true }
         case 'PAY_SUCCESS':
@@ -24,22 +25,38 @@ function reducer(state, action) {
             return { ...state, loadingPay: false, errorPay: action.payload }
         case 'PAY_RESET':
             return { ...state, loadingPay: false, successPay: false, errorPay: '' }
+        case 'DELIVER_REQUEST':
+            return { ...state, loadingDeliver: true };
+        case 'DELIVER_SUCCESS':
+            return { ...state, loadingDeliver: false, successDeliver: true };
+        case 'DELIVER_FAIL':
+            return { ...state, loadingDeliver: false };
+        case 'DELIVER_RESET':
+            return {
+                ...state,
+                loadingDeliver: false,
+                successDeliver: false,
+            };
         default:
             state
     }
 }
 function OrderScreen() {
+    // order/:id
     const [{ isPending }, paypalDispatch] = usePayPalScriptReducer()
     const { query } = useRouter()
     const orderId = query.id
-    const [{ 
-        loading, 
-        error, 
-        order, 
-        successPay, 
-        loadingPay, 
-        /*loadingDeliver, 
-        successDeliver */ },
+    const { data: session } = useSession()
+    const [
+        {
+            loading,
+            error,
+            order,
+            successPay,
+            loadingPay,
+            loadingDeliver,
+            successDeliver,
+        },
         dispatch,
     ] = useReducer(reducer, {
         loading: true,
@@ -56,11 +73,13 @@ function OrderScreen() {
                 dispatch({ type: 'FETCH_FAIL', payload: getError(err) })
             }
         }
-        if (!order._id || successPay || (order._id && order._id !== orderId)) {
-
+        if (!order._id || successPay || successDeliver || (order._id && order._id !== orderId)) {
             fetchOrder()
             if (successPay) {
                 dispatch({ type: 'PAY_RESET' })
+            }
+            if (successDeliver) {
+                dispatch({ type: 'DELIVER_RESET' });
             }
         } else {
             const loadPaypalScript = async () => {
@@ -69,18 +88,61 @@ function OrderScreen() {
                     type: 'resetOptions',
                     value: {
                         'client-id': clientId,
-                        currency: 'USD'
-                    }
+                        currency: 'USD',
+                    },
                 })
-                paypalDispatch({
-                    type: 'setLoadingStatus',
-                    value: 'pending'
-                })
+                paypalDispatch({ type: 'setLoadingStatus', value: 'pending' })
             }
             loadPaypalScript()
         }
-    }, [orderId, paypalDispatch, order, successPay])
+    }, [order, orderId, paypalDispatch, successDeliver, successPay]);
+    function createOrder(data, actions) {
+        return actions.order
+            .create({
+                purchase_units: [
+                    {
+                        amount: { value: descount },
+                    },
+                ],
+            })
+            .then((orderID) => {
+                return orderID
+            })
+    }
+    async function deliverOrderHandler() {
+        try {
+            dispatch({ type: 'DELIVER_REQUEST' });
+            const { data } = await axios.put(
+                `/api/admin/orders/${order._id}/deliver`,
+                {}
+            );
+            dispatch({ type: 'DELIVER_SUCCESS', payload: data });
+            toast.success('Order is delivered');
+        } catch (err) {
+            dispatch({ type: 'DELIVER_FAIL', payload: getError(err) });
+            toast.error(getError(err));
+        }
+    }
 
+    function onApprove(data, actions) {
+        return actions.order.capture().then(async function (details) {
+            try {
+                dispatch({ type: 'PAY_REQUEST' })
+                const { data } = await axios.put(
+                    `/api/orders/${order._id}/pay`,
+                    details
+                )
+                dispatch({ type: 'PAY_SUCCESS', payload: data })
+                toast.success('Pagamento do pedido foi realizado com sucesso!')
+            } catch (err) {
+                dispatch({ type: 'PAY_FAIL', payload: getError(err) })
+                toast.error(getError(err))
+            }
+        })
+    }
+    function onError(err) {
+        toast.error(getError(err))
+    }
     const {
         shippingAddress,
         paymentMethod,
@@ -92,55 +154,25 @@ function OrderScreen() {
         descount,
         isPaid,
         paidAt,
-        // isDelivered,
-        // deliveredAt,
-
+        isDelivered,
+        deliveredAt,
     } = order
-    function createOrder(data, actions) {
-        return actions.order.create(
-            {
-                purchase_units: [
-                    {
-                        amount: { value: descount },
-                    },
-                ]
-            },
-        ).then((orderId) => {
-            return orderId
-        })
-    }
-    function onAprove(data, actions) {
-        return actions.order.capture().then(async function (details) {
-            try {
-                dispatch({ type: 'PAY_REQUEST' })
-                const { data } = await axios.put(`/api/orders/${order._id}/pay`,
-                    details
-                )
-                dispatch({ type: 'PAY_SUCCESS', payload: data })
-                toast.success('Pagamento efetuado com sucesso')
-            } catch (err) {
-                dispatch({ type: 'PAY_FAIL', payload: getError(err) })
-                toast.error(getError(err))
-            }
-        })
-    }
-    function onError(err) {
-        toast.error(getError(err))
-    }
+
     return (
         <Layout title={`Pedido ${orderId}`}>
-            <h1 className='text-center card shadow-sm'>{`Id: ${orderId}`}</h1>
+            <h1 className="mb-4 text-center text-blue-700 text-3xl card">{`ID: ${orderId}`}</h1>
             {loading ? (
                 <div>Carregando...</div>
-            ) : (error ? (
-                <div className='alert-error'>{error}</div>
+            ) : error ? (
+                <div className="alert-error">{error}</div>
             ) : (
-                <div className='grid md:grid-cols-4 md:gap-5'>
-                    <div className='overflow-x-auto md:col-span-3'>
-                        <div className='card p-5 m-2 text-2xl text-indigo-500 text-center '> <h2>Lista de produtos</h2>
-                            <table className='min-w-full'>
-                                <thead className='border-y border-indigo-800'>
-                                    <tr className='text-indigo-800 text-1xl'>
+                <div className="grid md:grid-cols-4 md:gap-5">
+                    <div className="overflow-x-auto md:col-span-3">
+                        <div className="card bg-white text-center mx-1 overflow-x-auto p-5">
+                            <h2 className="mb-2 text-blue-600 text-3xl">Lista dos Produtos</h2>
+                            <table className="min-w-full">
+                                <thead className="border-b">
+                                    <tr className='text-blue-700 text-2xl'>
                                         <th className="px-5 text-center">Item</th>
                                         <th className="p-5 text-center">Quantidade</th>
                                         <th className="p-5 text-center">Preço</th>
@@ -149,29 +181,32 @@ function OrderScreen() {
                                 </thead>
                                 <tbody>
                                     {orderItems.map((item) => (
-                                        <tr key={item._id} className='border-y   border-indigo-700'>
-                                            <td className='m-5'>
-                                                <Link href={`/product/${item.slug}`} >
-                                                    <Image src={item.image} alt={item.name} width={50} height={50}></Image>
+                                        <tr key={item._id} className='border-y divide-blue-600 border-blue-600'>
+                                            <td>
+                                                <Link href={`/product/${item.slug}`}>
+                                                    <Image
+                                                        src={item.image}
+                                                        alt={item.name}
+                                                        width={50}
+                                                        height={50}
+                                                        className="cursor-pointer"
+                                                    ></Image>
                                                 </Link>
                                             </td>
-                                            <td className="p-5 text-black only:text-center">{item.quantity}</td>
-                                            <td className="p-5 text-black text-center">R${item.price}</td>
-                                            <td className="p-5 text-black text-center">
-                                                R${item.quantity * item.price}
+                                            <td className="p-5 only:text-center">{item.quantity}</td>
+                                            <td className="p-5 text-center">R$ {item.price}</td>
+                                            <td className="p-5 text-center">
+                                                R$ {item.quantity * item.price}
                                             </td>
                                         </tr>
                                     ))}
                                 </tbody>
                             </table>
-
-                            <div className='text-end mr-16 pr-2'>R$:{itemsPrice}</div>
                         </div>
-                        <div className='grid ml-12 mx-2 grid-cols-2'>
-                            <div>
-                                <div className='card p-5'>
-                                    <h2 className='text-center text-2xl text-indigo-800'>Endereço de entrega</h2>
-                                    <div className=' items-left grid grid-cols-2 gap-4 flex-col  mb-2'>
+                        <div className='flex justify-between gap-x-5'>
+                            <div className="card bg-white w-1/2 p-5">
+                                <h2 className="mb-2 text-blue-600 text-center text-3xl">Endereço para entrega</h2>
+                                <div className=' items-left grid grid-cols-2 gap-4 flex-col  mb-2'>
                                         <div className="col-span-1">
                                             <div className='text-indigo-800'>Nome:&nbsp;
                                                 <span className='text-black'>{shippingAddress.name}</span>
@@ -198,53 +233,54 @@ function OrderScreen() {
                                             </div>
                                         </div>
                                     </div>
+                                <div className='flex items-center flex-col'>
+                                    {isDelivered ? (
+                                        <div className="alert-success">Entregue {deliveredAt}</div>
+                                    ) : (
+                                        <div className="alert-error">Não entregue</div>
+                                    )}
                                 </div>
                             </div>
-                            <div className='card p-5 mx-10 w-auto'>
+                            <div className="card bg-white mx-1 w-1/2 p-5">
                                 <div className='flex flex-col justify-between h-full'>
-                                    <h2 className="mb-2 text-center text-2xl text-indigo-800">Método de pagamento</h2>
-                                    <div className=" text-center text-xl ">
-                                        <span className='border border-indigo-800 shadow-sm bg-slate-100 hover:cursor-pointer hover:bg-slate-50 shadow-slate-900 p-3'>
-                                            {paymentMethod}
-                                        </span>
-                                    </div>
-                                    <div>
+                                    <h2 className="mb-2 text-blue-600 text-center text-3xl">Método de pagamento</h2>
+                                    <div className='mb-2 text-xl text-center'>{paymentMethod}</div>
+                                    <div className='flex items-center flex-col'>
                                         {isPaid ? (
-                                            <div className='alert-success'>Pago às {paidAt}</div>
-                                        ):(
-                                            <div className='alert-error'>Não confirmado</div>
+                                            <div className="alert-success">Pago às {paidAt.substring(11, 19)} do dia {paidAt.substring(8, 10)}/{paidAt.substring(5, 7)}/{paidAt.substring(0, 4)}. </div>
+                                        ) : (
+                                            <div className="alert-error bg-red-600"><i class="ri-checkbox-blank-circle-fill mx-1 text-white"></i>Ainda não confirmado</div>
                                         )}
                                     </div>
                                 </div>
                             </div>
                         </div>
-
                     </div>
                     <div>
-                        <div className='card p-5 mt-2'>
-                            <h2>Resumo do Pedido:</h2>
+                        <div className="bg-blue-100 shadow-md rounded-lg p-5 border border-green-700">
+                            <h2 className="mb-2 text-blue-600 text-center text-3xl">Resumo do Pedido</h2>
                             <ul>
                                 <li>
-                                    <div>
+                                    <div className="mb-2 gap-5 text-xl flex justify-between">
                                         <div>Itens</div>
-                                        <div>R$:{itemsPrice}</div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div>
-                                        <div>Taxa</div>
-                                        <div>R$:{taxPrice}</div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div>
-                                        <div>Entrega</div>
-                                        <div>R$:{shippingPrice}</div>
+                                        <div>R$&nbsp;{itemsPrice}</div>
                                     </div>
                                 </li>
                                 <li>
                                     <div className="mb-2 flex text-xl justify-between">
-                                        <div>Total</div>
+                                        <div>Taxa</div>
+                                        <div>R$&nbsp;{taxPrice}</div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div className="mb-2 flex text-xl justify-between">
+                                        <div>Entrega</div>
+                                        <div>R$&nbsp;{shippingPrice}</div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div className="mb-2 flex text-xl justify-between">
+                                        <div className='mt-3cpmst'>Total</div>
                                         <div className='flex flex-col align-middle items-end'>
                                             <span className='text-md text-red-500 line-through'>de: R$&nbsp;
                                                 {totalPrice}</span>
@@ -258,27 +294,37 @@ function OrderScreen() {
                                         {isPending ? (
                                             <div>Carregando...</div>
                                         ) : (
-                                            <div className='w-full'>
+                                            <div className="w-full">
                                                 <PayPalButtons
                                                     createOrder={createOrder}
-                                                    onAprove={onAprove}
-                                                    onError={onError}>
-                                                </PayPalButtons>
+                                                    onApprove={onApprove}
+                                                    onError={onError}
+                                                    Layout='responsive'
+                                                ></PayPalButtons>
                                             </div>
                                         )}
                                         {loadingPay && <div>Carregando...</div>}
                                     </li>
                                 )}
-
+                                {session.user.isAdmin && order.isPaid && !order.isDelivered && (
+                                    <li>
+                                        {loadingDeliver && <div>Carregando...</div>}
+                                        <button
+                                            className="primary-button bg-white w-full"
+                                            onClick={deliverOrderHandler}
+                                        >
+                                            Confirmar entrega
+                                        </button>
+                                    </li>
+                                )}
                             </ul>
                         </div>
                     </div>
                 </div>
-            )
             )}
         </Layout>
-    )
+    );
 }
 
-OrderScreen.auth = true
-export default OrderScreen
+OrderScreen.auth = true;
+export default OrderScreen;
