@@ -35,6 +35,7 @@ async function handler(req, res) {
         name,
         lastName,
         email,
+        image,
         password: bcryptjs.hashSync(password),
         isAdmin: false,
     });
@@ -46,6 +47,7 @@ async function handler(req, res) {
         _id: user._id,
         name: user.name,
         lastName: user.lastName,
+        image:'f',
         email: user.email,
         isAdmin: user.isAdmin,
     });

@@ -48,9 +48,9 @@ function OrderHistoryScreen() {
                     <div className="alert-error">{error}</div>
                 ) : (
                     <div className="flex mb-5 justify-center">
-                        <table className="">
+                        <table className="w-2/3">
                             <thead className="border-b-8  border-2 border-b-indigo-500">
-                                <tr className='text-md text-slate-800'>
+                                <tr className='text-sm text-slate-800'>
                                     <th className="px-5 border text-center">Id</th>
                                     <th className="p-3 border text-center">Data do pedido</th>
                                     <th className="p-3 border text-center">Total</th>
