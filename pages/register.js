@@ -125,7 +125,7 @@ export default function LoginScreen() {
                                                 minLength: { value: 3, message: 'O nome deve ser maior que 2 caracteres' }
                                             })}
                                             type="name"
-                                            className="form-control focus:shadow-lg block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-white focus:shadow-md focus:shadow-slate-500 focus:bg-indigo-300 focus:border-blue-600 focus:outline-none"
+                                            className="form-control  block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-white focus:shadow-md focus:shadow-slate-500 focus:bg-indigo-300 focus:border-blue-600 focus:outline-none"
                                             id="name"
                                             autoFocus
                                         /> {errors.name && (<div className='text-sm text-red-500'>{errors.name.message}</div>)}
@@ -141,7 +141,7 @@ export default function LoginScreen() {
                                                 minLength: { value: 3, message: 'O sobrenome deve ter mais de 2 caracteres' }
                                             })}
                                             type="lastName"
-                                            className="form-control focus:shadow-lg block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-white focus:shadow-md focus:shadow-slate-500 focus:bg-indigo-300 focus:border-blue-600 focus:outline-none"
+                                            className="form-control  block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-white focus:shadow-md focus:shadow-slate-500 focus:bg-indigo-300 focus:border-blue-600 focus:outline-none"
                                             id="lastName"
                                             autoFocus
                                         /> {errors.lastName && (<div className='text-sm text-red-500'>{errors.lastName.message}</div>)}
@@ -159,7 +159,7 @@ export default function LoginScreen() {
                                             }
                                         })}
                                         type="email"
-                                        className="form-control focus:shadow-lg block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-white focus:shadow-md focus:shadow-slate-500 focus:bg-indigo-300 focus:border-blue-600 focus:outline-none"
+                                        className="form-control  block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-white focus:shadow-md focus:shadow-slate-500 focus:bg-indigo-300 focus:border-blue-600 focus:outline-none"
                                         id="email"
                                         autoFocus
                                     /> {errors.email && (<div className='text-sm text-red-500'>{errors.email.message}</div>)}

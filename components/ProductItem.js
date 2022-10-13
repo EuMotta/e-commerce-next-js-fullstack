@@ -1,8 +1,9 @@
 import React from "react"
 import Link from 'next/link'
-import Image from "next/image";
-import { toast } from "react-toastify";
-export default function productItem({ product, addToCartHandler }) {
+import Image from "next/image"
+import { toast } from "react-toastify"
+
+export default function ProductItem({ product, addToCartHandler }) {
     return (
         <div className="card p-5 hover:-translate-y-2 ">
             <p className="mb-2 px-2 pt-2 text-sm">Vendedor: <span className="text-xl">@</span>{product.publisher}</p>
