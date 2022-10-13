@@ -11,7 +11,6 @@ async function handler(req, res) {
     if (
         !name ||
         !lastName ||
-        !image ||
         !email ||
         !email.includes('@') ||
         !password ||
