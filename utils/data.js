@@ -2,7 +2,8 @@ import bcrypt from 'bcryptjs'
 const data = {
     users: [
         {
-            name: 'José Antonio Motta',
+            name: 'José ',
+            lastName: 'Antonio Motta',
             image: '/imgUser/admin.png',
             email: 'adminnfTrade@example.com',
             password: bcrypt.hashSync('12345678'),
@@ -10,6 +11,7 @@ const data = {
         },
         {
             name: 'Milena',
+            lastName: 'Carolina Souza',
             image: '/imgUser/user.png',
             email: 'usernfTrade@example.com',
             password: bcrypt.hashSync('12345678'),
