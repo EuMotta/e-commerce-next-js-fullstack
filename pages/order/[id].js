@@ -249,7 +249,7 @@ function OrderScreen() {
                                         {isPaid ? (
                                             <div className="alert-success">Pago às {paidAt.substring(11, 19)} do dia {paidAt.substring(8, 10)}/{paidAt.substring(5, 7)}/{paidAt.substring(0, 4)}. </div>
                                         ) : (
-                                            <div className="alert-error bg-red-600"><i class="ri-checkbox-blank-circle-fill mx-1 text-white"></i>Ainda não confirmado</div>
+                                            <div className="alert-error bg-red-600"><i className="ri-checkbox-blank-circle-fill mx-1 text-white"></i>Ainda não confirmado</div>
                                         )}
                                     </div>
                                 </div>

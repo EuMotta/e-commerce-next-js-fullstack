@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import Link from 'next/link'
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import { Store } from '../utils/Store'
 import 'remixicon/fonts/remixicon.css'
 import { ToastContainer } from 'react-toastify'
@@ -44,6 +44,23 @@ export default function Layout({ title, children }) {
         dispatch({ type: 'CART_RESET' })
         signOut({ callbackUrl: '/login' })
     }
+    const homeRef = useRef(null)
+    const navRef = useRef(null)
+    const homeFunc = () => {
+        if (document.body.scrollTop > 80 || document.documentElement.scrollTop > 80) {
+          homeRef.current.classList.add('home_shrink')
+          navRef.current.classList.add('nav_shrink')
+        } else {
+          homeRef.current.classList.remove('home_shrink')
+          navRef.current.classList.remove('nav_shrink')
+        }
+      }
+    useEffect(() => {
+        window.addEventListener('scroll', homeFunc)
+    
+        return () => window.removeEventListener('scroll', homeFunc)
+    
+      }, [])
     return (
         <>
             <Head>
@@ -55,8 +72,8 @@ export default function Layout({ title, children }) {
             <ToastContainer position='bottom-center' limit={3} />
 
             <div className='flex flex-col'>
-                <header>
-                    <nav className="relative w-full flex flex-wrap items-center justify-between py-3 bg-gray-100 text-gray-500 shadow-lg">
+                <header ref={homeRef} >
+                    <nav ref={navRef} className="relative w-full flex flex-wrap items-center justify-between py-3 bg-gray-100 text-gray-500 shadow-lg">
                         <div className="container-fluid w-full flex flex-wrap items-center justify-between px-6">
                             <div className="container-fluid">
                                 <Link href="/">

@@ -80,6 +80,16 @@ a:hover {
     background-color: var(--body-bg);
   }
 }
+.home_shrink{
+  width: 100%;
+  position: sticky;
+  top: 0;
+  left: 0;
+  z-index: 999;
+}
+.nav_shrink{
+  background-color: rgba(243, 244, 246, 0.897) !important;
+}
 .alert-error{
   @apply my-3 rounded-lg bg-red-100 p-3 text-red-700 text-xl  text-center ;
 }

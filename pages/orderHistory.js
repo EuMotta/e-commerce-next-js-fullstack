@@ -6,7 +6,6 @@ import React, { useEffect, useReducer } from 'react'
 import Layout from '../components/Layout'
 import { getError } from '../utils/error'
 import 'remixicon/fonts/remixicon.css'
-import { useSession } from 'next-auth/react'
 
 function reducer(state, action) {
     switch (action.type) {
@@ -22,7 +21,6 @@ function reducer(state, action) {
 }
 
 function OrderHistoryScreen() {
-    const { status, data: session } = useSession()
     const [{ loading, error, orders }, dispatch] = useReducer(reducer, {
         loading: true,
         orders: [],
@@ -43,14 +41,6 @@ function OrderHistoryScreen() {
     return (
         <Layout title="Histórico" >
             <h1 className="mb-4 text-center text-blue-800 text-4xl bg-white">Histórico de Compras</h1>
-            <h1 className='text-3xl'>{session.user.name}</h1>
-                            <ul>
-                                <li>
-                                    <div className="mb-2 gap-5 text-xl flex">
-                                        <div>Gerencie suas compras recentes</div>
-                                    </div>
-                                </li>
-                            </ul>
             {
                 loading ? (
                     <div>Carregando...</div>
@@ -79,16 +69,16 @@ function OrderHistoryScreen() {
                                             {
                                                 order.isPaid
                                                     ? <span className='bg-green-200 cursor-default p-1 px-5 text-sm rounded'>{order.paidAt.substring(0, 10)}</span>
-                                                    : <Link href={`/order/${order._id}`} passHref><span className='bg-red-400 flex cursor-pointer p-1 px-2 text-sm rounded'><i class="ri-checkbox-blank-circle-fill mx-1 text-white"></i>Pendente</span></Link>
+                                                    : <Link href={`/order/${order._id}`} passHref><span className='bg-red-400 flex cursor-pointer p-1 px-2 text-sm rounded'><i className="ri-checkbox-blank-circle-fill mx-1 text-white"></i>Pendente</span></Link>
                                             }
                                         </td>
                                         <td className="px-3 py-2 border text-center">
                                             {
                                                 order.isDelivered
-                                                    ? <span className='bg-green-200 cursor-default p-1 text-sm rounded'><i class="ri-checkbox-blank-circle-fill mx-1 text-white"></i>{order.deliveredAt.substring(0, 10)}</span>
+                                                    ? <span className='bg-green-200 cursor-default p-1 text-sm rounded'><i className="ri-checkbox-blank-circle-fill mx-1 text-white"></i>{order.deliveredAt.substring(0, 10)}</span>
                                                     : <div className='flex flex-col items-center'>
                                                         <span className='text-xs relative'>Previsão: {moment().add(7, 'day').calendar().substring(0, 5)}</span>
-                                                        <span className='bg-red-400 cursor-default p-1 text-sm rounded flex '><i class="ri-checkbox-blank-circle-fill mx-1 text-white"></i>Não Entregue</span>
+                                                        <span className='bg-red-400 cursor-default p-1 text-sm rounded flex '><i className="ri-checkbox-blank-circle-fill mx-1 text-white"></i>Não Entregue</span>
                                                     </div>
                                             }
                                         </td>
