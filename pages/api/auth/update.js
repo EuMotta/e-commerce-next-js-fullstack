@@ -12,7 +12,7 @@ async function handler(req, res) {
         return res.status(401).send({ message: 'Erro: É necessário estar acessado em sua conta para realizar essa função!' })
     }
     const { user } = session
-    const { name, image, lastName, email, password } = req.body
+    const { name, lastName, email, password } = req.body
     if (
         !name ||
         !lastName ||
