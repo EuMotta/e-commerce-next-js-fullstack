@@ -13,7 +13,7 @@ async function handler(req, res) {
         !email ||
         !email.includes('@') ||
         !password ||
-        password.trim().length < 5
+        password.trim().length < 7
     ) {
         res.status(422).json({
             message: 'Erro de validação!',
