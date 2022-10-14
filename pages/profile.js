@@ -6,7 +6,6 @@ import { getError } from '../utils/error'
 import axios from 'axios'
 import Layout from '../components/Layout'
 import { useRouter } from 'next/router'
-import Link from 'next/link'
 import Image from 'next/image'
 
 export default function ProfileScreen() {
