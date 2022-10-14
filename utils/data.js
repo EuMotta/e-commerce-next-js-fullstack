@@ -76,8 +76,8 @@ const data = {
             publisher: 'Oliver Sanchez'
         },
         {
-            name: 'Liquid Forest Princess',
-            image: '/img/Produto05.png',
+            name: 'Liquid Forest Princess New',
+            image: '/img/produto05.png',
             slug: 'produto-05',
             title:'Título do produto',
             gender:'Gênero do produto',
