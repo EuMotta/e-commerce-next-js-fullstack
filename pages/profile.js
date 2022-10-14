@@ -50,9 +50,9 @@ export default function ProfileScreen() {
         <Layout title={`Perfil de ${session.user.name}`}>
             {
                 session.user.isAdmin ? (
-                    <Link
+                    <span
                         onLoad={router.push('/unauthorizedProfile')} >
-                    </Link>
+                    </span>
                 ) : (
                     <form
                         className="grid md:grid-cols-6 md:gap-5"
