@@ -7,6 +7,7 @@ import axios from 'axios'
 import Layout from '../components/Layout'
 import { useRouter } from 'next/router'
 import Image from 'next/image'
+import Script from 'next/script'
 
 export default function ProfileScreen() {
     const router = useRouter()
@@ -49,9 +50,9 @@ export default function ProfileScreen() {
         <Layout title={`Perfil de ${session.user.name}`}>
             {
                 session.user.isAdmin ? (
-                    <span
+                    <Script
                         onLoad={router.push('/unauthorizedProfile')} >
-                    </span>
+                    </Script>
                 ) : (
                     <form
                         className="grid md:grid-cols-6 md:gap-5"
