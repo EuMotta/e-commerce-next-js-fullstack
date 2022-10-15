@@ -7,7 +7,7 @@ async function handler(req, res) {
     if (req.method !== 'PUT') {
         return res.status(400).send({ message: `${req.method} Não suportado` })
     }
-    const session = await getSession({ req });
+    const session = await getSession({ req })
     if (!session) {
         return res.status(401).send({ message: 'Erro: É necessário estar acessado em sua conta para realizar essa função!' })
     }

@@ -1,4 +1,3 @@
-
 import NextAuth from "next-auth"
 import User from "../../../models/User"
 import db from "../../../utils/db"
@@ -25,11 +24,11 @@ export default NextAuth({
     providers: [
         CredentialsProvider({
             async authorize(credentials) {
-                await db.connect();
+                await db.connect()
                 const user = await User.findOne({
                     email: credentials.email,
                 })
-                await db.disconnect();
+                await db.disconnect()
                 if (user && bcryptjs.compareSync(credentials.password, (user.password))) {
                     return {
                         _id: user._id,

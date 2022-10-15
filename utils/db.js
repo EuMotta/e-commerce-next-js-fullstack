@@ -4,13 +4,13 @@ const connection = {}
 
 async function connect(){
     if(connection.isConnected){
-        console.log('Conectou, Ore!')
+        console.log('Conectou!')
         return
     }
     if(mongoose.connections.length > 0){
         connection.isConnected = mongoose.connections[0].readyState
         if(connection.isConnected === 1){
-            console.log('DB has been connected')
+            console.log('DB foi conectado')
             return
         }
         await mongoose.disconnect()

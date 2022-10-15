@@ -2,7 +2,7 @@ import bcrypt from 'bcryptjs'
 const data = {
     users: [
         {
-            name: 'José ',
+            name: 'José',
             lastName: 'Antonio Motta',
             image: '/imgUser/admin.png',
             email: 'adminnfTrade@example.com',
