@@ -63,6 +63,7 @@ export default function ProfileScreen() {
                         <div className='md:col-span-2 col-span-6 sm:col-span-6   md:w-3/4 sm:w-1/2  block mx-auto'>
                             <Image
                                 src={`/imgUser/${session.user.name}.png`}
+                                alt={`${session.user.name}`}
                                 width={200}
                                 height={200}
                                 layout='responsive'
