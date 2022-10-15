@@ -77,7 +77,7 @@ const data = {
         },
         {
             name: 'Liquid Forest Princess New',
-            image: '/img/produto05.png',
+            image: '/img/produto04.png',
             slug: 'produto-05',
             title:'Título do produto',
             gender:'Gênero do produto',
