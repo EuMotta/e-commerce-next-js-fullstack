@@ -46,21 +46,24 @@ export default function Layout({ title, children }) {
     }
     const homeRef = useRef(null)
     const navRef = useRef(null)
+    const rocketRef = useRef(null)
     const homeFunc = () => {
         if (document.body.scrollTop > 80 || document.documentElement.scrollTop > 80) {
-          homeRef.current.classList.add('home_shrink')
-          navRef.current.classList.add('nav_shrink')
+            homeRef.current.classList.add('home_shrink')
+            navRef.current.classList.add('nav_shrink')
+            rocketRef.current.classList.add('open')
         } else {
-          homeRef.current.classList.remove('home_shrink')
-          navRef.current.classList.remove('nav_shrink')
+            homeRef.current.classList.remove('home_shrink')
+            navRef.current.classList.remove('nav_shrink')
+            rocketRef.current.classList.remove('open')
         }
-      }
+    }
     useEffect(() => {
         window.addEventListener('scroll', homeFunc)
-    
+
         return () => window.removeEventListener('scroll', homeFunc)
-    
-      }, [])
+
+    }, [])
     return (
         <>
             <Head>
@@ -96,15 +99,15 @@ export default function Layout({ title, children }) {
                             <div className='flex'>
                                 <Link href="/cart">
                                     <div className='p-2 cursor-pointer flex text-black text-2xl'>
-                                         <i className="ri-shopping-cart-line"></i>
+                                        <i className="ri-shopping-cart-line"></i>
                                         {cartItemsCount > 0 && (
                                             <span
-                                            style={{ color: 'white', background: 'red' }}
-                                            className=' mb-5 rounded-full px-2  text-sm  font-bold'>
-                                            {cartItemsCount}
-                                        </span>
+                                                style={{ color: 'white', background: 'red' }}
+                                                className=' mb-5 rounded-full px-2  text-sm  font-bold'>
+                                                {cartItemsCount}
+                                            </span>
                                         )}
-                                       
+
                                     </div>
                                 </Link>
                                 {status === 'loading' ?
@@ -172,6 +175,12 @@ export default function Layout({ title, children }) {
                     </div>
 
                 </footer>
+                <button
+                    ref={rocketRef}
+                    onClick={() => {window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })}}
+                    className=" scroll-top scroll-to-target open">
+                    <i class="ri-rocket-2-fill relative -top-1"></i>
+                </button>
                 <div className=" p-1 text-sm text-center  text-red-700 bg-red-100 rounded-lg dark:bg-red-200 dark:text-red-800" role="alert">
                     <span className="font-medium">Aviso!</span> Site em desenvolvimento.
                 </div>
