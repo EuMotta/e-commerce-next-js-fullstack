@@ -165,7 +165,7 @@ button:hover,
   text-align: center;
   cursor: pointer;
   background: #203793;
-  transition: 1s ease;
+  transition: 300ms ease;
   border: none;
 }
 .scroll-top.open {
