@@ -9,6 +9,7 @@ import { Menu } from '@headlessui/react'
 import DropdownLink from './DropdownLink'
 import 'react-toastify/dist/ReactToastify.css'
 import Cookies from 'js-cookie'
+import Image from 'next/image'
 
 
 const nav_links = [
@@ -115,8 +116,17 @@ export default function Layout({ title, children }) {
                                     session?.user ?
                                         (
                                             <Menu as="div" className="relative  inline-block">
-                                                <Menu.Button className="text-blue-600 m-2">
-                                                    {session.user.name}
+                                                <Menu.Button className="flex text-indigo-600 m-2">
+                                                    <div className='mt-1 pr-2'>
+                                                    {session.user.name}</div>
+                                                    <Image
+                                                        src={`/imgUser/${session.user.name}.png`}
+                                                        width={30}
+                                                        height={30}
+                                                        unoptimized
+                                                        className="shadow-black rounded-full"
+                                                        alt="Foto de perfil"
+                                                    />
                                                 </Menu.Button>
                                                 <Menu.Items className="absolute right-0  w-56 origin-top-right bg-white  shadow-lg ">
                                                     <Menu.Item>
@@ -132,6 +142,16 @@ export default function Layout({ title, children }) {
                                                             Histórico de pedidos
                                                         </DropdownLink>
                                                     </Menu.Item>
+                                                    {session.user.isAdmin && (
+                                                        <Menu.Item>
+                                                            <DropdownLink
+                                                                className="dropdown-link"
+                                                                href="/admin/dashBoard"
+                                                            >
+                                                                Dashboard
+                                                            </DropdownLink>
+                                                        </Menu.Item>
+                                                    )}
                                                     <Menu.Item>
                                                         <a
                                                             className="dropdown-link"
@@ -177,7 +197,7 @@ export default function Layout({ title, children }) {
                 </footer>
                 <button
                     ref={rocketRef}
-                    onClick={() => {window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })}}
+                    onClick={() => { window.scrollTo({ top: 0, left: 0, behavior: 'smooth' }) }}
                     className=" scroll-top scroll-to-target open">
                     <i className="ri-rocket-2-fill relative -top-1"></i>
                 </button>
