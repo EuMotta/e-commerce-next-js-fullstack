@@ -52,6 +52,7 @@ export default function ProfileScreen() {
             {
                 session.user.isAdmin ? (
                     <Link
+                        
                         onLoad={router.push('/unauthorizedProfile')} >
                     </Link>
                 ) : (
