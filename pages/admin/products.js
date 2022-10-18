@@ -90,7 +90,7 @@ export default function ProductsScreen() {
         return (
             <Layout title='Produtos'>
                 <div className="grid md:grid-cols-6 md:gap-5">
-                    <div className="card md:col-span-1  text-center text-md py-5 px-1">
+                    {/* <div className="card md:col-span-1  text-center text-md py-5 px-1">
                         <i className="ri-admin-fill text-4xl text-indigo-700"></i>
                         <ul className=" mr-3">
                             <li>
@@ -122,8 +122,8 @@ export default function ProductsScreen() {
                                 </Link>
                             </li>
                         </ul>
-                    </div>
-                    <div className=" mx-2 md:col-span-5">
+                    </div> */}
+                    <div className=" mx-2 md:col-span-6">
                         <div className='grid'>
                             <h1 className="mb-4 text-center card text-blue-700 text-4xl">
                                 Produtos Cadastrados

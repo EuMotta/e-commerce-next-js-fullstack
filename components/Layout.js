@@ -180,7 +180,7 @@ export default function Layout({ title, children }) {
                 </header>
                 {session?.user.isAdmin ?
                     (
-                        <session className="fixed z-50 top-24">
+                        <session className="fixed block z-50 top-24">
                             <SideLinks />
                         </session>
                     ) : ("")
