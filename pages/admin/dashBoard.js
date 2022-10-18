@@ -79,7 +79,7 @@ function DashboardScreen() {
 
     return (
         <Layout title="Visão Geral">
-            <div className="grid md:grid-cols-6 md:gap-5">
+            <div className="grid ml-14 md:grid-cols-6 md:gap-5">
                 
                 <div className="md:col-span-6">
                     <h1 className="mb-4 text-center text-indigo-600 text-4xl bg-white">

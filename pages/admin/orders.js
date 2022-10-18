@@ -40,7 +40,7 @@ export default function AdminOrderScreen() {
     }, []);
     return (
         <Layout title="Pedidos">
-            <div className="grid md:grid-cols-6 md:gap-5">
+            <div className="grid ml-14 md:grid-cols-6 md:gap-5">
                 {/* <div className="card md:col-span-1  text-center text-md py-5 px-1">
                 <i className="ri-admin-fill text-4xl text-indigo-700"></i>
                     <ul className=" mr-3">
