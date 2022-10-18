@@ -10,6 +10,7 @@ import DropdownLink from './DropdownLink'
 import 'react-toastify/dist/ReactToastify.css'
 import Cookies from 'js-cookie'
 import Image from 'next/image'
+import SideLinks from './SideLinks'
 
 
 const nav_links = [
@@ -118,7 +119,7 @@ export default function Layout({ title, children }) {
                                             <Menu as="div" className="relative  inline-block">
                                                 <Menu.Button className="flex text-indigo-600 m-2">
                                                     <div className='mt-1 pr-2'>
-                                                    {session.user.name}</div>
+                                                        {session.user.name}</div>
                                                     <Image
                                                         src={`/imgUser/${session.user.name}.png`}
                                                         width={30}
@@ -177,6 +178,13 @@ export default function Layout({ title, children }) {
                         </div>
                     </nav>
                 </header>
+                {session?.user.isAdmin ?
+                    (
+                        <session className="fixed z-50 top-24">
+                            <SideLinks />
+                        </session>
+                    ) : ("")
+                }
                 <main>
                     <div className='container min-h-screen m-auto mt-8 px-0'>{children}</div>
                 </main>

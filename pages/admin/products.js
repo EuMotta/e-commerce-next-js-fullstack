@@ -91,7 +91,7 @@ export default function ProductsScreen() {
             <Layout title='Produtos'>
                 <div className="grid md:grid-cols-6 md:gap-5">
                     <div className="card md:col-span-1  text-center text-md py-5 px-1">
-                        <i class="ri-admin-fill text-4xl text-indigo-700"></i>
+                        <i className="ri-admin-fill text-4xl text-indigo-700"></i>
                         <ul className=" mr-3">
                             <li>
                                 <Link href="/admin/dashBoard">
@@ -153,14 +153,14 @@ export default function ProductsScreen() {
                                             <th className="p-5 text-center">Ações</th>
                                         </tr>
                                     </thead>
-                                    <tbody className="text-center">
+                                    <tbody className="text-center" >
                                         {products.map((product) => (
                                             <tr
                                                 key={product._id}
                                                 className=" rounded text-md shadow-sm shadow-slate-500 hover:translate-x-1 ease-in-out transition-all  hover:shadow-md hover:shadow-slate-700"
                                             >
                                                 <td className="p-5">{product._id.substring(20, 24)}</td>
-                                                <td className="p-5">{product.user.name}</td>
+                                                <td className="p-5">{product.name}</td>
                                                 <td className="p-5">{product.price}</td>
                                                 <td className="p-5">{product.category}</td>
                                                 <td className="p-5">{product.countInStock}</td>
@@ -171,7 +171,9 @@ export default function ProductsScreen() {
                                                             <button className="cursor-pointer ">Editar</button>
                                                         </Link>
                                                         {' '}
-                                                        <button className="cursor-pointer " onClick={() => deleteHandler(product._id)} type='button'>Deletar</button>
+                                                        <button className="cursor-pointer  !bg-red-400" 
+                                                        onClick={() => deleteHandler(product._id)} 
+                                                        type='button'>Deletar</button>
                                                     </div>
                                                 </td>
                                             </tr>

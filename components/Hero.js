@@ -2,11 +2,12 @@ import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
 import nftimg from '../public/img/bg_img.png'
-import cardimg1 from '../public/img/imgcard1.png'
+// import cardimg1 from '../public/img/imgcard1.png'
 import { useSession } from 'next-auth/react'
 
 export default function Hero() {
   const { data: session } = useSession()
+  
   return (
     <div className="grid grid-cols-1 mb-28 md:grid-cols-1 bg_img lg:grid-cols-2 sm:grid-cols-1 gap-4">
       <div className="col-span-1 text-center">
@@ -41,39 +42,103 @@ export default function Hero() {
           </div>
         </div>
       </div>
-      <div className='grid grid-cols-3'>
-        <div className='col-span-1'>
-          <div class="container mt-20">
-            <div class="card2">
-              <div class="lines"></div>
-              <div class="imageBox ">
-                <Image
-                  src={cardimg1}
-                  className="w-full "
-                  alt="Sample image"
-                  layout="responsive"
-                  width={350}
-                  height={350}
-                />
-              </div>
-              <div class="content shadow-lg shadow-black">
-                <div class="details">
-                  <h2>Hero Cat Glasses <br /> <span>Love Cat NFT</span></h2>
-                  <div class="info">
-                    <h3>Categoria <br /><span>Nft</span></h3>
-                    <h3>Valor <br /><span>R$ 340</span></h3>
-                    <h3>Ofertas <br /><span>31</span></h3>
+      {/* <div className='flex'>
+        <div className='md:flex md:gap-16 '>
+          <div className='col-span-1 '>
+            <div class="container mt-20">
+              <div class="card2">
+                <div class="lines"></div>
+                <div class="imageBox ">
+                  <Image
+                    src={cardimg1}
+                    className="w-full "
+                    alt="Sample image"
+                    layout="responsive"
+                    width={350}
+                    height={350}
+                  />
+                </div>
+                <div class="content shadow-lg shadow-black">
+                  <div class="details">
+                    <h2>Hero Cat Glasses <br /> <span>Love Cat NFT</span></h2>
+                    <div class="info">
+                      <h3>Categoria <br /><span>Nft</span></h3>
+                      <h3>Valor <br /><span>R$ 340</span></h3>
+                      <h3>Ofertas <br /><span>31</span></h3>
+                    </div>
+                    <div class="">
+                      <button className='primary-button'>Comprar</button>
+                      <button className='primary-button'>Saiba Mais</button>
+                    </div>
                   </div>
-                  <div class="actions">
-                    <button>Comprar</button>
-                    <button>Saiba Mais</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className='col-span-1 '>
+            <div class="container mt-20">
+              <div class="card2">
+                <div class="lines"></div>
+                <div class="imageBox ">
+                  <Image
+                    src={cardimg1}
+                    className="w-full "
+                    alt="Sample image"
+                    layout="responsive"
+                    width={350}
+                    height={350}
+                  />
+                </div>
+                <div class="content shadow-lg shadow-black">
+                  <div class="details">
+                    <h2>Hero Cat Glasses <br /> <span>Love Cat NFT</span></h2>
+                    <div class="info">
+                      <h3>Categoria <br /><span>Nft</span></h3>
+                      <h3>Valor <br /><span>R$ 340</span></h3>
+                      <h3>Ofertas <br /><span>31</span></h3>
+                    </div>
+                    <div class="">
+                      <button className='primary-button'>Comprar</button>
+                      <button className='primary-button'>Saiba Mais</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className='col-span-1 '>
+            <div class="container mt-20">
+              <div class="card2">
+                <div class="lines"></div>
+                <div class="imageBox ">
+                  <Image
+                    src={cardimg1}
+                    className="w-full "
+                    alt="Sample image"
+                    layout="responsive"
+                    width={350}
+                    height={350}
+                  />
+                </div>
+                <div class="content shadow-lg shadow-black">
+                  <div class="details">
+                    <h2>Hero Cat Glasses <br /> <span>Love Cat NFT</span></h2>
+                    <div class="info">
+                      <h3>Categoria <br /><span>Nft</span></h3>
+                      <h3>Valor <br /><span>R$ 340</span></h3>
+                      <h3>Ofertas <br /><span>31</span></h3>
+                    </div>
+                    <div class="">
+                      <button className='primary-button'>Comprar</button>
+                      <button className='primary-button'>Saiba Mais</button>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
     </div>
   )
 }

@@ -5,7 +5,6 @@ import Link from "next/link";
 import moment from "moment";
 import React, { useEffect, useReducer } from "react";
 import "remixicon/fonts/remixicon.css";
-import { CepBrasil, correiosBrasil, rastreioBrasil } from 'correios-brasil'
 
 function reducer(state, action) {
     switch (action.type) {
@@ -39,17 +38,11 @@ export default function AdminOrderScreen() {
         };
         fetchData();
     }, []);
-    const checkCEP = () => {
-        const cep = '12511340'
-        fetch(`https://viacep.com.br/ws/${cep}/json/`).then(res => res.json()).then(data => {
-            console.log(checkCEP)
-        })
-    }
     return (
         <Layout title="Pedidos">
             <div className="grid md:grid-cols-6 md:gap-5">
                 <div className="card md:col-span-1  text-center text-md py-5 px-1">
-                <i class="ri-admin-fill text-4xl text-indigo-700"></i>
+                <i className="ri-admin-fill text-4xl text-indigo-700"></i>
                     <ul className=" mr-3">
                         <li>
                             <Link href="/admin/dashBoard">
