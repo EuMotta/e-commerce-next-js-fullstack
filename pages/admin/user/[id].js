@@ -153,7 +153,7 @@ export default function AdminUserEditScreen() {
                             </div>
                             <div className="flex gap-3">
                                 <div className="mb-4">
-                                    <label htmlFor="image" className="text-xl text-indigo-700">
+                                    <label htmlFor="image" className="text-xl">
                                         Imagem
                                     </label>
 
