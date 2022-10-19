@@ -83,7 +83,7 @@ export default function AdminUserEditScreen() {
         <Layout title={`Editar usuário ${userId}`}>
             <div className="grid md:grid-cols-6 md:gap-5">
                 <div className="md:col-span-6">
-                    <h1 className="mb-4 text-center py-2 card text-indigo-700 text-2xl">{`Editar Produto: ${userId}`}</h1>
+                    <h1 className="mb-4 text-center py-2 card text-indigo-700 text-2xl">{`Editar Usuário: ${userId}`}</h1>
                     {loading ? (
                         <div>Carregando...</div>
                     ) : error ? (
