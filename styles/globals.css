@@ -113,6 +113,7 @@ button {
 }
 
 .primary-button {
+  transition: 300ms;
   @apply rounded py-1 bg-gradient-to-r from-zinc-100 via-zinc-50 to-zinc-200 bg-zinc-100  hover:bg-gradient-to-r hover:from-indigo-400 hover:via-indigo-300 hover:to-indigo-500 hover:bg-zinc-100  px-4 shadow-sm shadow-slate-400 m-2;
 }
 

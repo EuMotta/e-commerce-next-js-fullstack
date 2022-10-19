@@ -1,21 +1,21 @@
-import axios from "axios";
-import { getError } from "../../utils/error";
-import Layout from "../../components/Layout";
-import Link from "next/link";
-import moment from "moment";
-import React, { useEffect, useReducer } from "react";
-import "remixicon/fonts/remixicon.css";
+import axios from "axios"
+import { getError } from "../../utils/error"
+import Layout from "../../components/Layout"
+import Link from "next/link"
+import moment from "moment"
+import React, { useEffect, useReducer } from "react"
+import "remixicon/fonts/remixicon.css"
 
 function reducer(state, action) {
     switch (action.type) {
         case "FETCH_REQUEST":
-            return { ...state, loading: true, error: "" };
+            return { ...state, loading: true, error: "" }
         case "FETCH_SUCCESS":
-            return { ...state, loading: false, orders: action.payload, error: "" };
+            return { ...state, loading: false, orders: action.payload, error: "" }
         case "FETCH_FAIL":
-            return { ...state, loading: false, error: action.payload };
+            return { ...state, loading: false, error: action.payload }
         default:
-            state;
+            state
     }
 }
 
@@ -24,56 +24,23 @@ export default function AdminOrderScreen() {
         loading: true,
         orders: [],
         error: "",
-    });
+    })
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                dispatch({ type: "FETCH_REQUEST" });
-                const { data } = await axios.get(`/api/admin/orders`);
-                dispatch({ type: "FETCH_SUCCESS", payload: data });
+                dispatch({ type: "FETCH_REQUEST" })
+                const { data } = await axios.get(`/api/admin/orders`)
+                dispatch({ type: "FETCH_SUCCESS", payload: data })
             } catch (err) {
-                dispatch({ type: "FETCH_FAIL", payload: getError(err) });
+                dispatch({ type: "FETCH_FAIL", payload: getError(err) })
             }
-        };
-        fetchData();
-    }, []);
+        }
+        fetchData()
+    }, [])
     return (
         <Layout title="Pedidos">
-            <div className="grid ml-14 md:grid-cols-6 md:gap-5">
-                {/* <div className="card md:col-span-1  text-center text-md py-5 px-1">
-                <i className="ri-admin-fill text-4xl text-indigo-700"></i>
-                    <ul className=" mr-3">
-                        <li>
-                            <Link href="/admin/dashBoard">
-                                <button className="cursor-pointer  w-full primary-button">
-                                    Visão geral
-                                </button>
-                            </Link>
-                        </li>
-                        <li>
-                            <Link href="/admin/orders">
-                                <button className="cursor-pointer w-full primary-button">
-                                    Pedidos
-                                </button>
-                            </Link>
-                        </li>
-                        <li>
-                            <Link href="/admin/products">
-                                <button className="cursor-pointer  w-full primary-button">
-                                    Produtos
-                                </button>
-                            </Link>
-                        </li>
-                        <li>
-                            <Link href="/admin/users">
-                                <button className="cursor-pointer w-full primary-button">
-                                    Usuários
-                                </button>
-                            </Link>
-                        </li>
-                    </ul>
-                </div> */}
+            <div className="grid md:grid-cols-6 md:gap-5">
                 <div className="overflow-x-auto md:col-span-6">
                     <h1 className="mb-4 text-center card text-blue-700 text-4xl">
                         Pedidos
@@ -165,7 +132,7 @@ export default function AdminOrderScreen() {
                 </div>
             </div>
         </Layout>
-    );
+    )
 }
 
-AdminOrderScreen.auth = { adminOnly: true };
+AdminOrderScreen.auth = { adminOnly: true }

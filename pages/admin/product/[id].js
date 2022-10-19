@@ -1,5 +1,4 @@
 import axios from 'axios'
-import Link from 'next/link'
 import { useRouter } from 'next/router'
 import React, { useEffect, useReducer } from 'react'
 import { useForm } from 'react-hook-form'
@@ -98,40 +97,7 @@ export default function AdminProductEditScreen() {
     return (
         <Layout title={`Edit Product ${productId}`}>
             <div className="grid md:grid-cols-6 md:gap-5">
-                <div className="card md:col-span-1  text-center text-md py-5 px-1">
-                    <i className="ri-admin-fill text-4xl text-indigo-700"></i>
-                    <ul className=" mr-3">
-                        <li>
-                            <Link href="/admin/dashBoard">
-                                <button className="cursor-pointer  w-full primary-button">
-                                    Visão geral
-                                </button>
-                            </Link>
-                        </li>
-                        <li>
-                            <Link href="/admin/orders">
-                                <button className="cursor-pointer w-full primary-button">
-                                    Pedidos
-                                </button>
-                            </Link>
-                        </li>
-                        <li>
-                            <Link href="/admin/products">
-                                <button className="cursor-pointer  w-full primary-button">
-                                    Produtos
-                                </button>
-                            </Link>
-                        </li>
-                        <li>
-                            <Link href="/admin/users">
-                                <button className="cursor-pointer w-full primary-button">
-                                    Usuários
-                                </button>
-                            </Link>
-                        </li>
-                    </ul>
-                </div>
-                <div className="md:col-span-5">
+                <div className="md:col-span-6">
                     <h1 className="mb-4 text-center py-2 card text-indigo-700 text-2xl">{`Editar Produto: ${productId}`}</h1>
                     {loading ? (
                         <div>Carregando...</div>

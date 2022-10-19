@@ -90,9 +90,9 @@ export default function PlaceOrderScreen() {
                                                 </Link>
                                             </td>
                                             <td className="p-5 text-black only:text-center">{item.quantity}</td>
-                                            <td className="p-5 text-black text-center">R${item.price}</td>
+                                            <td className="p-5 text-black text-center">${item.price}</td>
                                             <td className="p-5 text-black text-center">
-                                                R${item.quantity * item.price}
+                                                ${item.quantity * item.price}
                                             </td>
                                         </tr>
                                     ))}
@@ -168,19 +168,19 @@ export default function PlaceOrderScreen() {
                                 <li>
                                     <div className="mb-2 gap-5 text-xl flex justify-between">
                                         <div>Itens</div>
-                                        <div>R$&nbsp;{itemsPrice}</div>
+                                        <div>$&nbsp;{itemsPrice}</div>
                                     </div>
                                 </li>
                                 <li>
                                     <div className="mb-2 flex text-xl justify-between">
                                         <div>Taxa</div>
-                                        <div>R$&nbsp;{taxPrice}</div>
+                                        <div>$&nbsp;{taxPrice}</div>
                                     </div>
                                 </li>
                                 <li>
                                     <div className="mb-2 flex text-xl justify-between">
                                         <div>Entrega</div>
-                                        <div>R$&nbsp;{shippingPrice}</div>
+                                        <div>$&nbsp;{shippingPrice}</div>
                                     </div>
                                 </li>
                                 <li>

@@ -143,16 +143,16 @@ export default function Layout({ title, children }) {
                                                             Histórico de pedidos
                                                         </DropdownLink>
                                                     </Menu.Item>
-                                                    {session.user.isAdmin && (
+                                                    {/* {session.user.isAdmin && (
                                                         <Menu.Item>
                                                             <DropdownLink
                                                                 className="dropdown-link"
-                                                                href="/admin/dashBoard"
+                                                                href="/admin/dashboard"
                                                             >
                                                                 Dashboard
                                                             </DropdownLink>
                                                         </Menu.Item>
-                                                    )}
+                                                    )} */}
                                                     <Menu.Item>
                                                         <a
                                                             className="dropdown-link"
@@ -180,7 +180,7 @@ export default function Layout({ title, children }) {
                 </header>
                 {session?.user.isAdmin ?
                     (
-                        <session className="fixed block z-50 top-24">
+                        <session className="fixed  z-50 top-52">
                             <SideLinks />
                         </session>
                     ) : ("")

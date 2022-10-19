@@ -39,7 +39,7 @@ const putHandler = async (req, res) => {
         product.description = req.body.description
         await product.save()
         await db.disconnect()
-        res.send({ message: 'Produto atualizado!' })
+        res.send({ message: 'Produto cadastrado!' })
     } else {
         await db.disconnect()
         res.status(404).send({ message: 'Produto não encontrado.' })

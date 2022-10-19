@@ -45,12 +45,13 @@ function CartScreen() {
                             <div className="overflow-x-auto md:col-span-3">
                                 <table className="min-w-full">
                                     <thead className="border-b border-indigo-800">
-                                    <tr className='text-indigo-800 text-1xl'>
-                                        <th className="px-5 text-center">Item</th>
-                                        <th className="p-5 text-center">Quantidade</th>
-                                        <th className="p-5 text-center">Preço/Un.</th>
-                                        <th className="p-5 text-center">Total</th>
-                                    </tr>
+                                        <tr className='text-indigo-800 text-1xl'>
+                                            <th className="px-5 text-center">Item</th>
+                                            <th className="p-5 text-center">Quantidade</th>
+                                            <th className="p-5 text-center">Preço Un.</th>
+                                            <th className="p-5 text-center">Preço Total</th>
+                                            <th className="p-5 text-center">Remover</th>
+                                        </tr>
                                     </thead>
                                     <tbody>
                                         {cartItems.map((item) => (
@@ -85,7 +86,12 @@ function CartScreen() {
                                                             ))}
                                                     </select>
                                                 </td>
-                                                <td className="p-5 text-red-600 text-center">${item.price}</td>
+                                                <td className="p-5 pointer-events-none  text-center">
+                                                    $&nbsp;{item.price}
+                                                </td>
+                                                <td className="p-5 pointer-events-none text-indigo-700 text-center">
+                                                    $&nbsp;{item.price * item.quantity}
+                                                </td>
                                                 <td className="p-5 text-center">
                                                     <button onClick={() => removeItemHandler(item)}>
                                                         <div className='bg-none'>

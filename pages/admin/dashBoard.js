@@ -1,8 +1,8 @@
-import axios from "axios";
-import { Bar } from "react-chartjs-2";
-import { getError } from "../../utils/error";
-import Layout from "../../components/Layout";
-import Link from "next/link";
+import axios from "axios"
+import { Bar } from "react-chartjs-2"
+import { getError } from "../../utils/error"
+import Layout from "../../components/Layout"
+import Link from "next/link"
 import {
     Chart as ChartJS,
     CategoryScale,
@@ -11,8 +11,8 @@ import {
     LinearScale,
     Title,
     Tooltip,
-} from "chart.js";
-import React, { useEffect, useReducer } from "react";
+} from "chart.js"
+import React, { useEffect, useReducer } from "react"
 
 ChartJS.register(
     CategoryScale,
@@ -21,7 +21,7 @@ ChartJS.register(
     Title,
     Tooltip,
     Legend
-);
+)
 
 export const options = {
     responsive: true,
@@ -30,18 +30,18 @@ export const options = {
             position: "top",
         },
     },
-};
+}
 
 function reducer(state, action) {
     switch (action.type) {
         case "FETCH_REQUEST":
-            return { ...state, loading: true, error: "" };
+            return { ...state, loading: true, error: "" }
         case "FETCH_SUCCESS":
-            return { ...state, loading: false, summary: action.payload, error: "" };
+            return { ...state, loading: false, summary: action.payload, error: "" }
         case "FETCH_FAIL":
-            return { ...state, loading: false, error: action.payload };
+            return { ...state, loading: false, error: action.payload }
         default:
-            state;
+            state
     }
 }
 
@@ -50,21 +50,21 @@ function DashboardScreen() {
         loading: true,
         summary: { salesData: [] },
         error: "",
-    });
+    })
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                dispatch({ type: "FETCH_REQUEST" });
-                const { data } = await axios.get(`/api/admin/summary`);
-                dispatch({ type: "FETCH_SUCCESS", payload: data });
+                dispatch({ type: "FETCH_REQUEST" })
+                const { data } = await axios.get(`/api/admin/summary`)
+                dispatch({ type: "FETCH_SUCCESS", payload: data })
             } catch (err) {
-                dispatch({ type: "FETCH_FAIL", payload: getError(err) });
+                dispatch({ type: "FETCH_FAIL", payload: getError(err) })
             }
-        };
+        }
 
-        fetchData();
-    }, []);
+        fetchData()
+    }, [])
 
     const data = {
         labels: summary.salesData.map((x) => x._id), // 2022/01 2022/03
@@ -75,13 +75,12 @@ function DashboardScreen() {
                 data: summary.salesData.map((x) => x.totalSales),
             },
         ],
-    };
+    }
 
     return (
         <Layout title="Visão Geral">
-            <div className="grid ml-14 md:grid-cols-6 md:gap-5">
-                
-                <div className="md:col-span-6">
+            <div className="grid md:grid-cols-6 md:gap-5">          
+                <div className="md:col-span-6 ">
                     <h1 className="mb-4 text-center text-indigo-600 text-4xl bg-white">
                         Visão geral
                     </h1>
@@ -153,8 +152,8 @@ function DashboardScreen() {
                 </div>
             </div>
         </Layout>
-    );
+    )
 }
 
-DashboardScreen.auth = { adminOnly: true };
-export default DashboardScreen;
+DashboardScreen.auth = { adminOnly: true }
+export default DashboardScreen
