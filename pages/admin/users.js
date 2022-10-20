@@ -71,7 +71,7 @@ function AdminUsersScreen() {
     <Layout title="Usuários">
       <div className="grid md:grid-cols-6 md:gap-5">
         <div className="overflow-x-auto md:col-span-6">
-          <h1 className="mb-4 grid-cols-1 text-center card text-blue-700 text-3xl ">
+          <h1 className="mb-4 grid-cols-1 text-center text-indigo-600 text-3xl ">
             Usuários cadastrados
           </h1>
           {loadingDelete && <div>Deletando...</div>}

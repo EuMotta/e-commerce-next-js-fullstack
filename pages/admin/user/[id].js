@@ -46,6 +46,7 @@ export default function AdminUserEditScreen() {
                 setValue('image', data.image)
                 setValue('email', data.email)
                 setValue('isAdmin', data.isAdmin)
+                setValue('password', data.password)
             } catch (err) {
                 dispatch({ type: 'FETCH_FAIL', payload: getError(err) })
             }
@@ -60,6 +61,7 @@ export default function AdminUserEditScreen() {
         image,
         email,
         isAdmin,
+        password,
     }) => {
         try {
             dispatch({ type: 'UPDATE_REQUEST' })
@@ -69,6 +71,7 @@ export default function AdminUserEditScreen() {
                 image,
                 email,
                 isAdmin,
+                password,
             })
             dispatch({ type: 'UPDATE_SUCCESS' })
             toast.success('Usuário atualizado.')
@@ -170,9 +173,39 @@ export default function AdminUserEditScreen() {
                                         <div className="text-red-600">{errors.image.message}</div>
                                     )}
                                 </div>
+                                <div className="mb-4">
+                                    <label htmlFor="isAdmin" className="text-xl text-indigo-700">
+                                        Admin
+                                    </label>
+                                    <select
+                                        className="form-control  focus:text-white focus:shadow-md focus:shadow-slate-500 focus:bg-indigo-300 focus:border-blue-600  block  px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0  focus:outline-none"
+                                        id="isAdmin"
+                                        type='boolean'
+                                        {...register("isAdmin")}
+                                    >
+                                        <option id="isAdmin" value={false}>Não</option>
+                                        <option id="isAdmin" value={true}>Sim</option>
+                                    </select>
+                                    {errors.category && (
+                                        <div className="text-red-600">
+                                            {errors.category.message}
+                                        </div>
+                                    )}
+                                </div>
+                                <div className="mb-6 ">
+                                    <label
+                                        htmlFor='password'
+                                    >Senha</label>
+                                    <input
+                                        type="password"
+                                        id="password"
+                                        {...register('password')}
+                                        className="form-control  cursor-not-allowed select-none  focus:text-white focus:shadow-md focus:shadow-slate-500 focus:bg-indigo-300 focus:border-blue-600  block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0  focus:outline-none"
+                                    />{errors.password && (<div className='text-sm text-red-500'>{errors.password.message}</div>)}
+                                </div>
                             </div>
                             <div className='w-3/4 p-5 md:col-span-1 sm:col-span-2 col-span-2'>
-
+                                
                             </div>
                             <div className="mb-4 flex justify-between">
                                 <button

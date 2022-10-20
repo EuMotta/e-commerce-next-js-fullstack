@@ -125,7 +125,7 @@ export default function ProductsScreen() {
                     </div> */}
                     <div className=" mx-2 md:col-span-6">
                         <div className='grid'>
-                            <h1 className="mb-4 text-center card text-blue-700 text-4xl">
+                            <h1 className="mb-4 text-center text-indigo-600 text-4xl">
                                 Produtos Cadastrados
                             </h1>
                             {loadingDelete && <div>Deletando item...</div>}

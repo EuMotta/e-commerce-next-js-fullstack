@@ -12,6 +12,16 @@
   src: url('../assets/fonts/BiennaleHeavyIt.otf');
   font-weight: 600;
 }
+@font-face {
+  font-family: aboutold;
+  src: url('../assets/fonts/OldStyle7SCRegular.ttf');
+  font-weight: 600;
+}
+@font-face {
+  font-family: aboutarabotro;
+  src: url('../assets/fonts/ArabotoLight400.ttf');
+  font-weight: 600;
+}
 
 html,
 body {
@@ -370,3 +380,9 @@ button:hover,
   transform: scale(0.98);
 }
 /* card end */
+.abouth2{
+  font-family: aboutold;
+}
+.about{
+  font-family: abouaraboto;
+}
