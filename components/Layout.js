@@ -66,6 +66,7 @@ export default function Layout({ title, children }) {
         return () => window.removeEventListener('scroll', homeFunc)
 
     }, [])
+
     return (
         <>
             <Head>
@@ -121,7 +122,7 @@ export default function Layout({ title, children }) {
                                                     <div className='mt-1 pr-2'>
                                                         {session.user.name}</div>
                                                     <Image
-                                                        src={`/imgUser/${session.user.name}.png`}
+                                                        src={`/imgUser/${session.user.name}.jpg`}
                                                         width={30}
                                                         height={30}
                                                         unoptimized

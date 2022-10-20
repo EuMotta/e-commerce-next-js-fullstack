@@ -194,13 +194,14 @@ export default function AdminUserEditScreen() {
                                 </div>
                                 <div className="mb-6 ">
                                     <label
+                                    className='hidden'
                                         htmlFor='password'
                                     >Senha</label>
                                     <input
                                         type="password"
                                         id="password"
                                         {...register('password')}
-                                        className="form-control  cursor-not-allowed select-none  focus:text-white focus:shadow-md focus:shadow-slate-500 focus:bg-indigo-300 focus:border-blue-600  block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0  focus:outline-none"
+                                        className="form-control hidden cursor-not-allowed select-none  focus:text-white focus:shadow-md focus:shadow-slate-500 focus:bg-indigo-300 focus:border-blue-600  w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0  focus:outline-none"
                                     />{errors.password && (<div className='text-sm text-red-500'>{errors.password.message}</div>)}
                                 </div>
                             </div>

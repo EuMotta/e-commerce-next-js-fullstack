@@ -52,7 +52,7 @@ const deleteHandler = async (req, res) => {
   const user = await User.findById(req.query.id)
   if (user) {
     if (
-      user.email === "admin@example.com"
+      user.email === "adminnfTrade@example.com"
     ) {
       return res.status(400).send({
         message: "Você não pode deletar este usuário.",
