@@ -6,7 +6,7 @@ export default function SideLinks() {
     <div className="card  text-2xl  py-2 px-1">
       <ul className="text-center">
         <li className="text-center"><i className="ri-admin-fill text-4xl text-blue-700"></i></li>
-        <Link href="/admin/dashBoard">
+        <Link href="/admin/dashboard">
           <li className="primary-button !rounded-full   cursor-pointer !px-2">
             <span className="relative top-0.5"><i className="ri-dashboard-line"></i></span>
           </li>

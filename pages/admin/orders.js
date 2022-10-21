@@ -119,7 +119,7 @@ export default function AdminOrderScreen() {
                                             <td className="p-5 text-center">
                                                 <Link href={`/order/${order._id}`} passHref>
                                                     <span className="cursor-pointer ">
-                                                       <i className='ri-file-list-3-line text-2xl '></i>
+                                                        <i className='ri-file-list-3-line text-2xl '></i>
                                                     </span>
                                                 </Link>
                                             </td>

@@ -9,10 +9,10 @@ export default function AboutScreen() {
     return (
         <Layout>
             <section className="grid grid-cols-1 mb-5 md:grid-cols-1 bg_img lg:grid-cols-2 sm:grid-cols-1 gap-4">
-                <div className="col-span-1 text-center">
+                <div  className="col-span-1 fish card !py-0 text-center">
                     <Image
                         src={aboutimg}
-                        className="w-full login_img"
+                        className="w-full login_img fish"
                         alt="Sample image"
                         layout="responsive"
                         width={350}
@@ -27,12 +27,12 @@ export default function AboutScreen() {
                             <span className="text-indigo-600"> fullstack!</span>
                         </h1>
                         <p className="text-2xl lg:ml-10 lg:text-left md:text-center sm:text-center text-center text-slate-600 mt-5 lg:w-4/5">
-                            Conheça um pouco sobre meu projeto nfTrade.
+                        Aluno da Faculdade de Tecnologia de Guaratinguetá!
                         </p>
                     </div>
                 </div>
             </section>
-            <div className='border rounded-lg shadow-sm shadow-slate-600 grid mx-10 grid-cols-6'>
+            <div className='border rounded-lg bg-slate-50 shadow-sm shadow-slate-600 grid  grid-cols-6'>
                 <div className='col-span-3 shadow-lg shadow-black m-10'>
                     <Image
                         src={aboutme}
@@ -44,7 +44,7 @@ export default function AboutScreen() {
                     />
                 </div>
 
-                <div className='col-span-3'>
+                <div className='col-span-3 '>
                     <div className='mt-10 mr-28'>
                         <h2 className='text-4xl abouth2'>Olá, eu sou</h2>
                         <h1 className='py-4 about text-indigo-600 text-5xl'>José Antonio Motta</h1>
