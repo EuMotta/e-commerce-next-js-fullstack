@@ -1,10 +1,12 @@
 import axios from 'axios'
+import Image from 'next/image'
 import { useRouter } from 'next/router'
-import React, { useEffect, useReducer } from 'react'
+import React, { useEffect, useReducer, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
 import Layout from '../../../components/Layout'
 import { getError } from '../../../utils/error'
+import noImage from '../../../public/img/404.svg'
 
 function reducer(state, action) {
     switch (action.type) {
@@ -41,9 +43,10 @@ export default function AdminProductEditScreen() {
         loading: true,
         error: '',
     })
+    const [imageSrc, setImageSrc] = useState();
 
     const uploadHandler = async (e, imageField = 'image') => {
-        const url = `https://api.cloudinary.com/v1_1/dqezidbmw/image/upload`
+        const url = `https://api.cloudinary.com/v1_1/dqezidbmw/upload`
         try {
             dispatch({ type: 'UPLOAD_REQUEST' })
             const {
@@ -54,10 +57,11 @@ export default function AdminProductEditScreen() {
             formData.append('file', file)
             formData.append('signature', signature)
             formData.append('timestamp', timestamp)
-            formData.append('api_key', process.env.NEXT_PUBLIC_CLOUDINARY_API_KEY)
+            formData.append('api_key', 179111452499136)
             const { data } = await axios.post(url, formData)
             dispatch({ type: 'UPLOAD_SUCCESS' })
             setValue(imageField, data.secure_url)
+            setImageSrc(data.secure_url);
             toast.success('Arquivo carregado com sucesso!')
         } catch (err) {
             dispatch({ type: 'UPLOAD_FAIL', payload: getError(err) })
@@ -231,6 +235,7 @@ export default function AdminProductEditScreen() {
                                 )}
                             </div>
                             <div className="flex gap-3">
+
                                 <div className="mb-4">
                                     <label htmlFor="image" className="text-xl text-indigo-700">
                                         Imagem
@@ -249,12 +254,23 @@ export default function AdminProductEditScreen() {
                                         <div className="text-red-600">{errors.image.message}</div>
                                     )}
                                 </div>
+                                <div className='card'>
+
+                                    <Image
+                                        src={imageSrc === " " ? noImage : imageSrc}
+                                        alt="imagem"
+                                        width={300}
+                                        height={300}
+                                        unoptimized
+                                    >
+                                    </Image>
+                                </div>
                                 <div className="mb-4">
                                     <label htmlFor="imageFile"
-                                        className='text-xl text-blue-700'>Carregar imagem</label>
+                                        className='text-2xl text-blue-700'>Carregar imagem</label>
                                     <input
                                         type="file"
-                                        className="form-control  focus:text-white focus:shadow-md focus:shadow-slate-500 focus:bg-indigo-300 focus:border-blue-600  block w-full px-4 py-1 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0  focus:outline-none"
+                                        className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-white focus:bg-blue-800 focus:border-blue-600 focus:outline-none"
                                         id="imageFile"
                                         onChange={uploadHandler}
                                     />
@@ -306,7 +322,7 @@ export default function AdminProductEditScreen() {
                                     </label>
                                     <input
                                         type="text"
-                                        className="form-control  focus:text-white focus:shadow-md focus:shadow-slate-500 focus:bg-indigo-300 focus:border-blue-600  block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0  focus:outline-none"
+                                        className="form-control  focus:text-white focus:shadow-md focus:shadow-slate-500 focus:bg-indigo-300 focus:border-blue-600  block  px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0  focus:outline-none"
                                         id="publisher"
                                         {...register("publisher", {
                                             required: "Por favor, digite o nome do vendedor",
@@ -322,7 +338,7 @@ export default function AdminProductEditScreen() {
                                     <label htmlFor="countInStock" className="text-xl text-indigo-700">
                                         Quantidade
                                     </label>
-                                    <input type="number" className="form-control block w-52 px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-white focus:bg-blue-800 focus:border-blue-600 focus:outline-none"
+                                    <input type="number" className="form-control  focus:text-white focus:shadow-md focus:shadow-slate-500 focus:bg-indigo-300 focus:border-blue-600  block  px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0  focus:outline-none"
                                         id="countInStock"
                                         {...register("countInStock", {
                                             required: "Please enter countInStock",
@@ -341,7 +357,7 @@ export default function AdminProductEditScreen() {
                                 </label>
                                 <textarea
                                     type="text"
-                                    className="form-control h-52 block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-white focus:bg-blue-800 focus:border-blue-600 focus:outline-none"
+                                    className="form-control h-52 w-full focus:text-white focus:shadow-md focus:shadow-slate-500 focus:bg-indigo-300 focus:border-blue-600  block  px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0  focus:outline-none"
                                     id="description"
                                     {...register("description", {
                                         required: "Please enter description",

@@ -57,7 +57,7 @@ export default function teste() {
                     TESTE
                 </h1>
                 <p className="">
-                    VAMO UPAR PORRA!
+                    VAMO UPAR!
                 </p>
                 <form className="" method="post" onChange={handleOnChange} onSubmit={handleOnSubmit}>
                     <p>
@@ -66,7 +66,7 @@ export default function teste() {
                     <img src={imageSrc} />
                     {imageSrc && !uploadData && (
                         <p>
-                            <button>CLICA AQUI PORRA</button>
+                            <button>CLICA AQUI </button>
                         </p>
                     )}
                     {uploadData && (

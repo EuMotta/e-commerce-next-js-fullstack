@@ -9,10 +9,10 @@ export default function AboutScreen() {
     return (
         <Layout>
             <section className="grid grid-cols-1 mb-5 md:grid-cols-1 bg_img lg:grid-cols-2 sm:grid-cols-1 gap-4">
-                <div  className="col-span-1 fish card !py-0 text-center">
+                <div className="col-span-1 !py-0 text-center">
                     <Image
                         src={aboutimg}
-                        className="w-full login_img fish"
+                        className="w-full login_img "
                         alt="Sample image"
                         layout="responsive"
                         width={350}
@@ -27,7 +27,7 @@ export default function AboutScreen() {
                             <span className="text-indigo-600"> fullstack!</span>
                         </h1>
                         <p className="text-2xl lg:ml-10 lg:text-left md:text-center sm:text-center text-center text-slate-600 mt-5 lg:w-4/5">
-                        Aluno da Faculdade de Tecnologia de Guaratinguetá!
+                            Aluno da Faculdade de Tecnologia de Guaratinguetá!
                         </p>
                     </div>
                 </div>
@@ -73,7 +73,28 @@ export default function AboutScreen() {
                     </div>
 
                 </div>
-
+            </div>
+            <div className='my-20'>
+                <div className='text-center mx-32'>
+                    <h1 className='text-5xl my-10'>Por que optar pelo nfTrade?</h1>
+                    <p className='text-3xl text-indigo-600'>Following reasons show advantages of adding AppCo to your lead pages, demos and checkouts evisculate interoperable imperatives rather.</p>
+                </div>
+                <div className='grid md:grid-cols-3'>
+                    <div class="rounded overflow-hidden text-center shadow-lg">
+                        <i class="ri-filter-off-line text-5xl"></i>
+                        <div class="px-6 py-4">
+                            <div class="font-bold text-xl mb-2"></div>
+                            <p class="text-gray-700 text-base">
+                                
+                            </p>
+                        </div>
+                        <div class="px-6 pt-4 pb-2">
+                            <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#photography</span>
+                            <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#travel</span>
+                            <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#winter</span>
+                        </div>
+                    </div>
+                </div>
             </div>
         </Layout>
     )

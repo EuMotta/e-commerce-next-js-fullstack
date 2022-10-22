@@ -22,38 +22,47 @@ export default function ProductItem({ product, addToCartHandler }) {
             <div className="mx-2">
                 <Link href={`/product/${product.slug}`}>
                     <a>
-                        <h2 className="text-xl text-center text-blue-800">{product.name}</h2>
+                        <h2 className="text-xl my-3 text-center text-indigo-600">{product.name}</h2>
                     </a>
-                </Link> 
-                <div className="text-center text-sm">Restam: {product.countInStock}</div>
-                <div className="flex justify-between w-full pb-2">
-                    <div className='flex items-center flex-col ml-2'>
-                        <span className='text-sm text-red-600 line-through'>de: R$&nbsp;
-                            {product.price}</span>
-                        <span className='text-xl  text-green-600'>por: R$&nbsp;
-                            {product.price * 0.9}</span>
+
+                </Link>
+                <a>
+                    <h2 className="my-3 text-slate-800">{product.description.substring(0, 56)}...</h2>
+                </a>
+                <div className="">
+                    <div className="justify-between mt-5 ml-2 w-full pb-2">
+                        <div className='flex flex-col '>
+                            <span className='text-sm text-red-600 line-through'>de: R$&nbsp;
+                                {product.price}</span>
+                            <span className='text-3xl  text-green-600'>por: R$&nbsp;
+                                {product.price * 0.9}</span>
+                        </div>
                     </div>
-                    {product.countInStock > 0 ? 
-                    (
-                    <button
-                        className="primary-button"
-                        type="button"
-                        onClick={() => addToCartHandler(product)}
-                    >
-                        <i className="ri-shopping-cart-line"></i>
-                    </button>
-                    ):(
-                        <button
-                        className="primary-button cursor-not-allowed"
-                        type="button"
-                        onClick={() =>  toast.error(
-                            'Produto indisponível!'
+                    {product.countInStock > 0 ?
+                        (
+                            <button
+                                className="primary-button w-full"
+                                type="button"
+                                onClick={() => addToCartHandler(product)}
+                            >
+                                <i className="ri-shopping-cart-line"></i> Comprar
+                            </button>
+                        ) : (
+                            <button
+                                className="primary-button w-full hover:  cursor-not-allowed text-red-600"
+                                type="button"
+                                onClick={() => toast.error(
+                                    'Produto indisponível!'
+                                )}
+                            >
+                                <i className="ri-shopping-cart-line "></i> Indisponível
+                            </button>
                         )}
-                    >
-                        <i className="ri-shopping-cart-line text-red-600"></i>
-                    </button>
-                    )}
-                    
+                    {product.countInStock > 0 ?
+                        (<div className="text-sm text-center">Restam: {product.countInStock}</div>
+                        ) : (
+                            <div className="text-sm text-center">Sem estoque</div>
+                        )}
                 </div>
             </div>
         </div>

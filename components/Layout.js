@@ -181,9 +181,9 @@ export default function Layout({ title, children }) {
                 </header>
                 {session?.user.isAdmin ?
                     (
-                        <session className="fixed  z-50 top-52">
+                        <div className="fixed  z-50 top-52">
                             <SideLinks />
-                        </session>
+                        </div>
                     ) : ("")
                 }
                 <main>
