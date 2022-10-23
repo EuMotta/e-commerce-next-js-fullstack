@@ -6,7 +6,7 @@ import { useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
 import Layout from '../../../components/Layout'
 import { getError } from '../../../utils/error'
-import noImage from '../../../public/img/404.svg'
+import noImage from '../../../public/img/noImage.svg'
 
 function reducer(state, action) {
     switch (action.type) {
@@ -39,11 +39,13 @@ function reducer(state, action) {
 export default function AdminProductEditScreen() {
     const { query } = useRouter()
     const productId = query.id
+    const [imageSrc, setImageSrc] = useState()
+    // const [images, setImages] = useState([])
     const [{ loading, error, loadingUpdate, loadingUpload }, dispatch] = useReducer(reducer, {
         loading: true,
         error: '',
     })
-    const [imageSrc, setImageSrc] = useState();
+
 
     const uploadHandler = async (e, imageField = 'image') => {
         const url = `https://api.cloudinary.com/v1_1/dqezidbmw/upload`
@@ -61,11 +63,11 @@ export default function AdminProductEditScreen() {
             const { data } = await axios.post(url, formData)
             dispatch({ type: 'UPLOAD_SUCCESS' })
             setValue(imageField, data.secure_url)
-            setImageSrc(data.secure_url);
+            setImageSrc(data.secure_url)
             toast.success('Arquivo carregado com sucesso!')
         } catch (err) {
             dispatch({ type: 'UPLOAD_FAIL', payload: getError(err) })
-            toast.error(getError(err));
+            toast.error(getError(err))
         }
     }
 
@@ -84,6 +86,7 @@ export default function AdminProductEditScreen() {
                 dispatch({ type: 'FETCH_SUCCESS' })
                 setValue('name', data.name)
                 setValue('image', data.image)
+                setValue('images', data.images)
                 setValue('slug', data.slug)
                 setValue('title', data.title)
                 setValue('gender', data.gender)
@@ -105,6 +108,7 @@ export default function AdminProductEditScreen() {
     const submitHandler = async ({
         name,
         image,
+        images,
         slug,
         title,
         gender,
@@ -115,10 +119,11 @@ export default function AdminProductEditScreen() {
         publisher,
     }) => {
         try {
-            dispatch({ type: 'UPDATE_REQUEST' });
+            dispatch({ type: 'UPDATE_REQUEST' })
             await axios.put(`/api/admin/products/${productId}`, {
                 name,
                 image,
+                images,
                 slug,
                 title,
                 gender,
@@ -127,15 +132,17 @@ export default function AdminProductEditScreen() {
                 description,
                 countInStock,
                 publisher,
-            });
-            dispatch({ type: 'UPDATE_SUCCESS' });
-            toast.success('Product updated successfully');
-            router.push('/admin/products');
+            })
+            dispatch({ type: 'UPDATE_SUCCESS' })
+            toast.success('Product updated successfully')
+            router.push('/admin/products')
         } catch (err) {
-            dispatch({ type: 'UPDATE_FAIL', payload: getError(err) });
-            toast.error(getError(err));
+            dispatch({ type: 'UPDATE_FAIL', payload: getError(err) })
+            toast.error(getError(err))
         }
-    };
+    }
+
+
 
     return (
         <Layout title={`Edit Product ${productId}`}>
@@ -148,227 +155,243 @@ export default function AdminProductEditScreen() {
                         <div className="alert-error">{error}</div>
                     ) : (
                         <form
-                            className="mx-auto text-xl p-10 w-full card "
+                            className="mx-auto text-xl  w-full"
                             onSubmit={handleSubmit(submitHandler)}
                         >
-                            <div className='flex gap-3'>
-                                <div className="mb-4">
-                                    <label htmlFor="name" className="text-xl text-indigo-700">
-                                        Nome
-                                    </label>
-                                    <input
-                                        type="text"
-                                        className="form-control  focus:text-white focus:shadow-md focus:shadow-slate-500 focus:bg-indigo-300 focus:border-blue-600  block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0  focus:outline-none"
-                                        id="name"
-                                        autoFocus
-                                        {...register("name", {
-                                            required: "Por favor, digite o nome do produto",
-                                            minLength: {
-                                                value: 3,
-                                                message: "Por favor, digite um nome válido",
-                                            },
-                                        })}
-                                    />
-                                    {errors.name && (
-                                        <div className="text-red-600">{errors.name.message}</div>
-                                    )}
-                                </div>
-                                <div className="mb-4">
-                                    <label htmlFor="gender" className="text-xl text-indigo-700">
-                                        Gênero
-                                    </label>
-                                    <select
-                                        className="form-control  focus:text-white focus:shadow-md focus:shadow-slate-500 focus:bg-indigo-300 focus:border-blue-600  block  px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0  focus:outline-none"
-                                        id="gender"
-                                        {...register("gender", {
-                                            required: "Por favor, escolha uma categoria",
-                                        })}
-                                    >
-                                        <option id="gender">NFT</option>
-                                        <option id="gender"> </option>
-                                    </select>
-                                    {errors.gender && (
-                                        <div className="text-red-600">{errors.gender.message}</div>
-                                    )}
-                                </div>
-                                <div className="mb-4">
-                                    <label htmlFor="title" className="text-xl text-indigo-700">
-                                        Título
-                                    </label>
-                                    <input
-                                        type="text"
-                                        className="form-control  focus:text-white focus:shadow-md focus:shadow-slate-500 focus:bg-indigo-300 focus:border-blue-600  block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0  focus:outline-none"
-                                        id="title"
-                                        autoFocus
-                                        {...register("title", {
-                                            required: "Por favor, digite o nome do produto",
-                                            minLength: {
-                                                value: 3,
-                                                message: "Por favor, digite um nome válido",
-                                            },
-                                        })}
-                                    />
-                                    {errors.title && (
-                                        <div className="text-red-600">{errors.title.message}</div>
-                                    )}
-                                </div>
-                            </div>
-                            <div className="mb-4">
-                                <label htmlFor="slug" className="text-xl text-indigo-700">
-                                    Slug
-                                </label>
-                                <input
-                                    type="text"
-                                    className="form-control  focus:text-white focus:shadow-md focus:shadow-slate-500 focus:bg-indigo-300 focus:border-blue-600  block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0  focus:outline-none"
-                                    id="slug"
-                                    {...register("slug", {
-                                        pattern: {
-                                            value: /^[a-z0-9]+(?:-[a-z0-9]+)*$/,
-                                            message: "É permitido apenas letras, números e dashes.",
-                                        },
-                                        required:
-                                            "Os slugs representam o ID nominal. Por favor, escreva-os sem espaços e sem letras maiúsculas!",
-                                    })}
-                                />
-                                {errors.slug && (
-                                    <div className="text-red-600">{errors.slug.message}</div>
-                                )}
-                            </div>
-                            <div className="flex gap-3">
-
-                                <div className="mb-4">
-                                    <label htmlFor="image" className="text-xl text-indigo-700">
-                                        Imagem
-                                    </label>
-
-                                    <input
-                                        type="text"
-                                        className="form-control  focus:text-white focus:shadow-md focus:shadow-slate-500 focus:bg-indigo-300 focus:border-blue-600  block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0  focus:outline-none"
-                                        id="image"
-                                        {...register("image", {
-                                            required:
-                                                "Por favor, digite o diretório da imagem e seu tipo.",
-                                        })}
-                                    />
-                                    {errors.image && (
-                                        <div className="text-red-600">{errors.image.message}</div>
-                                    )}
-                                </div>
-                                <div className='card'>
-
-                                    <Image
-                                        src={imageSrc === " " ? noImage : imageSrc}
-                                        alt="imagem"
-                                        width={300}
-                                        height={300}
-                                        unoptimized
-                                    >
-                                    </Image>
-                                </div>
-                                <div className="mb-4">
-                                    <label htmlFor="imageFile"
-                                        className='text-2xl text-blue-700'>Carregar imagem</label>
-                                    <input
-                                        type="file"
-                                        className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-white focus:bg-blue-800 focus:border-blue-600 focus:outline-none"
-                                        id="imageFile"
-                                        onChange={uploadHandler}
-                                    />
-                                    {loadingUpload && <div>Enviando....</div>}
-                                </div>
-
-                                <div className="mb-4">
-                                    <label htmlFor="price" className="text-xl text-indigo-700">
-                                        Preço
-                                    </label>
-                                    <input
-                                        type="number"
-                                        className="form-control  focus:text-white focus:shadow-md focus:shadow-slate-500 focus:bg-indigo-300 focus:border-blue-600  block  px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0  focus:outline-none"
-                                        id="price"
-                                        {...register("price", {
-                                            required: "Por favor, digite um valor válido",
-                                        })}
-                                    />
-                                    {errors.price && (
-                                        <div className="text-red-600">{errors.price.message}</div>
-                                    )}
-                                </div>
-
-                            </div>
-                            <div className="flex gap-3">
-                                <div className="mb-4">
-                                    <label htmlFor="category" className="text-xl text-indigo-700">
-                                        Tipo
-                                    </label>
-                                    <select
-                                        className="form-control  focus:text-white focus:shadow-md focus:shadow-slate-500 focus:bg-indigo-300 focus:border-blue-600  block  px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0  focus:outline-none"
-                                        id="category"
-                                        {...register("category", {
-                                            required: "Por favor, escolha uma categoria",
-                                        })}
-                                    >
-                                        <option id="category">New NFT</option>
-                                        <option id="category">Old NFT</option>
-                                    </select>
-                                    {errors.category && (
-                                        <div className="text-red-600">
-                                            {errors.category.message}
+                            <div className='grid grid-cols-6'>
+                                <div className='col-span-6'>
+                                    <div className='card p-10'>
+                                        <h1 className='text-3xl mb-5'>Informações Básicas</h1>
+                                        <div className='flex gap-3 '>
+                                            <div className="mb-4">
+                                                <label htmlFor="name" className="text-xl text-indigo-700">
+                                                    Nome
+                                                </label>
+                                                <input
+                                                    type="text"
+                                                    className="form-control  focus:text-white focus:shadow-md focus:shadow-slate-500 focus:bg-indigo-300 focus:border-blue-600  block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0  focus:outline-none"
+                                                    id="name"
+                                                    autoFocus
+                                                    {...register("name", {
+                                                        required: "Por favor, digite o nome do produto",
+                                                        minLength: {
+                                                            value: 3,
+                                                            message: "Por favor, digite um nome válido",
+                                                        },
+                                                    })}
+                                                />
+                                                {errors.name && (
+                                                    <div className="text-red-600">{errors.name.message}</div>
+                                                )}
+                                            </div>
+                                            <div className="mb-4">
+                                                <label htmlFor="slug" className="text-xl text-indigo-700">
+                                                    Slug
+                                                </label>
+                                                <input
+                                                    type="text"
+                                                    className="form-control  focus:text-white focus:shadow-md focus:shadow-slate-500 focus:bg-indigo-300 focus:border-blue-600  block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0  focus:outline-none"
+                                                    id="slug"
+                                                    {...register("slug", {
+                                                        pattern: {
+                                                            value: /^[a-z0-9]+(?:-[a-z0-9]+)*$/,
+                                                            message: "É permitido apenas letras, números e dashes.",
+                                                        },
+                                                        required:
+                                                            "Os slugs representam o ID nominal. Por favor, escreva-os sem espaços e sem letras maiúsculas!",
+                                                    })}
+                                                />
+                                                {errors.slug && (
+                                                    <div className="text-red-600">{errors.slug.message}</div>
+                                                )}
+                                            </div>
+                                            <div className="mb-4">
+                                                <label htmlFor="title" className="text-xl text-indigo-700">
+                                                    Título
+                                                </label>
+                                                <input
+                                                    type="text"
+                                                    className="form-control  focus:text-white focus:shadow-md focus:shadow-slate-500 focus:bg-indigo-300 focus:border-blue-600  block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0  focus:outline-none"
+                                                    id="title"
+                                                    autoFocus
+                                                    {...register("title", {
+                                                        required: "Por favor, digite o nome do produto",
+                                                        minLength: {
+                                                            value: 3,
+                                                            message: "Por favor, digite um nome válido",
+                                                        },
+                                                    })}
+                                                />
+                                                {errors.title && (
+                                                    <div className="text-red-600">{errors.title.message}</div>
+                                                )}
+                                            </div>
                                         </div>
-                                    )}
-                                </div>
-                                <div className="mb-4">
-                                    <label htmlFor="publisher" className="text-xl text-indigo-700">
-                                        Vendedor
-                                    </label>
-                                    <input
-                                        type="text"
-                                        className="form-control  focus:text-white focus:shadow-md focus:shadow-slate-500 focus:bg-indigo-300 focus:border-blue-600  block  px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0  focus:outline-none"
-                                        id="publisher"
-                                        {...register("publisher", {
-                                            required: "Por favor, digite o nome do vendedor",
-                                        })}
-                                    />
-                                    {errors.publisher && (
-                                        <div className="text-red-600">
-                                            {errors.publisher.message}
+                                        <div className="mb-4">
+                                            <label htmlFor="description" className="text-xl text-indigo-700">
+                                                descrição
+                                            </label>
+                                            <textarea
+                                                type="text"
+                                                className="form-control h-52 w-full focus:text-white focus:shadow-md focus:shadow-slate-500 focus:bg-indigo-300 focus:border-blue-600  block  px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0  focus:outline-none"
+                                                id="description"
+                                                {...register("description", {
+                                                    required: "Please enter description",
+                                                })}
+                                            />
+                                            {errors.description && (
+                                                <div className="text-red-600">
+                                                    {errors.description.message}
+                                                </div>
+                                            )}
                                         </div>
-                                    )}
-                                </div>
-                                <div className="mb-4">
-                                    <label htmlFor="countInStock" className="text-xl text-indigo-700">
-                                        Quantidade
-                                    </label>
-                                    <input type="number" className="form-control  focus:text-white focus:shadow-md focus:shadow-slate-500 focus:bg-indigo-300 focus:border-blue-600  block  px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0  focus:outline-none"
-                                        id="countInStock"
-                                        {...register("countInStock", {
-                                            required: "Please enter countInStock",
-                                        })}
-                                    />
-                                    {errors.countInStock && (
-                                        <div className="text-red-600">
-                                            {errors.countInStock.message}
-                                        </div>
-                                    )}
-                                </div>
-                            </div>
-                            <div className="mb-4">
-                                <label htmlFor="description" className="text-xl text-indigo-700">
-                                    descrição
-                                </label>
-                                <textarea
-                                    type="text"
-                                    className="form-control h-52 w-full focus:text-white focus:shadow-md focus:shadow-slate-500 focus:bg-indigo-300 focus:border-blue-600  block  px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0  focus:outline-none"
-                                    id="description"
-                                    {...register("description", {
-                                        required: "Please enter description",
-                                    })}
-                                />
-                                {errors.description && (
-                                    <div className="text-red-600">
-                                        {errors.description.message}
                                     </div>
-                                )}
+                                    <div className='card p-10'>
+                                        <h1 className='text-3xl mb-5'>Preço e Imagem</h1>
+                                        <div className="flex gap-3">
+                                            <div className="mb-4 hidden">
+                                                <label htmlFor="image" className="text-xl text-indigo-700">
+                                                    Imagem
+                                                </label>
+
+                                                <input
+                                                    type="text"
+                                                    className="form-control  focus:text-white focus:shadow-md focus:shadow-slate-500 focus:bg-indigo-300 focus:border-blue-600  block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0  focus:outline-none"
+                                                    id="image"
+                                                    {...register("image", {
+                                                        required:
+                                                            "Por favor, digite o diretório da imagem e seu tipo.",
+                                                    })}
+                                                />
+                                                {errors.image && (
+                                                    <div className="text-red-600">{errors.image.message}</div>
+                                                )}
+                                            </div>
+
+
+                                            <div className="mb-4">
+                                                <label htmlFor="price" className="text-xl text-indigo-700">
+                                                    Preço
+                                                </label>
+                                                <input
+                                                    type="number"
+                                                    className="form-control  focus:text-white focus:shadow-md focus:shadow-slate-500 focus:bg-indigo-300 focus:border-blue-600  block  px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0  focus:outline-none"
+                                                    id="price"
+                                                    {...register("price", {
+                                                        required: "Por favor, digite um valor válido",
+                                                    })}
+                                                />
+                                                {errors.price && (
+                                                    <div className="text-red-600">{errors.price.message}</div>
+                                                )}
+                                            </div>
+                                            <div className="mb-4">
+                                                <label htmlFor="countInStock" className="text-xl text-indigo-700">
+                                                    Quantidade
+                                                </label>
+                                                <input type="number" className="form-control  focus:text-white focus:shadow-md focus:shadow-slate-500 focus:bg-indigo-300 focus:border-blue-600  block  px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0  focus:outline-none"
+                                                    id="countInStock"
+                                                    {...register("countInStock", {
+                                                        required: "Please enter countInStock",
+                                                    })}
+                                                />
+                                                {errors.countInStock && (
+                                                    <div className="text-red-600">
+                                                        {errors.countInStock.message}
+                                                    </div>
+                                                )}
+                                            </div>
+                                        </div>
+                                        <div className='flex'>
+                                            <div className=''>
+                                                <Image
+                                                    src={imageSrc ? imageSrc : noImage}
+                                                    alt="imagem"
+                                                    width={90}
+                                                    height={90}
+                                                    unoptimized
+                                                    className='card hover:transition'
+                                                >
+                                                </Image>
+                                            </div>
+                                            <div className="mb-4">
+                                                <label htmlFor="imageFile"
+                                                    className='text-xl text-indigo-600'>Carregar imagem</label>
+                                                <input
+                                                    type="file"
+                                                    className="form-control focus:text-white focus:shadow-md focus:shadow-slate-500 focus:bg-indigo-300 focus:border-blue-600  block  px-4 py-1 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0  focus:outline-none"
+                                                    id="imageFile"
+                                                    onChange={uploadHandler}
+                                                />
+                                                {loadingUpload && <div>Enviando....</div>}
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div className='card p-10'>
+                                    <h1 className='text-3xl mb-5'>Organizações</h1>
+                                        <div className="flex gap-3">
+                                            <div className="mb-4">
+                                                <label htmlFor="publisher" className="text-xl text-indigo-700">
+                                                    Vendedor
+                                                </label>
+                                                <input
+                                                    type="text"
+                                                    className="form-control  focus:text-white focus:shadow-md focus:shadow-slate-500 focus:bg-indigo-300 focus:border-blue-600  block  px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0  focus:outline-none"
+                                                    id="publisher"
+                                                    {...register("publisher", {
+                                                        required: "Por favor, digite o nome do vendedor",
+                                                    })}
+                                                />
+                                                {errors.publisher && (
+                                                    <div className="text-red-600">
+                                                        {errors.publisher.message}
+                                                    </div>
+                                                )}
+                                            </div>
+                                            <div className="mb-4">
+                                                <label htmlFor="gender" className="text-xl text-indigo-700">
+                                                    Gênero
+                                                </label>
+                                                <select
+                                                    className="form-control  focus:text-white focus:shadow-md focus:shadow-slate-500 focus:bg-indigo-300 focus:border-blue-600  block  px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0  focus:outline-none"
+                                                    id="gender"
+                                                    {...register("gender", {
+                                                        required: "Por favor, escolha uma categoria",
+                                                    })}
+                                                >
+                                                    <option id="gender">NFT</option>
+                                                    <option id="gender"> </option>
+                                                </select>
+                                                {errors.gender && (
+                                                    <div className="text-red-600">{errors.gender.message}</div>
+                                                )}
+                                            </div>
+                                            <div className="mb-4">
+                                                <label htmlFor="category" className="text-xl text-indigo-700">
+                                                    Tipo
+                                                </label>
+                                                <select
+                                                    className="form-control  focus:text-white focus:shadow-md focus:shadow-slate-500 focus:bg-indigo-300 focus:border-blue-600  block  px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0  focus:outline-none"
+                                                    id="category"
+                                                    {...register("category", {
+                                                        required: "Por favor, escolha uma categoria",
+                                                    })}
+                                                >
+                                                    <option id="category">New NFT</option>
+                                                    <option id="category">Old NFT</option>
+                                                </select>
+                                                {errors.category && (
+                                                    <div className="text-red-600">
+                                                        {errors.category.message}
+                                                    </div>
+                                                )}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
+
                             <div className="mb-4 flex justify-between">
                                 <button
                                     onClick={() => `/admin/products`}

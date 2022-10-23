@@ -3,6 +3,7 @@ import React from 'react'
 import Layout from '../components/Layout'
 import aboutimg from '../public/img/aboutimg.svg'
 import aboutme from '../public/img/aboutme.jpg'
+import admin1 from '../public/img/admin1.png'
 
 
 export default function AboutScreen() {
@@ -74,26 +75,94 @@ export default function AboutScreen() {
 
                 </div>
             </div>
-            <div className='my-20'>
+            <div className='my-36'>
                 <div className='text-center mx-32'>
                     <h1 className='text-5xl my-10'>Por que optar pelo nfTrade?</h1>
                     <p className='text-3xl text-indigo-600'>Following reasons show advantages of adding AppCo to your lead pages, demos and checkouts evisculate interoperable imperatives rather.</p>
                 </div>
-                <div className='grid md:grid-cols-3'>
-                    <div class="rounded overflow-hidden text-center shadow-lg">
-                        <i class="ri-filter-off-line text-5xl"></i>
-                        <div class="px-6 py-4">
-                            <div class="font-bold text-xl mb-2"></div>
-                            <p class="text-gray-700 text-base">
-                                
+                <div className='grid md:grid-cols-3 mt-20'>
+                    <div className="rounded overflow-hidden text-center col-span-1 shadow-lg mx-10">
+                        <i className="ri-speed-line text-5xl"></i>
+                        <div className="px-6 py-4">
+                            <div className="text-2xl mb-2">
+                                <h1>16x mais rápido</h1>
+                            </div>
+                            <p className="text-gray-700 text-base">
+                                Website construido em react.js, linguagem que chega a ser <span className='text-indigo-600'>16x</span> mais rápida que um website em HTML.
                             </p>
                         </div>
-                        <div class="px-6 pt-4 pb-2">
-                            <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#photography</span>
-                            <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#travel</span>
-                            <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#winter</span>
+                        <div className="px-6 pt-4 pb-2">
+                            <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">Rápido</span>
+                            <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">Sem atrasos</span>
+                            <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">Next.js</span>
                         </div>
                     </div>
+                    <div className="rounded overflow-hidden text-center col-span-1 shadow-lg mx-10">
+                        <i className="ri-filter-off-line text-5xl"></i>
+                        <div className="px-6 py-4">
+                            <div className="text-2xl mb-2">
+                                <h1>Design limpo</h1>
+                            </div>
+                            <p className="text-gray-700 text-base">
+                                O objetivo é facilitar o máximo o manuseio do website por qualquer operador.
+                            </p>
+                        </div>
+                        <div className="px-6 pt-4 pb-2">
+                            <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">Limpo</span>
+                            <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">Agradável</span>
+                            <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">Funcional</span>
+                        </div>
+                    </div>
+                    <div className="rounded overflow-hidden text-center col-span-1 shadow-lg mx-10">
+                        <i className="ri-list-settings-line text-5xl"></i>
+                        <div className="px-6 py-4">
+                            <div className="text-xl mb-2">
+                                <h1>Monitoramento Administrativo</h1>
+                            </div>
+                            <p className="text-gray-700 text-base">
+                                Funcionários e Administradores podem monitorar vendas, cadastros e lucros por vendas e um gráfico geral.
+                            </p>
+                        </div>
+                        <div className="px-6 pt-4 pb-2">
+                            <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#photography</span>
+                            <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#travel</span>
+                            <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#winter</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div className='grid grid-cols-5 '>
+                <div className='col-span-3'>
+                    <h1 className='text-5xl mt-20'>Use Your Android or ios Device to Manage Everything</h1>
+                    <div className='mt-24'>
+                        <div className='flex my-5'>
+                            <i className="ri-list-settings-line text-3xl card p-3 mx-3 text-white !bg-indigo-600"></i>
+                            <p className='text-lg'>Barra de navegação exclusiva do administrador e funcionário, onde pode acessar painéis que facilitam a manutenção e monitoração</p>
+                        </div>
+                        <div className='flex my-5'>
+                            <i className="ri-line-chart-fill text-3xl card p-3 mx-3 text-white !bg-indigo-600"></i>
+                            <p className='text-lg'>Temos um gráfico que facilita o monitoramento de vendas diárias, ajudando assim na contagem dos lucros que sua empresa está tendo.</p>
+                        </div>
+                        <div className='flex my-5'>
+                            <i className="ri-line-chart-fill text-3xl card p-3 mx-3 text-white !bg-indigo-600"></i>
+                            <p className='text-lg'>Temos um gráfico que facilita o monitoramento de vendas diárias, ajudando assim na contagem dos lucros que sua empresa está tendo.</p>
+                        </div>
+                        <div className='flex my-5'>
+                            <i className="ri-line-chart-fill text-3xl card p-3 mx-3 text-white !bg-indigo-600"></i>
+                            <p className='text-lg'>Temos um gráfico que facilita o monitoramento de vendas diárias, ajudando assim na contagem dos lucros que sua empresa está tendo.</p>
+                        </div>
+                    </div>
+                </div>
+                <div className='col-span-2'>
+                    <Image
+                        src={admin1}
+                        className="w-full "
+                        alt="Sample image"
+                        layout="responsive"
+                        width={250}
+                        height={420}
+                    />
                 </div>
             </div>
         </Layout>

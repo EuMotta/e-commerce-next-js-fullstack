@@ -1,38 +1,38 @@
-import { useRouter } from 'next/router';
-import React, { useContext, useEffect, useState } from 'react';
-import { toast } from 'react-toastify';
-import Cookies from 'js-cookie';
-import CheckoutWizard from '../components/CheckoutWizard';
-import Layout from '../components/Layout';
-import { Store } from '../utils/Store';
+import { useRouter } from 'next/router'
+import React, { useContext, useEffect, useState } from 'react'
+import { toast } from 'react-toastify'
+import Cookies from 'js-cookie'
+import CheckoutWizard from '../components/CheckoutWizard'
+import Layout from '../components/Layout'
+import { Store } from '../utils/Store'
 
 export default function PaymentScreen() {
-    const [selectedPaymentMethod, setSelectedPaymentMethod] = useState('');
-    const { state, dispatch } = useContext(Store);
-    const { cart } = state;
-    const { shippingAddress, paymentMethod } = cart;
-    const router = useRouter();
+    const [selectedPaymentMethod, setSelectedPaymentMethod] = useState('')
+    const { state, dispatch } = useContext(Store)
+    const { cart } = state
+    const { shippingAddress, paymentMethod } = cart
+    const router = useRouter()
     const submitHandler = (e) => {
-        e.preventDefault();
+        e.preventDefault()
         if (!selectedPaymentMethod) {
-            return toast.error('Por favor, selecione o método de pagamento!');
+            return toast.error('Por favor, selecione o método de pagamento!')
         }
-        dispatch({ type: 'SAVE_PAYMENT_METHOD', payload: selectedPaymentMethod });
+        dispatch({ type: 'SAVE_PAYMENT_METHOD', payload: selectedPaymentMethod })
         Cookies.set(
             'cart',
             JSON.stringify({
                 ...cart,
                 paymentMethod: selectedPaymentMethod,
             })
-        );
-        router.push('/placeorder');
-    };
+        )
+        router.push('/placeorder')
+    }
     useEffect(() => {
         if (!shippingAddress.address) {
-            return router.push('/shipping');
+            return router.push('/shipping')
         }
-        setSelectedPaymentMethod(paymentMethod || '');
-    }, [paymentMethod, router, shippingAddress.address]);
+        setSelectedPaymentMethod(paymentMethod || '')
+    }, [paymentMethod, router, shippingAddress.address])
 
     return (
         <Layout title="Pagamento">
@@ -72,7 +72,7 @@ export default function PaymentScreen() {
                 </form>
             </div>
         </Layout>
-    );
+    )
 }
 
-PaymentScreen.auth = true;
+PaymentScreen.auth = true

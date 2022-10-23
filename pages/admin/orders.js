@@ -85,12 +85,12 @@ export default function AdminOrderScreen() {
                                             <td className="p-5">{order.totalPrice}</td>
                                             <td className="p-5">
                                                 {order.isPaid ? (
-                                                    <span className="bg-green-200 p-2 text-sm rounded-xl">
-                                                        {order.paidAt.substring(11, 19)}
+                                                    <span className=" p-2 text-sm rounded-xl">
+                                                        <i className="ri-checkbox-blank-circle-fill mx-1 text-green-400"></i>{order.paidAt.substring(11, 19)}
                                                     </span>
                                                 ) : (
-                                                    <span className="bg-red-400 cursor-pointer p-1 px-2 text-sm rounded">
-                                                        Não Pago
+                                                    <span className=" cursor-pointer p-1 px-2 text-sm rounded">
+                                                       <i className="ri-checkbox-blank-circle-fill mx-1 text-red-400"></i> Não Pago
                                                     </span>
                                                 )}
                                             </td>
@@ -110,8 +110,8 @@ export default function AdminOrderScreen() {
                                                                 .fromNow()
                                                                 .substring(3, 10)}
                                                         </span>
-                                                        <span className="bg-red-400 flex cursor-pointer p-1 px-2 text-sm rounded">
-                                                            Não Entregue
+                                                        <span className="text-red-400 flex cursor-pointer p-1 px-2 text-sm rounded">
+                                                        <i className="ri-checkbox-blank-circle-fill mx-1 text-red-400"></i> Não Entregue
                                                         </span>
                                                     </div>
                                                 )}

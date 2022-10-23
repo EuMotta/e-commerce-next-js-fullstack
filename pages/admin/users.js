@@ -106,7 +106,7 @@ function AdminUsersScreen() {
                       <td className="p-5">
                         <Link href={`/admin/user/${user._id}`} passHref>
                           <button className="cursor-pointer">
-                            Editar
+                          <i className="ri-pencil-line text-lg"></i>
                           </button>
                         </Link>
                         &nbsp;
@@ -115,7 +115,7 @@ function AdminUsersScreen() {
                           className="cursor-pointer  !bg-red-400"
                           onClick={() => deleteHandler(user._id)}
                         >
-                          Deletar
+                          <i className="ri-delete-bin-2-line text-lg"></i>
                         </button>
                       </td>
                     </tr>

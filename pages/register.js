@@ -1,14 +1,14 @@
 import React, { useEffect } from 'react'
 import Layout from '../components/Layout'
 import { useForm } from 'react-hook-form'
-import Link from 'next/link';
-import Image from 'next/image';
+import Link from 'next/link'
+import Image from 'next/image'
 import loginimg from '../public/img/Register.svg'
 import { signIn, useSession } from 'next-auth/react'
-import { toast } from 'react-toastify';
-import { getError } from '../utils/error';
-import { useRouter } from 'next/router';
-import axios from 'axios';
+import { toast } from 'react-toastify'
+import { getError } from '../utils/error'
+import { useRouter } from 'next/router'
+import axios from 'axios'
 
 export default function LoginScreen() {
     const { data: session } = useSession()
@@ -24,7 +24,7 @@ export default function LoginScreen() {
         register,
         getValues,
         formState: { errors },
-    } = useForm();
+    } = useForm()
     const submitHandler = async ({ name, lastName, email, password }) => {
         try {
             await axios.post('/api/auth/signup', {

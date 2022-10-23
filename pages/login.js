@@ -1,13 +1,13 @@
 import React, { useEffect } from 'react'
 import Layout from '../components/Layout'
 import { useForm } from 'react-hook-form'
-import Link from 'next/link';
-import Image from 'next/image';
+import Link from 'next/link'
+import Image from 'next/image'
 import loginimg from '../public/img/log.svg'
 import { signIn, useSession } from 'next-auth/react'
-import { toast } from 'react-toastify';
-import { getError } from '../utils/error';
-import { useRouter } from 'next/router';
+import { toast } from 'react-toastify'
+import { getError } from '../utils/error'
+import { useRouter } from 'next/router'
 
 export default function LoginScreen() {
     const { data: session } = useSession()
@@ -22,7 +22,7 @@ export default function LoginScreen() {
         handleSubmit,
         register,
         formState: { errors },
-    } = useForm();
+    } = useForm()
     const submitHandler = async ({ email, password }) => {
         try {
             const result = await signIn('credentials', {

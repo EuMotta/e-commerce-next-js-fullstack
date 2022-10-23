@@ -1,4 +1,5 @@
 import axios from 'axios'
+import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import React, { useEffect, useReducer } from 'react'
@@ -87,10 +88,10 @@ export default function ProductsScreen() {
             toast.error(getError(err))
         }
     }
-        return (
-            <Layout title='Produtos'>
-                <div className="grid md:grid-cols-6 md:gap-5">
-                    {/* <div className="card md:col-span-1  text-center text-md py-5 px-1">
+    return (
+        <Layout title='Produtos'>
+            <div className="grid md:grid-cols-6 md:gap-5">
+                {/* <div className="card md:col-span-1  text-center text-md py-5 px-1">
                         <i className="ri-admin-fill text-4xl text-indigo-700"></i>
                         <ul className=" mr-3">
                             <li>
@@ -123,68 +124,85 @@ export default function ProductsScreen() {
                             </li>
                         </ul>
                     </div> */}
-                    <div className=" mx-2 md:col-span-6">
-                        <div className='grid'>
-                            <h1 className="mb-4 text-center text-indigo-600 text-4xl">
-                                Produtos Cadastrados
-                            </h1>
-                            {loadingDelete && <div>Deletando item...</div>}
-                            <button className='primary-button'
-                                disabled={loadingCreate}
-                                onClick={createHandler}>
-                                {loadingCreate ? 'Carregando' : 'Adicionar Produtos'}
-                            </button>
-                        </div>
-                        {loading ? (
-                            <div>Carregando...</div>
-                        ) : error ? (
-                            <div className="alert-error">{error}</div>
-                        ) : (
-                            <div className="flex mb-5 justify-center">
-                                <table className="w-full mx-2">
-                                    <thead className="border-b-8  border-2 border-b-indigo-500">
-                                        <tr className="text-sm text-slate-800">
-                                            <th className="px-5 text-center">ID</th>
-                                            <th className="p-5 text-center">Nome do usuário</th>
-                                            <th className="p-5 text-center">Preço</th>
-                                            <th className="p-5 text-center">Categoria</th>
-                                            <th className="p-5 text-center">Quantidade</th>
-                                            <th className="p-5 text-center">Avaliação</th>
-                                            <th className="p-5 text-center">Ações</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody className="text-center" >
-                                        {products.map((product) => (
-                                            <tr
-                                                key={product._id}
-                                                className=" rounded text-md shadow-sm shadow-slate-500 hover:translate-x-1 ease-in-out transition-all  hover:shadow-md hover:shadow-slate-700"
-                                            >
-                                                <td className="p-5">{product._id.substring(20, 24)}</td>
-                                                <td className="p-5">{product.name}</td>
-                                                <td className="p-5">{product.price}</td>
-                                                <td className="p-5">{product.category}</td>
-                                                <td className="p-5">{product.countInStock}</td>
-                                                <td className="p-2">{product.rating}</td>
-                                                <td className="p-5 text-center">
-                                                    <div>
-                                                        <Link href={`/admin/product/${product._id}`}>
-                                                            <button className="cursor-pointer ">Editar</button>
-                                                        </Link>
-                                                        {' '}
-                                                        <button className="cursor-pointer  !bg-red-400" 
-                                                        onClick={() => deleteHandler(product._id)} 
-                                                        type='button'>Deletar</button>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                        ))}
-                                    </tbody>
-                                </table>
-                            </div>
-                        )}
+                <div className=" mx-2 md:col-span-6">
+                    <div className='grid'>
+                        <h1 className="mb-4 text-center text-indigo-600 text-4xl">
+                            Produtos Cadastrados
+                        </h1>
+                        {loadingDelete && <div>Deletando item...</div>}
+                        <button className='primary-button'
+                            disabled={loadingCreate}
+                            onClick={createHandler}>
+                            {loadingCreate ? 'Carregando' : 'Adicionar Produtos'}
+                        </button>
                     </div>
+                    {loading ? (
+                        <div>Carregando...</div>
+                    ) : error ? (
+                        <div className="alert-error">{error}</div>
+                    ) : (
+                        <div className="flex mb-5 justify-center">
+                            <table className="w-full mx-2">
+                                <thead className="border-b-8  border-2 border-b-indigo-500">
+                                    <tr className="text-sm text-slate-800">
+                                        <th className="px-5 text-center">ID</th>
+                                        <th className="p-5 text-center">Produto</th>
+                                        <th className="p-5 text-center">Categoria</th>
+
+                                        <th className="p-5 text-center">Avaliação</th>
+                                        <th className="p-5 text-center">Quantidade</th>
+                                        <th className="p-5 text-center">Preço</th>
+                                        <th className="p-5 text-center">Ações</th>
+                                    </tr>
+                                </thead>
+                                <tbody className="text-center" >
+                                    {products.map((product) => (
+                                        <tr
+                                            key={product._id}
+                                            className=" rounded text-md shadow-sm shadow-slate-500 hover:translate-x-1 ease-in-out transition-all  hover:shadow-md hover:shadow-slate-700"
+                                        >
+                                            <td className="p-5">{product._id.substring(20, 24)}</td>
+                                            <td className="flex  cursor-pointer mt-2 items-center">
+                                                <Image
+                                                    src={product.image}
+                                                    alt={product.name}
+                                                    width={50}
+                                                    height={50}
+                                                    className='rounded-lg'
+                                                ></Image>
+                                                &nbsp;
+                                                {product.name}
+                                            </td>
+                                            <td className="p-5">{product.category}</td>
+
+                                            <td className="p-2">{product.rating}</td>
+                                            <td className="p-5">{product.countInStock > 0 ?
+                                                (<div className="text-sm text-center"><i className="ri-checkbox-blank-circle-fill mx-1 text-green-400"></i>Em estoque: {product.countInStock}</div>
+                                                ) : (
+                                                    <div className="text-sm text-center"><i className="ri-checkbox-blank-circle-fill mx-1 text-red-400"></i>Sem estoque</div>
+                                                )}</td>
+                                            <td className="p-5">{product.price}</td>
+
+                                            <td className="p-5 text-center">
+                                                <div>
+                                                    <Link href={`/admin/product/${product._id}`}>
+                                                        <button className="cursor-pointer "><i className="ri-pencil-line text-lg"></i></button>
+                                                    </Link>
+                                                    {' '}
+                                                    <button className="cursor-pointer  !bg-red-400"
+                                                        onClick={() => deleteHandler(product._id)}
+                                                        type='button'><i className="ri-delete-bin-2-line text-lg"></i></button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
+                        </div>
+                    )}
                 </div>
-            </Layout>
-        )
-    }
-    ProductsScreen.auth = { adminOnly: true }
+            </div>
+        </Layout>
+    )
+}
+ProductsScreen.auth = { adminOnly: true }

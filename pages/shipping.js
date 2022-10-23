@@ -185,7 +185,7 @@ export default function ShippingScreen() {
                 </form>
             </div>
     </Layout>
-  );
+  )
 }
 
-ShippingScreen.auth = true;
+ShippingScreen.auth = true
