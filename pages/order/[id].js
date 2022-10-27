@@ -42,7 +42,6 @@ function reducer(state, action) {
     }
 }
 function OrderScreen() {
-    // order/:id
     const [{ isPending }, paypalDispatch] = usePayPalScriptReducer()
     const { query } = useRouter()
     const orderId = query.id
@@ -160,7 +159,7 @@ function OrderScreen() {
 
     return (
         <Layout title={`Pedido ${orderId}`}>
-            <h1 className="mb-4 text-center text-blue-700 text-3xl card">{`ID: ${orderId}`}</h1>
+            <h1 className="mb-4 text-center text-blue-700 text-3xl">{`ID: ${orderId}`}</h1>
             {loading ? (
                 <div>Carregando...</div>
             ) : error ? (
@@ -168,7 +167,7 @@ function OrderScreen() {
             ) : (
                 <div className="grid md:grid-cols-4 md:gap-5">
                     <div className="overflow-x-auto md:col-span-3">
-                        <div className="card bg-white text-center mx-1 overflow-x-auto p-5">
+                        <div className=" bg-white text-center mx-1 overflow-x-auto p-5">
                             <h2 className="mb-2 text-blue-600 text-3xl">Lista dos Produtos</h2>
                             <table className="min-w-full">
                                 <thead className="border-b">
@@ -184,13 +183,16 @@ function OrderScreen() {
                                         <tr key={item._id} className='border-y divide-blue-600 border-blue-600'>
                                             <td>
                                                 <Link href={`/product/${item.slug}`}>
-                                                    <Image
-                                                        src={item.image}
-                                                        alt={item.name}
-                                                        width={50}
-                                                        height={50}
-                                                        className="cursor-pointer"
-                                                    ></Image>
+                                                    <div className="flex  cursor-pointer items-center">
+                                                        <Image
+                                                            src={item.image}
+                                                            alt={item.name}
+                                                            width={50}
+                                                            height={50}
+                                                        ></Image>
+                                                        &nbsp;
+                                                        {item.name}
+                                                    </div>
                                                 </Link>
                                             </td>
                                             <td className="p-5 only:text-center">{item.quantity}</td>
@@ -204,49 +206,51 @@ function OrderScreen() {
                             </table>
                         </div>
                         <div className='flex justify-between gap-x-5'>
-                            <div className="card bg-white w-1/2 p-5">
-                                <h2 className="mb-2 text-blue-600 text-center text-3xl">Endereço para entrega</h2>
+                            <div className="border rounded-xl bg-white w-1/2 p-5">
+                                <h2 className="mb-2 text-indigo-600 text-center text-3xl">Endereço para entrega</h2>
                                 <div className=' items-left grid grid-cols-2 gap-4 flex-col  mb-2'>
-                                        <div className="col-span-1">
-                                            <div className='text-indigo-800'>Nome:&nbsp;
-                                                <span className='text-black'>{shippingAddress.name}</span>
-                                            </div>
-                                            <div className='text-indigo-800 gap'>Endereço:&nbsp;
-                                                <span className='text-black'>{shippingAddress.address}</span>
-                                            </div>
-                                            <div className='text-indigo-800'>Bairro:&nbsp;
-                                                <span className='text-black'>{shippingAddress.neighborhood}</span>
-                                            </div>
-                                            <div className='text-indigo-800'>Cidade:&nbsp;
-                                                <span className='text-black'>{shippingAddress.city}</span>
-                                            </div>
+                                    <div className="col-span-1">
+                                        <div className='text-indigo-800'>Nome:&nbsp;
+                                            <span className='text-black'>{shippingAddress.name}</span>
                                         </div>
-                                        <div className=' col-span-1 ml-10'>
-                                            <div className='text-indigo-800'>CEP:&nbsp;
-                                                <span className='text-black'>{shippingAddress.postalCode}</span>
-                                            </div>
-                                            <div className='text-indigo-800'>Número:&nbsp;
-                                                <span className='text-black'>{shippingAddress.number}</span>
-                                            </div>
-                                            <div className='text-indigo-800'>Estado:&nbsp;
-                                                <span className='text-black'>{shippingAddress.state}</span>
-                                            </div>
+                                        <div className='text-indigo-800 gap'>Endereço:&nbsp;
+                                            <span className='text-black'>{shippingAddress.address}</span>
+                                        </div>
+                                        <div className='text-indigo-800'>Bairro:&nbsp;
+                                            <span className='text-black'>{shippingAddress.neighborhood}</span>
+                                        </div>
+                                        <div className='text-indigo-800'>Cidade:&nbsp;
+                                            <span className='text-black'>{shippingAddress.city}</span>
                                         </div>
                                     </div>
+                                    <div className=' col-span-1 ml-10'>
+                                        <div className='text-indigo-800'>CEP:&nbsp;
+                                            <span className='text-black'>{shippingAddress.postalCode}</span>
+                                        </div>
+                                        <div className='text-indigo-800'>Número:&nbsp;
+                                            <span className='text-black'>{shippingAddress.number}</span>
+                                        </div>
+                                        <div className='text-indigo-800'>Estado:&nbsp;
+                                            <span className='text-black'>{shippingAddress.state}</span>
+                                        </div>
+                                    </div>
+                                </div>
                                 <div className='flex items-center flex-col'>
                                     {isDelivered ? (
+                                        
                                         <div className="alert-success">Entregue {deliveredAt}</div>
                                     ) : (
                                         <div className="alert-error">Não entregue</div>
                                     )}
                                 </div>
                             </div>
-                            <div className="card bg-white mx-1 w-1/2 p-5">
+                            <div className="border rounded-xl bg-white mx-1 w-1/2 p-5">
                                 <div className='flex flex-col justify-between h-full'>
                                     <h2 className="mb-2 text-blue-600 text-center text-3xl">Método de pagamento</h2>
                                     <div className='mb-2 text-xl text-center'>{paymentMethod}</div>
                                     <div className='flex items-center flex-col'>
                                         {isPaid ? (
+                                            
                                             <div className="alert-success">Pago às {paidAt.substring(11, 19)} do dia {paidAt.substring(8, 10)}/{paidAt.substring(5, 7)}/{paidAt.substring(0, 4)}. </div>
                                         ) : (
                                             <div className="alert-error bg-red-600"><i className="ri-checkbox-blank-circle-fill mx-1 text-white"></i>Ainda não confirmado</div>
@@ -320,7 +324,9 @@ function OrderScreen() {
                             </ul>
                         </div>
                     </div>
+                    
                 </div>
+                
             )}
         </Layout>
     );

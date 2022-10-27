@@ -150,6 +150,7 @@ export default function ProductsScreen() {
                                         <th className="p-5 text-center">Categoria</th>
 
                                         <th className="p-5 text-center">Avaliação</th>
+                                        <th className="p-5 text-center">Vendidos</th>
                                         <th className="p-5 text-center">Quantidade</th>
                                         <th className="p-5 text-center">Preço</th>
                                         <th className="p-5 text-center">Ações</th>
@@ -176,6 +177,7 @@ export default function ProductsScreen() {
                                             <td className="p-5">{product.category}</td>
 
                                             <td className="p-2">{product.rating}</td>
+                                            <td className="p-2">{product.sellCount}</td>{/*Não consigo fazer o contamento de vendas ainda*/}
                                             <td className="p-5">{product.countInStock > 0 ?
                                                 (<div className="text-sm text-center"><i className="ri-checkbox-blank-circle-fill mx-1 text-green-400"></i>Em estoque: {product.countInStock}</div>
                                                 ) : (

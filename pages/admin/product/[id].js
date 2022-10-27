@@ -132,6 +132,7 @@ export default function AdminProductEditScreen() {
                 description,
                 countInStock,
                 publisher,
+                sellCount,
             })
             dispatch({ type: 'UPDATE_SUCCESS' })
             toast.success('Product updated successfully')

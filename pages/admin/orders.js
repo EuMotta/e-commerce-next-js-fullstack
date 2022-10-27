@@ -57,7 +57,8 @@ export default function AdminOrderScreen() {
                                         <th className="px-5 text-center">ID</th>
                                         <th className="p-5 text-center">Nome do usuário</th>
                                         <th className="p-5 text-center">Data da compra</th>
-                                        <th className="p-5 text-center">Total R$</th>
+                                        <th className="p-5 text-center">Total</th>
+                                        <th className="p-5 text-center">Forma de pagamento</th>
                                         <th className="p-5 text-center">Status do pagamento</th>
                                         <th className="p-5 text-center">Data da entrega</th>
                                         <th className="p-5 text-center">Detalhes</th>
@@ -82,7 +83,8 @@ export default function AdminOrderScreen() {
                                                 {order.createdAt.substring(5, 7)}/
                                                 {order.createdAt.substring(0, 4)}
                                             </td>
-                                            <td className="p-5">{order.totalPrice}</td>
+                                            <td className="p-5">${order.totalPrice}</td>
+                                            <td className="p-5">{order.paymentMethod}</td>
                                             <td className="p-5">
                                                 {order.isPaid ? (
                                                     <span className=" p-2 text-sm rounded-xl">

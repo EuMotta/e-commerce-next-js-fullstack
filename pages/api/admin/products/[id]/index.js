@@ -38,6 +38,7 @@ const putHandler = async (req, res) => {
         product.publisher = req.body.publisher
         product.countInStock = req.body.countInStock
         product.description = req.body.description
+        product.sellCount = req.body.sellCount
         await product.save()
         await db.disconnect()
         res.send({ message: 'Produto cadastrado!' })

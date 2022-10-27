@@ -31,7 +31,8 @@ const data = {
             rating: 4.5,
             numReviews: 10,
             countInStock: 1,
-            publisher: 'José Antonio'
+            publisher: 'José Antonio',
+            sellCount: 0,
         },
         {
             name: 'Dodo hide the seek',
@@ -45,7 +46,8 @@ const data = {
             rating: 4.5,
             numReviews: 10,
             countInStock: 3,
-            publisher: 'Gustavo'
+            publisher: 'Gustavo',
+            sellCount: 0,
         },
         {
             name: 'Synthwave Painting',
@@ -59,7 +61,8 @@ const data = {
             rating: 4.5,
             numReviews: 10,
             countInStock: 500,
-            publisher: 'Louis'
+            publisher: 'Louis',
+            sellCount: 0,
         },
         {
             name: 'Spider Eyes Modern Art',
@@ -73,7 +76,8 @@ const data = {
             rating: 4.5,
             numReviews: 10,
             countInStock: 3,
-            publisher: 'Oliver Sanchez'
+            publisher: 'Oliver Sanchez',
+            sellCount: 0,
         },
         {
             name: 'Liquid Forest Princess New',
@@ -87,7 +91,8 @@ const data = {
             rating: 4.5,
             numReviews: 10,
             countInStock: 3,
-            publisher: 'Mary tipper'
+            publisher: 'Mary tipper',
+            sellCount: 0,
         },
         {
             name: 'Colorful Abstract Painting',
@@ -101,7 +106,8 @@ const data = {
             rating: 4.5,
             numReviews: 10,
             countInStock: 3,
-            publisher: 'Zoe Stiffler'
+            publisher: 'Zoe Stiffler',
+            sellCount: 0,
         },
         {
             name: 'Colorful Abstract',
@@ -115,7 +121,8 @@ const data = {
             rating: 4.5,
             numReviews: 10,
             countInStock: 3,
-            publisher: 'Mike Anderson'
+            publisher: 'Mike Anderson',
+            sellCount: 0,
         },
         {
             name: 'The girl with the firefly',
@@ -129,7 +136,8 @@ const data = {
             rating: 4.5,
             numReviews: 10,
             countInStock: 0,
-            publisher: 'Maik'
+            publisher: 'Maik',
+            sellCount: 0,
         },
     ]
 }

@@ -32,6 +32,7 @@ const postHandler = async (req, res) => {
     numReviews: 0,
     countInStock: 1,
     publisher: 'Dono',
+    sellCount: 0,
   })
   const product = await newProduct.save()
   await db.disconnect()

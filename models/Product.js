@@ -15,6 +15,7 @@ const productSchema = new mongoose.Schema(
         numReviews: { type: Number, required: true, default: 0 },
         countInStock: { type: Number, required: true, default: 0 },
         description: { type: String, required: true },
+        sellCount: { type: Number, required: false, default: 0 }
 
     }, {
     timestamps: true
