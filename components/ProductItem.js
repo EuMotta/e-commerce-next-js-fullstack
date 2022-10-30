@@ -2,6 +2,7 @@ import React from "react"
 import Link from 'next/link'
 import Image from "next/image"
 import { toast } from "react-toastify"
+import { TbShoppingCartOff } from 'react-icons/tb'
 
 export default function ProductItem({ product, addToCartHandler }) {
     return (
@@ -55,7 +56,7 @@ export default function ProductItem({ product, addToCartHandler }) {
                                     'Produto indisponível!'
                                 )}
                             >
-                                <i className="ri-shopping-cart-line "></i> Indisponível
+                                <span className="flex justify-center gap-2"><TbShoppingCartOff/>Indisponível</span>
                             </button>
                         )}
                     {product.countInStock > 0 ?

@@ -124,14 +124,14 @@ button {
 
 .primary-button {
   transition: 300ms;
-  @apply rounded py-1 bg-gradient-to-r from-zinc-100 via-zinc-50 to-zinc-200 bg-zinc-100  hover:bg-gradient-to-r hover:from-indigo-400 hover:via-indigo-300 hover:to-indigo-500 hover:bg-zinc-100  px-4 shadow-sm shadow-slate-400 m-2;
+  @apply rounded py-1 bg-gradient-to-r from-zinc-100 via-zinc-50 to-zinc-200 bg-zinc-100  hover:bg-gradient-to-r hover:from-slate-800 hover:via-slate-800 hover:to-slate-800 hover:bg-zinc-100  px-4 shadow-sm shadow-slate-400 m-2;
 }
 
 button:hover,
 .primary-button:hover {
   --tw-bg-opacity: 1;
   transform: scale(1.05);
-  @apply bg-slate-700 text-white  focus:text-white hover:shadow-sm hover:shadow-slate-500 hover:bg-indigo-400 hover:border-blue-600 ;
+  @apply bg-slate-700 text-white  focus:text-white hover:shadow-sm hover:shadow-slate-500 hover:bg-slate-800 hover:border-blue-600 ;
 }
 
 .img_ef {

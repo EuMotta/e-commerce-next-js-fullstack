@@ -207,8 +207,8 @@ export default function Layout({ title, children }) {
                 <button
                     ref={rocketRef}
                     onClick={() => { window.scrollTo({ top: 0, left: 0, behavior: 'smooth' }) }}
-                    className=" scroll-top !bg-indigo-600 scroll-to-target open">
-                    <i className="ri-rocket-2-fill relative -top-1"></i>
+                    className=" scroll-top !bg-indigo-600 hover:!bg-slate-800  scroll-to-target open">
+                    <i className="ri-rocket-2-fill  relative -top-1"></i>
                 </button>
                 <div className=" p-1 text-sm text-center  text-red-700 bg-red-100 rounded-lg dark:bg-red-200 dark:text-red-800" role="alert">
                     <span className="font-medium">Aviso!</span> Site em desenvolvimento.
