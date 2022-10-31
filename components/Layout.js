@@ -187,6 +187,7 @@ export default function Layout({ title, children }) {
                     ) : ("")
                 }
                 <main>
+                    
                     <div className='container min-h-screen m-auto mt-8 px-0'>{children}</div>
                 </main>
                 <footer className="flex justify-center items-center h-10 shadow-inner">

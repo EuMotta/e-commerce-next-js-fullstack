@@ -1,3 +1,4 @@
+import axios from 'axios'
 import Image from 'next/image'
 import React, { useCallback, useEffect, useState } from 'react'
 import { useDropzone } from 'react-dropzone'
@@ -60,6 +61,7 @@ export default function Dropzone() {
                                 height={100}
                                 unoptimized
                                 className=''
+                                alt=''
                             /></div>
                         
                     ))}</div>
