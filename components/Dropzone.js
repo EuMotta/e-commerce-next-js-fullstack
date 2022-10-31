@@ -3,6 +3,7 @@ import Image from 'next/image'
 import React, { useCallback, useEffect, useState } from 'react'
 import { useDropzone } from 'react-dropzone'
 import { RiImageAddFill } from 'react-icons/ri'
+import { BsImages } from 'react-icons/bs'
 
 export default function Dropzone() {
     function handleUpload() {
@@ -44,35 +45,46 @@ export default function Dropzone() {
                 <input {...getInputProps()} />
                 {isDragActive ?
                     (
-                        <div className='flex justify-center text-5xl'><RiImageAddFill /></div>
+                        <div>
+                            <span className='flex justify-center text-5xl'>
+                                <RiImageAddFill />
+                            </span>
+                            Solte sua imagem
+                        </div>
                     ) : (
-                        <div className=''>Clique aqui ou arraste as imagens</div>
+                        <div className=''>
+                            <span className='flex justify-center text-5xl'>
+                                <BsImages />
+                            </span>
+                            Clique aqui ou arraste as imagens
+                        </div>
                     )
                 }<div className='flex gap-x-4 basis basis-10'>
-                {images.map((image, index) => (
+
+                    {images.map((image, index) => (
                         <div
-                            className='flex justify-between'
+                            className='flex  justify-between'
                             key={index}
                         >
-                            
+
                             <Image
                                 src={image}
                                 width={100}
                                 height={100}
                                 unoptimized
-                                className=''
+                                className='transition-all z-10'
                                 alt=''
                             /></div>
-                        
+
                     ))}</div>
             </div>
             {images.length > 0 &&
                 <div className='flex'>
-                    
+
                     {images.length > 0 &&
                         <div>
                             <button onClick={handleUpload}>
-                            Enviar
+                                Enviar
                             </button>
                         </div>
                     }
