@@ -3,9 +3,10 @@ import Image from 'next/image'
 import React, { useCallback, useEffect, useState } from 'react'
 import { useDropzone } from 'react-dropzone'
 import { RiImageAddFill } from 'react-icons/ri'
-import { BsImages } from 'react-icons/bs'
+import { BsImages, BsFillXCircleFill } from 'react-icons/bs'
 
 export default function Dropzone() {
+    
     function handleUpload() {
         console.log("Enviando Arquivos...")
         axios.post('http://localhost:4000/upload', { images }).then(response => {
@@ -66,7 +67,6 @@ export default function Dropzone() {
                             className='flex  justify-between'
                             key={index}
                         >
-
                             <Image
                                 src={image}
                                 width={100}
@@ -74,8 +74,9 @@ export default function Dropzone() {
                                 unoptimized
                                 className='transition-all z-10'
                                 alt=''
-                            /></div>
-
+                            />
+                            <div  className=''><BsFillXCircleFill/></div>
+                            </div>
                     ))}</div>
             </div>
             {images.length > 0 &&
