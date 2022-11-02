@@ -2,13 +2,14 @@ import React, { useEffect } from 'react'
 import Layout from '../components/Layout'
 import { useForm } from 'react-hook-form'
 import Link from 'next/link'
-import Image from 'next/image'
-import loginimg from '../public/img/Register.svg'
+// import Image from 'next/image'
+// import loginimg from '../public/img/Register.svg'
 import { signIn, useSession } from 'next-auth/react'
 import { toast } from 'react-toastify'
 import { getError } from '../utils/error'
 import { useRouter } from 'next/router'
 import axios from 'axios'
+import { GiFallingStar } from 'react-icons/gi'
 
 export default function LoginScreen() {
     const { data: session } = useSession()
@@ -53,7 +54,7 @@ export default function LoginScreen() {
                     <div
                         className="flex xl:justify-center lg:justify-between justify-center items-center flex-wrap h-full g-6"
                     >
-                        <div
+                        {/* <div
                             className="grow-0 login_img shrink-1 md:shrink-0 basis-auto xl:w-6/12 lg:w-6/12 md:w-9/12 mb-12 md:mb-0"
                         >
                             <Image
@@ -61,10 +62,11 @@ export default function LoginScreen() {
                                 className="w-full"
                                 alt="Sample image"
                             />
-                        </div>
-                        <div className="xl:ml-20 xl:w-5/12 lg:w-5/12 md:w-8/12 mb-12 md:mb-0">
+                        </div> */}
+                        <div className="xl:ml-20 card p-10 mb-12 md:mb-0">
                             <form onSubmit={handleSubmit(submitHandler)}>
-                                <div className='text-5xl text-center mb-10'>
+                                <div className='text-3xl text-center mb-10'>
+                                <span className='flex text-indigo-600 justify-center'><GiFallingStar/></span>
                                     <h1>Efetuar cadastro</h1>
                                 </div>
                                 <div className="flex flex-row items-center justify-center lg:justify-start">
@@ -114,7 +116,7 @@ export default function LoginScreen() {
                                 >
                                     <p className="text-center font-semibold mx-4 mb-0">Ou</p>
                                 </div>
-                                <div className='flex justify-between'>
+                                <div className='flex gap-2 justify-between'>
                                     <div className="mb-6 ">
                                         <label
                                             htmlFor='name'
@@ -217,17 +219,19 @@ export default function LoginScreen() {
                                         />
                                         <label className="form-check-label inline-block text-gray-800" htmlFor="checkbox">Lembrar-me</label>
                                     </div>
+                                    
+                                </div>
+                                <div className="text-center lg:text-left">
+                                    <button
+                                        className="inline-block w-full px-7 py-3 bg-blue-600 text-white font-medium text-md leading-snug rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
+                                    >Cadastrar-se
+                                    </button>
+                                    <div className='flex justify-center'>
                                     <p className="text-md font-semibold mt-2 pt-1 mb-0">
                                         Já possui uma conta?
                                         <Link href={`/login?redirect=${redirect || '/'} `}
                                             className="text-red-600 hover:text-red-700 focus:text-red-700 transition duration-200 ease-in-out"> Entrar</Link>
-                                    </p>
-                                </div>
-                                <div className="text-center lg:text-left">
-                                    <button
-                                        className="inline-block px-7 py-3 bg-blue-600 text-white font-medium text-md leading-snug rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
-                                    >Cadastrar-se
-                                    </button>
+                                    </p></div>
                                 </div>
                             </form>
                         </div>
