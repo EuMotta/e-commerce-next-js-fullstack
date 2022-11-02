@@ -11,6 +11,7 @@ import 'react-toastify/dist/ReactToastify.css'
 import Cookies from 'js-cookie'
 import Image from 'next/image'
 import SideLinks from './SideLinks'
+import { AiOutlineLoading } from 'react-icons/ai'
 
 
 const nav_links = [
@@ -114,13 +115,16 @@ export default function Layout({ title, children }) {
                                     </div>
                                 </Link>
                                 {status === 'loading' ?
-                                    ('Carregando') :
+                                    (<AiOutlineLoading
+                                        className='rotating text-2xl'
+                                        />) :
                                     session?.user ?
                                         (
                                             <Menu as="div" className="relative  inline-block">
                                                 <Menu.Button className="flex text-indigo-600 m-2">
                                                     <div className='mt-1 pr-2'>
                                                         {session.user.name}</div>
+                                                        
                                                     <Image
                                                         src={`/imgUser/${session.user.name}.jpg`}
                                                         width={30}
