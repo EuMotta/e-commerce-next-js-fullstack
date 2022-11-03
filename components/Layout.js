@@ -23,10 +23,10 @@ const nav_links = [
     //     path: "categoria",
     //     display: "Categorias",
     // },
-    // {
-    //     path: "sobre",
-    //     display: "Sobre",
-    // },
+    {
+        path: "about",
+        display: "Sobre",
+    },
     // {
     //     path: "contato",
     //     display: "Contatos",
