@@ -9,6 +9,7 @@ import Product from '../../models/Product'
 import imgErro from '../../public/img/404.svg'
 import axios from 'axios'
 import { toast } from 'react-toastify'
+import { GrContact } from 'react-icons/gr'
 
 export default function ProductScreen(props) {
     const { state, dispatch } = useContext(Store)
@@ -63,7 +64,7 @@ export default function ProductScreen(props) {
                         <button className='bg-red-300 hover:bg-red-500'> Voltar</button>
                     </Link>
                 </div>
-                <h1 className='container mt-4 px-4 py-5 text-center text-3xl'>{product.name}</h1>
+
             </div>
             <div className='grid md:grid-cols-5 md:gap-3'>
                 <div className='md:col-span-2 mb-5 shadow-slate-700 shadow-md rounded border-8'>
@@ -81,26 +82,27 @@ export default function ProductScreen(props) {
                     <div className='flex '>
                         <div className='text-xl w-3/5 mr-3'>
                             <ul className='card p-5'>
+                                <h1 className='container mb-2 text-center text-3xl'>{product.name}</h1>
                                 <li className=' border rounded shadow-sm shadow-slate-400 text-center'>
                                     Tipo: <span className='text-indigo-600'>{product.category}</span>
                                 </li>
-                                <li>
-                                    Criador: {product.publisher}
+                                <li className='py-2'>
+                                    <span className='text-indigo-600'>Criador:</span> {product.publisher}
                                 </li>
-                                <li>
-                                    Título: {product.title}
+                                <li className='py-2'>
+                                    <span className='text-indigo-600'>Título:</span> {product.title}
                                 </li>
-                                <li>
-                                    Gênero: {product.gender}
+                                <li className='py-2'>
+                                    <span className='text-indigo-600'>Gênero:</span> {product.gender}
                                 </li>
-                                <li>
+                                <li className='py-2'>
                                     {product.rating} de {product.numReviews} avaliações
                                 </li>
                             </ul>
                         </div>
                         <div className='w-2/5'>
                             <div className='p-6 card'>
-                                <div className='mb-2 flex justify-between'>
+                                <div className=' flex justify-between'>
                                     <div className='text-2xl' >Preço</div>
                                     <div className='text-2xl text-red-600'>
                                         {product.countInStock > 0 ? <div className='flex items-center flex-col ml-2'>
@@ -122,21 +124,39 @@ export default function ProductScreen(props) {
                                     </div>
                                 </div>
                                 <div className='flex mt-7 text-center '>
-                                    <button onClick={addToCartHandler} className='w-full bg-sky-100 flex justify-between'>
-                                        Comprar
-                                        <i className="ri-shopping-cart-line"></i>
+                                    <button onClick={addToCartHandler} className='w-full gap-1 primary-button  flex justify-center'>
+                                        <i className="ri-shopping-cart-line"></i> Carrinho
                                     </button>
                                 </div>
                             </div>
-                        </div></div>
-                    <div className='col-span-3'>
-                        <ul className='card p-5'>
-                            <li className='border rounded shadow-sm mb-2 shadow-slate-400 text-center'>
+                            <div className='card p-3 text-center'>
+                            <div className='flex justify-center'><GrContact/></div>
+                                <button className='primary-button cursor-not-allowed'>Conversar com vendedor</button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div className='col-span-6 border-y w=full'>
+                    <div className='grid mt-10 mx-10 grid-cols-4'>
+                        <ul className='col-span-3 ml-10 mt-16 p-5'>
+                            <li className='text-xl mb-1 '>
                                 <h2>Descrição:</h2>
                             </li>
                             <li>
                                 {product.description}
                             </li>
+                        </ul>
+                        <ul className='col-span-1'>
+                            <Image
+                                src={product.image}
+                                alt={product.name}
+                                width={640}
+                                height={640}
+                                layout="responsive"
+                                className='img_ef'
+                            >
+                            </Image>
                         </ul>
                     </div>
                 </div>
