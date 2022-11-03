@@ -4,6 +4,10 @@ import Layout from '../components/Layout'
 import aboutimg from '../public/img/aboutimg.svg'
 import aboutme from '../public/img/aboutme.jpg'
 import admin1 from '../public/img/admin1.png'
+import { CiBoxList } from 'react-icons/ci'
+import { GoGraph } from 'react-icons/go'
+import { MdSell } from 'react-icons/md'
+import { AiFillEdit } from 'react-icons/ai'
 
 
 export default function AboutScreen() {
@@ -134,23 +138,23 @@ export default function AboutScreen() {
 
             <div className='grid grid-cols-5 '>
                 <div className='col-span-3'>
-                    <h1 className='text-5xl mt-20'>Use Your Android or ios Device to Manage Everything</h1>
+                    <h1 className='text-5xl mt-20'>Responsividade para todos os dispositivos!</h1>
                     <div className='mt-24'>
                         <div className='flex my-5'>
-                            <i className="ri-list-settings-line text-3xl card p-3 mx-3 text-white !bg-indigo-600"></i>
+                            <span className='card p-3 mx-3 text-white !bg-indigo-600'><CiBoxList className='text-3xl' /></span>
                             <p className='text-lg'>Barra de navegação exclusiva do administrador e funcionário, onde pode acessar painéis que facilitam a manutenção e monitoração</p>
                         </div>
                         <div className='flex my-5'>
-                            <i className="ri-line-chart-fill text-3xl card p-3 mx-3 text-white !bg-indigo-600"></i>
+                            <span className='card p-3 mx-3 text-white !bg-indigo-600'><GoGraph className='text-3xl' /></span>
                             <p className='text-lg'>Temos um gráfico que facilita o monitoramento de vendas diárias, ajudando assim na contagem dos lucros que sua empresa está tendo.</p>
                         </div>
                         <div className='flex my-5'>
-                            <i className="ri-line-chart-fill text-3xl card p-3 mx-3 text-white !bg-indigo-600"></i>
-                            <p className='text-lg'>Temos um gráfico que facilita o monitoramento de vendas diárias, ajudando assim na contagem dos lucros que sua empresa está tendo.</p>
+                            <span className='card p-3 mx-3 text-white !bg-indigo-600'><MdSell className='text-3xl' /></span>
+                            <p className='text-lg'>Monitoramento de vendas, desde o pedido até a entrega, o que aumenta a praticidade da plataforma.</p>
                         </div>
                         <div className='flex my-5'>
-                            <i className="ri-line-chart-fill text-3xl card p-3 mx-3 text-white !bg-indigo-600"></i>
-                            <p className='text-lg'>Temos um gráfico que facilita o monitoramento de vendas diárias, ajudando assim na contagem dos lucros que sua empresa está tendo.</p>
+                            <span className='card p-3 mx-3 text-white !bg-indigo-600'><AiFillEdit className='text-3xl' /></span>
+                            <p className='text-lg'>Alterações nos produtos podem ser feitos com facilidade, não necessitando nenhum conhecimento em programação.</p>
                         </div>
                     </div>
                 </div>
