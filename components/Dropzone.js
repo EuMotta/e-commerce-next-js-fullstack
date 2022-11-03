@@ -3,9 +3,8 @@ import Image from 'next/image'
 import React, { useCallback, useEffect, useState } from 'react'
 import { useDropzone } from 'react-dropzone'
 import { RiImageAddFill } from 'react-icons/ri'
-import { BsImages, BsFillXCircleFill } from 'react-icons/bs'
+import { BsFillXCircleFill } from 'react-icons/bs'
 import svg from '../public/img/dragdrop.svg'
-import { useRouter } from 'next/router'
 import { toast } from 'react-toastify'
 
 export default function Dropzone() {
