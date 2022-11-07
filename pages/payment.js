@@ -6,6 +6,12 @@ import CheckoutWizard from '../components/CheckoutWizard'
 import Layout from '../components/Layout'
 import { Store } from '../utils/Store'
 
+const method = [
+    'Paypal',
+    'Stripe',
+    'Boleto',
+]
+
 export default function PaymentScreen() {
     const [selectedPaymentMethod, setSelectedPaymentMethod] = useState('')
     const { state, dispatch } = useContext(Store)
@@ -39,26 +45,24 @@ export default function PaymentScreen() {
             <CheckoutWizard activeStep={2} />
             <div className='card w-full'>
                 <form className="mx-auto max-w-screen-md " onSubmit={submitHandler}>
-                    <h1 className="mb-4 text-center text-blue-900 text-2xl">Método de Pagamento</h1>
-                    <div className='flex items-center flex-col'>
+                    <h1 className="mb-4 text-center text-indigo-600 text-2xl">Método de Pagamento</h1>
                         {
-                            ['PayPal', 'Pix', 'Boleto'].map((payment) => (
-                                <div key={payment}  className="mb-4  cursor-pointer text-xl p-2 w-1/3 card bg-white hover:text-white focus:shadow-md hover:shadow-slate-500 hover:bg-indigo-500 hover:border-blue-600 hover:outline-none">
-                                    <input
-                                        name="paymentMethod"
-                                        className="p-2 cursor-pointer outline-non focus:ring-0"
-                                        id={payment}
-                                        type="radio"
-                                        checked={selectedPaymentMethod === payment}
-                                        onChange={() => setSelectedPaymentMethod(payment)}
-                                    />
-                                    <label className="p-2  cursor-pointer" htmlFor={payment}>
+                            method.map((payment, index) => (
+                                <div key={index} className="flex flex-col items-center">
+                                    <label className="focus:bg-blue-600 text-center cursor-pointer w-1/3 text-xl px-10 py-2 card bg-white hover:text-white  hover:shadow-slate-500 hover:bg-indigo-500 hover:border-blue-600 hover:outline-none" htmlFor={payment}>
+                                        <input
+                                            name="paymentMethod"
+                                            className="p-2 cursor-pointer m-2 outline-non focus:ring-0"
+                                            id={payment}
+                                            type="radio"
+                                            checked={selectedPaymentMethod === payment}
+                                            onChange={() => setSelectedPaymentMethod(payment)}
+                                        />
                                         {payment}
                                     </label>
                                 </div>
                             ))
                         }
-                    </div>
                     <div className="mb-4 flex justify-between">
                         <button
                             onClick={() => router.push('/shipping')}

@@ -87,10 +87,10 @@ function CartScreen() {
                                                     </select>
                                                 </td>
                                                 <td className="p-5 pointer-events-none  text-center">
-                                                    $&nbsp;{item.price}
+                                                    $&nbsp;{(item.price - (item.price * item.descount) / 100).toFixed(2)}
                                                 </td>
                                                 <td className="p-5 pointer-events-none text-indigo-700 text-center">
-                                                    $&nbsp;{item.price * item.quantity}
+                                                    $&nbsp;{((item.price - (item.price * item.descount) / 100) * item.quantity).toFixed(2)}
                                                 </td>
                                                 <td className="p-5 text-center">
                                                     <button onClick={() => removeItemHandler(item)}>
@@ -109,7 +109,7 @@ function CartScreen() {
                                     <li>
                                         <div className="pb-3 text-xl">
                                             Total ({cartItems.reduce((a, c) => a + c.quantity, 0)}) {" "}:
-                                            ${cartItems.reduce((a, c) => a + c.quantity * c.price, 0)}
+                                            ${cartItems.reduce((a, c) => a + c.quantity * (c.price - (c.price*c.descount/100)), 0).toFixed(2)}
                                         </div>
                                     </li>
                                     <li>

@@ -17,12 +17,12 @@ export default function PlaceOrderScreen() {
     const router = useRouter()
     const round2 = (num) => Math.round(num * 100 + Number.EPSILON) / 100
     const itemsPrice = round2(
-        cartItems.reduce((a, c) => a + c.quantity * c.price, 0)
+        cartItems.reduce((a, c) => a + c.quantity * (c.price - (c.price*c.descount/100)), 0).toFixed(2)
     )
     const shippingPrice = itemsPrice > 200 ? 0 : 15
     const taxPrice = round2(itemsPrice * 0.15)
-    const totalPrice = round2(itemsPrice + shippingPrice + taxPrice)
-    const descount = round2(totalPrice * 0.9)
+    const totalPrice = round2((itemsPrice) + shippingPrice + taxPrice)
+    const totalDescount = round2(totalPrice * 0.9)
     useEffect(() => {
         if (!paymentMethod) {
             router.push('/payment')
@@ -60,7 +60,7 @@ export default function PlaceOrderScreen() {
     return (
         <Layout title='Revisão do pedido'>
             <CheckoutWizard activeStep={3} />
-            <h1 className='w-full mb-5 text-center text-4xl text-indigo-600 '>Revisão do pedido</h1>
+            <h1 className='w-full mb-5 text-center text-2xl text-indigo-500 '>Revisão do pedido</h1>
             {cartItems.length === 0 ? (
                 <div>
                     O carrinho está vazio.
@@ -71,13 +71,13 @@ export default function PlaceOrderScreen() {
             ) : (
                 <div className='grid md:grid-cols-4 md:gap-5'>
                     <div className='overflow-x-auto md:col-span-3'>
-                        <div className='card p-5 m-2 text-2xl text-indigo-500 text-center '> <h2>Lista de produtos</h2>
+                        <div className='card p-5 m-2 text-2xl text-indigo-800 text-center '> <h2>Lista de produtos</h2>
                             <table className='min-w-full'>
                                 <thead className='border-y border-indigo-800'>
                                     <tr className='text-indigo-800 text-1xl'>
                                         <th className="px-5 text-center">Item</th>
                                         <th className="p-5 text-center">Quantidade</th>
-                                        <th className="p-5 text-center">Preço</th>
+                                        <th className="p-5 text-center">Preço Un.</th>
                                         <th className="p-5 text-center">Total</th>
                                     </tr>
                                 </thead>
@@ -90,16 +90,16 @@ export default function PlaceOrderScreen() {
                                                 </Link>
                                             </td>
                                             <td className="p-5 text-black only:text-center">{item.quantity}</td>
-                                            <td className="p-5 text-black text-center">${item.price}</td>
+                                            <td className="p-5 text-black text-center">$ {(item.price - (item.price * item.descount) / 100).toFixed(2)}</td>
                                             <td className="p-5 text-black text-center">
-                                                ${item.quantity * item.price}
+                                            $ {((item.price - (item.price * item.descount) / 100) * item.quantity).toFixed(2)}
                                             </td>
                                         </tr>
                                     ))}
                                 </tbody>
                             </table>
 
-                            <div className='text-end mr-16 pr-2'>R$:{itemsPrice}</div>
+                            <div className='text-end mr-16 pr-2'>$ {itemsPrice}</div>
                         </div>
                         <div className='grid ml-12 mx-2 grid-cols-2'>
                             <div>
@@ -163,7 +163,7 @@ export default function PlaceOrderScreen() {
                     </div>
                     <div>
                         <div className='card p-5 mt-2'>
-                            <h2>Resumo do Pedido:</h2>
+                            <h2 className='text-xl text-indigo-800'>Resumo do Pedido:</h2>
                             <ul>
                                 <li>
                                     <div className="mb-2 gap-5 text-xl flex justify-between">
