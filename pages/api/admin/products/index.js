@@ -33,6 +33,7 @@ const postHandler = async (req, res) => {
     countInStock: 1,
     publisher: 'Dono',
     sellCount: 0,
+    descount: 1,
   })
   const product = await newProduct.save()
   await db.disconnect()
