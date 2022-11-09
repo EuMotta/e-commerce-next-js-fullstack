@@ -153,6 +153,8 @@ export default function ProductsScreen() {
                                         <th className="p-5 text-center">Vendidos</th>
                                         <th className="p-5 text-center">Quantidade</th>
                                         <th className="p-5 text-center">Preço</th>
+                                        <th className="p-5 text-center">Desconto</th>
+                                        <th className="p-5 text-center">Preço atual</th>
                                         <th className="p-5 text-center">Ações</th>
                                     </tr>
                                 </thead>
@@ -184,6 +186,7 @@ export default function ProductsScreen() {
                                                     <div className="text-sm text-center"><i className="ri-checkbox-blank-circle-fill mx-1 text-red-400"></i>Sem estoque</div>
                                                 )}</td>
                                             <td className="p-5">{product.price}</td>
+                                            <td className="p-5">{product.descount == 0 ? <span className='text-sm text-red-400'>Sem desconto</span> : `${product.descount} %`} </td>
 
                                             <td className="p-5 text-center">
                                                 <div>
