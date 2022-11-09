@@ -33,10 +33,13 @@ export default function ProductItem({ product, addToCartHandler }) {
                 <div className="">
                     <div className="justify-between mt-5 ml-2 w-full pb-2">
                         <div className='flex flex-col '>
-                            <span className='text-sm text-red-600 line-through'>de: R$&nbsp;
-                                {product.price}</span>
+                            <span className="grid">
+                                <span className='text-sm text-red-600 line-through'>de: R$&nbsp;
+                                    {product.price.toFixed(2)}</span>
+                                <span className="text-xs">{product.descount} % de desconto</span>
+                            </span>
                             <span className='text-3xl  text-green-600'>por: R$&nbsp;
-                                {product.price * 0.9}</span>
+                                {(product.price - (product.price * product.descount) / 100).toFixed(2)} </span>
                         </div>
                     </div>
                     {product.countInStock > 0 ?
@@ -56,7 +59,7 @@ export default function ProductItem({ product, addToCartHandler }) {
                                     'Produto indisponível!'
                                 )}
                             >
-                                <span className="flex justify-center gap-2"><TbShoppingCartOff/>Indisponível</span>
+                                <span className="flex justify-center gap-2"><TbShoppingCartOff />Indisponível</span>
                             </button>
                         )}
                     {product.countInStock > 0 ?
