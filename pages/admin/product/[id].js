@@ -95,6 +95,7 @@ export default function AdminProductEditScreen() {
                 setValue('description', data.description)
                 setValue('countInStock', data.countInStock)
                 setValue('publisher', data.publisher)
+                setValue('descount', data.descount)
             } catch (err) {
                 dispatch({ type: 'FETCH_FAIL', payload: getError(err) })
             }
@@ -117,6 +118,7 @@ export default function AdminProductEditScreen() {
         description,
         countInStock,
         publisher,
+        descount,
     }) => {
         try {
             dispatch({ type: 'UPDATE_REQUEST' })
@@ -132,6 +134,7 @@ export default function AdminProductEditScreen() {
                 description,
                 countInStock,
                 publisher,
+                descount,
             })
             dispatch({ type: 'UPDATE_SUCCESS' })
             toast.success('Product updated successfully')
@@ -141,9 +144,7 @@ export default function AdminProductEditScreen() {
             toast.error(getError(err))
         }
     }
-
-
-
+    
     return (
         <Layout title={`Edit Product ${productId}`}>
             <div className="grid md:grid-cols-6 md:gap-5">
@@ -283,6 +284,22 @@ export default function AdminProductEditScreen() {
                                                 />
                                                 {errors.price && (
                                                     <div className="text-red-600">{errors.price.message}</div>
+                                                )}
+                                            </div>
+                                            <div className="mb-4">
+                                                <label htmlFor="descount" className="text-xl text-indigo-700">
+                                                    Desconto %
+                                                </label>
+                                                <input
+                                                    type="number"
+                                                    className="form-control  focus:text-white focus:shadow-md focus:shadow-slate-500 focus:bg-indigo-300 focus:border-blue-600  block  px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0  focus:outline-none"
+                                                    id="descount"
+                                                    {...register("descount", {
+                                                        required: "Por favor, digite um valor válido",
+                                                    })}
+                                                />
+                                                {errors.descount && (
+                                                    <div className="text-red-600">{errors.descount.message}</div>
                                                 )}
                                             </div>
                                             <div className="mb-4">
