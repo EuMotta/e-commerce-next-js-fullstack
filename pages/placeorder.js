@@ -17,12 +17,13 @@ export default function PlaceOrderScreen() {
     const router = useRouter()
     const round2 = (num) => Math.round(num * 100 + Number.EPSILON) / 100
     const itemsPrice = round2(
-        cartItems.reduce((a, c) => a + c.quantity * (c.price - (c.price*c.descount/100)), 0).toFixed(2)
+        cartItems.reduce((a, c) => a + c.quantity * (c.price - (c.price * c.descount / 100)), 0).toFixed(2)
     )
     const shippingPrice = itemsPrice > 200 ? 0 : 15
     const taxPrice = round2(itemsPrice * 0.15)
+    const descount = round2(cartItems.reduce((a, c) => a + c.price, 0))
     const totalPrice = round2((itemsPrice) + shippingPrice + taxPrice)
-    const totalDescount = round2(totalPrice * 0.9)
+    const totalDescount = round2(totalPrice * 0.95)
     useEffect(() => {
         if (!paymentMethod) {
             router.push('/payment')
@@ -41,6 +42,7 @@ export default function PlaceOrderScreen() {
                 taxPrice,
                 totalPrice,
                 descount,
+                totalDescount,
             })
             setLoading(false)
             dispatch({ type: 'CART_CLEAR_ITEMS' })
@@ -92,7 +94,7 @@ export default function PlaceOrderScreen() {
                                             <td className="p-5 text-black only:text-center">{item.quantity}</td>
                                             <td className="p-5 text-black text-center">$ {(item.price - (item.price * item.descount) / 100).toFixed(2)}</td>
                                             <td className="p-5 text-black text-center">
-                                            $ {((item.price - (item.price * item.descount) / 100) * item.quantity).toFixed(2)}
+                                                $ {((item.price - (item.price * item.descount) / 100) * item.quantity).toFixed(2)}
                                             </td>
                                         </tr>
                                     ))}
@@ -185,12 +187,18 @@ export default function PlaceOrderScreen() {
                                 </li>
                                 <li>
                                     <div className="mb-2 flex text-xl justify-between">
+                                        <div>NfDesconto</div>
+                                        <div>5%</div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div className="mb-2 flex text-xl justify-between">
                                         <div>Total</div>
                                         <div className='flex flex-col align-middle items-end'>
-                                            <span className='text-md text-red-500 line-through'>de: R$&nbsp;
+                                            <span className='text-md text-red-500 line-through'>de: $&nbsp;
                                                 {totalPrice}</span>
-                                            <span className='text-xl text-green-600'>por: R$&nbsp;
-                                                {descount}</span>
+                                            <span className='text-xl text-green-600'>por: $&nbsp; {totalDescount}
+                                            </span>
                                         </div>
                                     </div>
                                 </li>
