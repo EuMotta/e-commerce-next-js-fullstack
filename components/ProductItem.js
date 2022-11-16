@@ -3,6 +3,7 @@ import Link from 'next/link'
 import Image from "next/image"
 import { toast } from "react-toastify"
 import { TbShoppingCartOff } from 'react-icons/tb'
+import { FcPaid } from 'react-icons/fc'
 
 export default function ProductItem({ product, addToCartHandler }) {
     return (
@@ -45,11 +46,11 @@ export default function ProductItem({ product, addToCartHandler }) {
                     {product.countInStock > 0 ?
                         (
                             <button
-                                className="primary-button w-full"
+                                className="primary-button w-full gap-2 flex justify-center"
                                 type="button"
                                 onClick={() => addToCartHandler(product)}
                             >
-                                <i className="ri-shopping-cart-line"></i> Comprar
+                                <FcPaid className="text-xl"/>  Comprar
                             </button>
                         ) : (
                             <button

@@ -1,19 +1,13 @@
-import { useSession } from 'next-auth/react'
-import Image from 'next/image'
 import React from 'react'
 import Layout from '../../components/Layout'
-import { MdAdminPanelSettings } from 'react-icons/md'
 import { useForm } from 'react-hook-form'
 
 export default function adminProfile() {
-    const { data: session } = useSession()
-
     const { handleSubmit, register, setValue } = useForm()
 
     const checkCNPJ = (e) => {
-        const cnpjEmpresa = "60316817000103"
         const cnpj = e.target.value.replace(/\D/g, '')
-        fetch(`https://brasilapi.com.br/api/cnpj/v1/${cnpjEmpresa}`).then(res => res.json())
+        fetch(`https://brasilapi.com.br/api/cnpj/v1/${cnpj}`).then(res => res.json())
             .then(data => {
                 console.log(data)
                 setValue('razao_social', data.razao_social)
@@ -37,24 +31,45 @@ export default function adminProfile() {
                 setValue('email', data.email)
             })
     }
+    const checkTaxa = (e) => {
+        const sigla = e.target.value.replace()
+        fetch(`https://brasilapi.com.br/api/taxas/v1/${sigla}`).then(res => res.json())
+            .then(data => {
+                console.log(data)
+                setValue('nome', data.nome)
+                setValue('valor', data.valor)
+            })
+    }
+    const checkDomain = (e) => {
+        const domain = e.target.value.replace()
+        fetch(`https://brasilapi.com.br/api/registrobr/v1/${domain}`).then(res => res.json())
+            .then(data => {
+                console.log(data)
+                setValue('status', data.status)
+                setValue('fqdn', data.fqdn)
+            })
+    }
 
     return (
         <Layout title='Perfil Admin'>
             <div className=''>
                 <div className="mb-4 grid col-span-1">
 
-                    <button
-                        className="form-control primary-button"
-                        id="razao_social"
-                        onClick={checkCNPJ}
-                    >Ver Dados</button>
+
                 </div>
 
                 <div className='grid grid-cols-6 gap-5'>
                     <div className='border-4 col-span-4 rounded-lg p-10 bg-slate-50 shadow-sm shadow-slate-600'>
                         <span className='text-center my-2'>
-                            <h2 className='text-5xl'><span className='text-indigo-600'>Informações </span> da Empresa</h2>
+                            <h2 className='text-5xl'><span className='text-indigo-600'>Pesquisar </span> Empresas</h2>
                         </span>
+                        <div className='flex justify-center mt-5'>
+                            <input
+                                placeholder='insira o CNPJ'
+                                className="form-control  block w-1/3 px-4 text-center py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-white focus:shadow-md focus:shadow-slate-500 focus:bg-indigo-300 focus:border-blue-600 focus:outline-none"
+                                onBlurCapture={checkCNPJ}
+                            />
+                        </div>
                         <div>
                             <form onSubmit={handleSubmit((data) => console.log(data))}>
                                 <div className='mt-4 pb-5  border border-slate-400  shadow-sm shadow-slate-600  p-2'>
@@ -89,7 +104,7 @@ export default function adminProfile() {
                                 <div className='mt-4 pb-5  border border-slate-400  shadow-sm shadow-slate-600  p-2'>
                                     <div className='text-center text-md mb-2 '>CNAE</div>
                                     <div className='flex gap-5'>
-                                        <div className="text-md p-2 w-1/3 text-center shadow  shadow-slate-600 py-2">
+                                        <div className="text-md p-2 w-2/4 text-center shadow  shadow-slate-600 py-2">
                                             <label className='text-md text-indigo-700' htmlFor="cnae_fiscal">CNAE Fiscal</label>
                                             <input
                                                 {...register("cnae_fiscal")}
@@ -97,7 +112,7 @@ export default function adminProfile() {
                                                 className="form-control text-sm w-full  block text-center font-normal text-gray-700 bg-white  "
                                             />
                                         </div>
-                                        <div className="text-md p-2 w-2/3 text-center shadow  shadow-slate-600 py-2">
+                                        <div className="text-md p-2 w-2/4 text-center shadow  shadow-slate-600 py-2">
                                             <label className='text-md text-indigo-700' htmlFor="cnae_fiscal_descricao">CNAE Fiscal Descrição</label>
                                             <input
                                                 {...register("cnae_fiscal_descricao")}
@@ -105,12 +120,13 @@ export default function adminProfile() {
                                                 className="form-control text-sm w-full  block text-center font-normal text-gray-700 bg-white  "
                                             />
                                         </div>
+
                                     </div>
                                 </div>
                                 <div className='mt-4 pb-5  border border-slate-400  shadow-sm shadow-slate-600  p-2'>
                                     <div className='text-center text-md mb-2 '>Natureza/Situação</div>
                                     <div className='flex gap-5'>
-                                        <div className="text-md p-2 w-2/4 text-center shadow  shadow-slate-600 py-2">
+                                        <div className="text-md p-2 w-1/3 text-center shadow  shadow-slate-600 py-2">
                                             <label className='text-md text-indigo-700' htmlFor="natureza_juridica">Natureza Juridíca</label>
                                             <input
                                                 {...register("natureza_juridica")}
@@ -246,52 +262,86 @@ export default function adminProfile() {
                                         </div>
                                     </div>
                                 </div>
-                                
+
                             </form>
                         </div>
                     </div>
-                    <div className='col-span-2 h-auto bg-slate-900 shadow-sm shadow-slate-600'>
-                        <div className=' '>
-                            {session?.user.isAdmin ?
-                            (
-                                    <div className='p-10'>
-                                        <div className='flex justify-center '>
-                                            <Image
-                                                src={`/imgUser/${session.user.name}.jpg`}
-                                                width={100}
-                                                height={100}
-                                                unoptimized
-                                                className="shadow-black rounded-full "
-                                                alt="Foto de perfil"
-                                            />
-                                        </div>
-
-                                        <div className=''>
-                                            <span className='text-xl text-slate-50 flex justify-center'><MdAdminPanelSettings className='text-3xl' />Administrador</span>
-                                        </div>
-                                        <div className='mt-4 grid gap-y-4 border p-2'>
-                                            <div className="text-md text-white text-center shadow  shadow-slate-50 py-2">
-                                                <div className=''>Nome:</div> <span className='text-slate-50 '>{session.user.name}</span>
+                    <div className='border-4 col-span-2 rounded-lg p-10 bg-slate-50 shadow-sm shadow-slate-600'>
+                        <div>
+                            <span className='text-center my-2'>
+                                <h2 className='text-5xl'><span className='text-indigo-600'></span>Taxas</h2>
+                            </span>
+                            <div className='flex justify-center mt-5'>
+                                <input
+                                    placeholder='Nome/tipo'
+                                    className="form-control  block w-full px-4 text-center py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-white focus:shadow-md focus:shadow-slate-500 focus:bg-indigo-300 focus:border-blue-600 focus:outline-none"
+                                    onBlurCapture={checkTaxa}
+                                />
+                            </div>
+                            <div>
+                                <form onSubmit={handleSubmit((data) => console.log(data))}>
+                                    <div className='mt-4 pb-5  border border-slate-400  shadow-sm shadow-slate-600  p-2'>
+                                        <div className='text-center text-md mb-2 '>Valor da Taxa</div>
+                                        <div className='flex gap-5'>
+                                            <div className="text-md  p-2 text-center shadow  shadow-slate-600 py-2">
+                                                <label className='text-md text-indigo-700' htmlFor="valor">Nome</label>
+                                                <input
+                                                    {...register("nome")}
+                                                    placeholder='Não Encontrado'
+                                                    className="form-control text-sm w-full block text-center font-normal text-gray-700 bg-white  "
+                                                />
                                             </div>
-                                            <div className="text-md text-white text-center shadow  shadow-slate-50 py-2">
-                                                <div className=''>Email:</div> <span className='text-slate-50 '>{session.user.email}</span>
+                                            <div className="text-md  p-2 text-center shadow  shadow-slate-600 py-2">
+                                                <label className='text-md text-indigo-700' htmlFor="valor">Taxa</label>
+                                                <input
+                                                    {...register("valor")}
+                                                    placeholder='Não Encontrado'
+                                                    className="form-control text-sm w-full block text-center font-normal text-gray-700 bg-white  "
+                                                />
                                             </div>
-                                            <div className="text-md text-white text-center shadow  shadow-slate-50 py-2">
-                                                <div className=''>ID:</div> <span className='text-slate-50 '>{session.user._id}</span>
-                                            </div>
-                                            <div className="text-md text-white text-center shadow  shadow-slate-50 py-2">
-                                                <div className=''>Hierarquia:</div> <span className='text-slate-50 '>{session.user.isAdmin ? 'Administrador' : 'Not Admin'}</span>
-                                            </div>
-
                                         </div>
                                     </div>
-                                ) : ("")
-                            }
+                                </form>
+                            </div>
                         </div>
-
+                        <div className='mt-5'>
+                            <span className='text-center my-2'>
+                                <h2 className='text-5xl'><span className='text-indigo-600'></span>Domínio</h2>
+                            </span>
+                            <div className='flex justify-center mt-5'>
+                                <input
+                                    placeholder='Nome/tipo'
+                                    className="form-control  block w-full px-4 text-center py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-white focus:shadow-md focus:shadow-slate-500 focus:bg-indigo-300 focus:border-blue-600 focus:outline-none"
+                                    onBlurCapture={checkDomain}
+                                />
+                            </div>
+                            <div>
+                                <form onSubmit={handleSubmit((data) => console.log(data))}>
+                                    <div className='mt-4 pb-5  border border-slate-400  shadow-sm shadow-slate-600  p-2'>
+                                        <div className='text-center text-md mb-2 '>Status</div>
+                                        <div className='flex gap-5'>
+                                            <div className="text-md  p-2 text-center shadow  shadow-slate-600 py-2">
+                                                <label className='text-md text-indigo-700' htmlFor="valor">Status</label>
+                                                <input
+                                                    {...register("status")}
+                                                    placeholder='Não Encontrado'
+                                                    className="form-control text-sm w-full block text-center font-normal text-gray-700 bg-white  "
+                                                />
+                                            </div>
+                                            <div className="text-md  p-2 text-center shadow  shadow-slate-600 py-2">
+                                                <label className='text-md text-indigo-700' htmlFor="valor">Dominio</label>
+                                                <input
+                                                    {...register("fqdn")}
+                                                    placeholder='Não Encontrado'
+                                                    className="form-control text-sm w-full block text-center font-normal text-gray-700 bg-white  "
+                                                />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
                     </div>
-
-
                 </div>
             </div>
 

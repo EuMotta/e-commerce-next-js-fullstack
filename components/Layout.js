@@ -12,6 +12,8 @@ import Cookies from 'js-cookie'
 import Image from 'next/image'
 import SideLinks from './SideLinks'
 import { AiOutlineLoading } from 'react-icons/ai'
+import {MdAdminPanelSettings} from 'react-icons/md'
+import {FcUp} from 'react-icons/fc'
 
 
 const nav_links = [
@@ -117,14 +119,22 @@ export default function Layout({ title, children }) {
                                 {status === 'loading' ?
                                     (<AiOutlineLoading
                                         className='rotating text-2xl'
-                                        />) :
+                                    />) :
                                     session?.user ?
                                         (
                                             <Menu as="div" className="relative  inline-block">
                                                 <Menu.Button className="flex text-indigo-600 m-2">
-                                                    <div className='mt-1 pr-2'>
+                                                    <div className='mt-1 flex pr-2 hover:text-white'>
+                                                        {session?.user.isAdmin ?
+                                                        (
+                                                            <div className="flex justify-center">
+                                                               <MdAdminPanelSettings className='text-xl'/>
+                                                            </div>
+                                                        ) : ("")
+                                                    }
+                                                    
                                                         {session.user.name}</div>
-                                                        
+
                                                     <Image
                                                         src={`/imgUser/${session.user.name}.jpg`}
                                                         width={30}
@@ -191,7 +201,6 @@ export default function Layout({ title, children }) {
                     ) : ("")
                 }
                 <main>
-                    
                     <div className='container min-h-screen m-auto mt-8 px-0'>{children}</div>
                 </main>
                 <footer className="flex justify-center items-center h-10 shadow-inner">
@@ -212,8 +221,8 @@ export default function Layout({ title, children }) {
                 <button
                     ref={rocketRef}
                     onClick={() => { window.scrollTo({ top: 0, left: 0, behavior: 'smooth' }) }}
-                    className=" scroll-top !bg-indigo-600 hover:!bg-slate-800  scroll-to-target open">
-                    <i className="ri-rocket-2-fill  relative -top-1"></i>
+                    className=" scroll-top !bg-indigo-100 hover:!bg-slate-200  scroll-to-target open">
+                    <FcUp className='text-white'/>
                 </button>
                 <div className=" p-1 text-sm text-center  text-red-700 bg-red-100 rounded-lg dark:bg-red-200 dark:text-red-800" role="alert">
                     <span className="font-medium">Aviso!</span> Site em desenvolvimento.

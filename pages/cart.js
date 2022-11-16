@@ -7,10 +7,12 @@ import { useRouter } from 'next/router'
 import dynamic from 'next/dynamic'
 import axios from 'axios'
 import { toast } from 'react-toastify'
+import { useSession } from 'next-auth/react'
 
 function CartScreen() {
     const router = useRouter()
     const { state, dispatch } = useContext(Store);
+    const { data: session } = useSession()
     const { cart: { cartItems }, } = state;
     const removeItemHandler = (item) => {
         dispatch({ type: 'CART_REMOVE_ITEM', payload: item });
@@ -114,7 +116,7 @@ function CartScreen() {
                                     </li>
                                     <li>
                                         <button
-                                            onClick={() => router.push('login?redirect=shipping')}
+                                            onClick={session?.user ? (() => router.push('/shipping')) : (() => router.push('login?redirect=shipping'))}
                                             className="primary-button shadow-sm w-full"
                                         >
                                             Confirmar

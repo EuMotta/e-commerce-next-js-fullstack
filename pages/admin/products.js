@@ -6,6 +6,7 @@ import React, { useEffect, useReducer } from 'react'
 import { toast } from 'react-toastify'
 import Layout from '../../components/Layout'
 import { getError } from '../../utils/error'
+import { FcInfo,FcPaid } from 'react-icons/fc'
 
 function reducer(state, action) {
     switch (action.type) {
@@ -59,20 +60,20 @@ export default function ProductsScreen() {
             fetchData()
         }
     }, [successDelete])
-    const deleteHandler = async (productId) => {
-        if (!window.confirm("Você tem certeza?")) {
-            return
-        }
-        try {
-            dispatch({ type: "DELETE_REQUEST" })
-            await axios.delete(`/api/admin/products/${productId}`)
-            dispatch({ type: "DELETE_SUCCESS" })
-            toast.success("Produto deletado com sucesso!")
-        } catch (err) {
-            dispatch({ type: "DELETE_FAIL" })
-            toast.error(getError(err))
-        }
-    }
+    // const deleteHandler = async (productId) => {
+    //     if (!window.confirm("Você tem certeza?")) {
+    //         return
+    //     }
+    //     try {
+    //         dispatch({ type: "DELETE_REQUEST" })
+    //         await axios.delete(`/api/admin/products/${productId}`)
+    //         dispatch({ type: "DELETE_SUCCESS" })
+    //         toast.success("Produto deletado com sucesso!")
+    //     } catch (err) {
+    //         dispatch({ type: "DELETE_FAIL" })
+    //         toast.error(getError(err))
+    //     }
+    // }
     const createHandler = async () => {
         if (!window.confirm("Você tem certeza?")) {
             return
@@ -126,8 +127,8 @@ export default function ProductsScreen() {
                     </div> */}
                 <div className=" mx-2 md:col-span-6">
                     <div className='grid'>
-                        <h1 className="mb-4 text-center text-indigo-600 text-4xl">
-                            Produtos Cadastrados
+                        <h1 className="mb-4 flex justify-center text-indigo-600 text-4xl">
+                            <FcPaid/>Produtos Cadastrados
                         </h1>
                         {loadingDelete && <div>Deletando item...</div>}
                         <button className='primary-button'
@@ -154,8 +155,7 @@ export default function ProductsScreen() {
                                         <th className="p-5 text-center">Quantidade</th>
                                         <th className="p-5 text-center">Preço</th>
                                         <th className="p-5 text-center">Desconto</th>
-                                        <th className="p-5 text-center">Preço atual</th>
-                                        <th className="p-5 text-center">Ações</th>
+                                        <th className="p-5 text-center">Detalhes</th>
                                     </tr>
                                 </thead>
                                 <tbody className="text-center" >
@@ -190,13 +190,15 @@ export default function ProductsScreen() {
 
                                             <td className="p-5 text-center">
                                                 <div>
-                                                    <Link href={`/admin/product/${product._id}`}>
-                                                        <button className="cursor-pointer "><i className="ri-pencil-line text-lg"></i></button>
-                                                    </Link>
+                                                    <span className=" flex justify-center">
+                                                        <Link href={`/admin/product/${product._id}`}>
+                                                            <FcInfo className='text-3xl cursor-pointer' />
+                                                        </Link>
+                                                    </span>
                                                     {' '}
-                                                    <button className="cursor-pointer  !bg-red-400"
+                                                    {/* <button className="cursor-pointer  !bg-red-400"
                                                         onClick={() => deleteHandler(product._id)}
-                                                        type='button'><i className="ri-delete-bin-2-line text-lg"></i></button>
+                                                        type='button'><i className="ri-delete-bin-2-line text-lg"></i></button> */}
                                                 </div>
                                             </td>
                                         </tr>

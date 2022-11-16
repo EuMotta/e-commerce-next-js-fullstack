@@ -16,7 +16,9 @@ export default function LoginScreen() {
     const { redirect } = router.query
     useEffect(() => {
         if (session?.user) {
-            router.push(redirect || '/')
+         toast.success("Logado com sucesso!")
+         const ttime = () => router.push(redirect || '/')
+         setTimeout(ttime,3000)
         }
     }, [router, session, redirect])
     const {

@@ -3,6 +3,7 @@ import { Bar } from "react-chartjs-2"
 import { getError } from "../../utils/error"
 import Layout from "../../components/Layout"
 import Link from "next/link"
+import { FcTodoList, FcShop, FcStackOfPhotos,FcBusinessContact,FcComboChart } from 'react-icons/fc'
 import {
     Chart as ChartJS,
     CategoryScale,
@@ -79,10 +80,10 @@ function DashboardScreen() {
 
     return (
         <Layout title="Visão Geral">
-            <div className="grid md:grid-cols-6 md:gap-5">          
+            <div className="grid md:grid-cols-6 md:gap-5">
                 <div className="md:col-span-6 ">
-                    <h1 className="mb-4 text-center text-indigo-600 text-4xl bg-white">
-                        Visão geral
+                    <h1 className="mb-4 flex justify-center text-indigo-600 text-4xl bg-white">
+                        <FcComboChart/>Visão geral
                     </h1>
                     {loading ? (
                         <div>Carregando...</div>
@@ -91,50 +92,78 @@ function DashboardScreen() {
                     ) : (
                         <div>
                             <div className="grid grid-cols-1 md:grid-cols-4">
-                                <div className="card m-5 p-5">
-                                    
+                                <div className="card !rounded m-5 p-5">
+
                                     <p className="text-3xl text-indigo-700">
-                                        R$ {summary.ordersPrice}{" "}
+                                        $ {summary.ordersPrice}{" "}
                                     </p>
-                                    <p className="text-xl">Vendas</p>
-                                    <Link href="/admin/orders">
-                                        <span className="hover:underline text-indigo-700 cursor-pointer">
-                                            Visualizar vendas
+                                    <span className="grid grid-cols-4">
+                                        <span className="col-span-3">
+                                            <p className="text-xl">Vendas</p>
+                                            <Link href="/admin/orders">
+                                                <span className="hover:underline text-indigo-700 cursor-pointer">
+                                                    Visualizar vendas
+                                                </span>
+                                            </Link>
                                         </span>
-                                    </Link>
+                                        <span className="flex justify-center">
+                                            <FcTodoList className="text-5xl" />
+                                        </span>
+                                    </span>
                                 </div>
-                                <div className="card m-5 p-5">
+                                <div className="card !rounded m-5 p-5">
                                     <p className="text-3xl text-indigo-700">
                                         {summary.ordersCount}{" "}
                                     </p>
-                                    <p className="text-xl">Compras</p>
-                                    <Link href="/admin/orders">
-                                        <span className="hover:underline text-indigo-700 cursor-pointer">
-                                            Visualizar compras
+                                    <span className="grid grid-cols-4">
+                                        <span className="col-span-3">
+                                            <p className="text-xl">Compras</p>
+                                            <Link href="/admin/orders">
+                                                <span className="hover:underline text-indigo-700 cursor-pointer">
+                                                    Visualizar compras
+                                                </span>
+                                            </Link>
                                         </span>
-                                    </Link>
+                                        <span className="flex justify-center">
+                                            <FcShop className="text-5xl" />
+                                        </span>
+                                    </span>
                                 </div>
-                                <div className="card m-5 p-5">
+                                <div className="card !rounded m-5 p-5">
                                     <p className="text-3xl text-indigo-700">
                                         {summary.productsCount}{" "}
                                     </p>
-                                    <p className="text-xl">Produtos</p>
-                                    <Link href="/admin/products">
-                                        <span className="hover:underline text-indigo-700 cursor-pointer">
-                                            Visualizar produtos
+                                    <span className="grid grid-cols-4">
+                                        <span className="col-span-3">
+                                            <p className="text-xl">Produtos</p>
+                                            <Link href="/admin/products">
+                                                <span className="hover:underline text-indigo-700 cursor-pointer">
+                                                    Visualizar produtos
+                                                </span>
+                                            </Link>
                                         </span>
-                                    </Link>
+                                        <span className="flex justify-center">
+                                            <FcStackOfPhotos className="text-5xl" />
+                                        </span>
+                                    </span>
                                 </div>
-                                <div className="card m-5 p-5">
+                                <div className="card !rounded m-5 p-5">
                                     <p className="text-3xl text-indigo-700">
                                         {summary.usersCount}{" "}
                                     </p>
-                                    <p className="text-xl">Usuários</p>
-                                    <Link href="/admin/users">
-                                        <span className="hover:underline text-indigo-700 cursor-pointer">
-                                            Visualizar usuários
+                                    <span className="grid grid-cols-4">
+                                        <span className="col-span-3">
+                                            <p className="text-xl">Usuários</p>
+                                            <Link href="/admin/users">
+                                                <span className="hover:underline text-indigo-700 cursor-pointer">
+                                                    Visualizar usuários
+                                                </span>
+                                            </Link>
                                         </span>
-                                    </Link>
+                                        <span className="flex justify-center">
+                                            <FcBusinessContact className="text-5xl" />
+                                        </span>
+                                    </span>
                                 </div>
                             </div>
                             <h2 className="text-2xl text-indigo-700 p-2">
@@ -146,6 +175,7 @@ function DashboardScreen() {
                                     legend: { display: true, position: "right" },
                                 }}
                                 data={data}
+
                             />
                         </div>
                     )}

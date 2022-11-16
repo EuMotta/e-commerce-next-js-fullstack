@@ -55,26 +55,14 @@ body {
 /* loading effect */
 @keyframes rotating {
   from {
-    -ms-transform: rotate(0deg);
-    -moz-transform: rotate(0deg);
-    -webkit-transform: rotate(0deg);
-    -o-transform: rotate(0deg);
     transform: rotate(0deg);
   }
   to {
-    -ms-transform: rotate(360deg);
-    -moz-transform: rotate(360deg);
-    -webkit-transform: rotate(360deg);
-    -o-transform: rotate(360deg);
     transform: rotate(360deg);
   }
 }
 .rotating {
-  -webkit-animation: rotating 2s linear infinite;
-  -moz-animation: rotating 2s linear infinite;
-  -ms-animation: rotating 2s linear infinite;
-  -o-animation: rotating 2s linear infinite;
-  animation: rotating 2s linear infinite;
+  animation: rotating 1s linear infinite;
 }
 /* loading effect end */
 
@@ -97,6 +85,7 @@ a:hover {
 * {
   box-sizing: border-box;
   border-radius: 2%;
+  
 }
 h1{
   font-family: madeb;
@@ -157,6 +146,10 @@ button:hover,
   --tw-bg-opacity: 1;
   transform: scale(1.05);
   @apply bg-slate-700 text-white  focus:text-white hover:shadow-sm hover:shadow-slate-500 hover:bg-slate-800 hover:border-blue-600 ;
+}
+
+.admin-button{
+  @apply bg-slate-50 shadow-sm shadow-slate-700 my-3 mx-2 hover:scale-110 transition-all;
 }
 
 .img_ef {

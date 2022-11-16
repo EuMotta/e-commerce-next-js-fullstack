@@ -4,7 +4,7 @@ import { getError } from "../../utils/error"
 import Layout from "../../components/Layout"
 import Link from "next/link"
 import React, { useEffect, useReducer } from "react"
-import { toast } from "react-toastify"
+import { FcInfo,FcConferenceCall } from 'react-icons/fc'
 
 function reducer(state, action) {
   switch (action.type) {
@@ -52,27 +52,27 @@ function AdminUsersScreen() {
     }
   }, [successDelete])
 
-  const deleteHandler = async (userId) => {
-    if (!window.confirm("Você tem certeza?")) {
-      return
-    }
-    try {
-      dispatch({ type: "DELETE_REQUEST" })
-      await axios.delete(`/api/admin/users/${userId}`)
-      dispatch({ type: "DELETE_SUCCESS" })
-      toast.success("Usuario deletado.")
-    } catch (err) {
-      dispatch({ type: "DELETE_FAIL" })
-      toast.error(getError(err))
-    }
-  }
+  // const deleteHandler = async (userId) => {
+  //   if (!window.confirm("Você tem certeza?")) {
+  //     return
+  //   }
+  //   try {
+  //     dispatch({ type: "DELETE_REQUEST" })
+  //     await axios.delete(`/api/admin/users/${userId}`)
+  //     dispatch({ type: "DELETE_SUCCESS" })
+  //     toast.success("Usuario deletado.")
+  //   } catch (err) {
+  //     dispatch({ type: "DELETE_FAIL" })
+  //     toast.error(getError(err))
+  //   }
+  // }
 
   return (
     <Layout title="Usuários">
       <div className="grid md:grid-cols-6 md:gap-5">
         <div className="overflow-x-auto md:col-span-6">
-          <h1 className="mb-4 grid-cols-1 text-center text-indigo-600 text-3xl ">
-            Usuários cadastrados
+          <h1 className="mb-4 grid-cols-1 flex justify-center text-indigo-600 text-3xl ">
+            <FcConferenceCall/>Usuários cadastrados
           </h1>
           {loadingDelete && <div>Deletando...</div>}
           {loading ? (
@@ -89,7 +89,7 @@ function AdminUsersScreen() {
                     <th className="p-5 text-center">Sobrenome</th>
                     <th className="p-5 text-center">E-mail</th>
                     <th className="p-5 text-center">Status</th>
-                    <th className="p-5 text-center">Ações</th>
+                    <th className="p-5 text-center">Detalhes</th>
                   </tr>
                 </thead>
                 <tbody className="text-center">
@@ -104,19 +104,21 @@ function AdminUsersScreen() {
                       <td className="p-5">{user.email}</td>
                       <td className="p-5">{user.isAdmin ? "Adm" : "Comum"}</td>
                       <td className="p-5">
-                        <Link href={`/admin/user/${user._id}`} passHref>
-                          <button className="cursor-pointer">
-                          <i className="ri-pencil-line text-lg"></i>
-                          </button>
-                        </Link>
+                        <span className=" flex justify-center">
+                          <Link href={`/admin/user/${user._id}`} passHref>
+
+                            <FcInfo className='text-3xl cursor-pointer' />
+
+                          </Link>
+                        </span>
                         &nbsp;
-                        <button
+                        {/* <button
                           type="button"
                           className="cursor-pointer  !bg-red-400"
                           onClick={() => deleteHandler(user._id)}
                         >
                           <i className="ri-delete-bin-2-line text-lg"></i>
-                        </button>
+                        </button> */}
                       </td>
                     </tr>
                   ))}

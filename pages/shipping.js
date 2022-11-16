@@ -7,84 +7,102 @@ import { Store } from '../utils/Store'
 import { useRouter } from 'next/router'
 
 export default function ShippingScreen() {
-  const {
-    handleSubmit,
-    register,
-    formState: { errors },
-    setValue
-  } = useForm()
+    const {
+        handleSubmit,
+        register,
+        formState: { errors },
+        setValue
+    } = useForm()
 
-  const { state, dispatch } = useContext(Store)
-  const { cart } = state
-  const { shippingAddress } = cart
-  const router = useRouter()
+    const { state, dispatch } = useContext(Store)
+    const { cart } = state
+    const { shippingAddress } = cart
+    const router = useRouter()
 
-  useEffect(() => {
-    setValue('name', shippingAddress.name)
-    setValue('postalCode', shippingAddress.postalCode)
-    setValue('number', shippingAddress.number)
-    setValue('address', shippingAddress.address)
-    setValue('neighborhood', shippingAddress.neighborhood)
-    setValue('city', shippingAddress.city)
-    setValue('state', shippingAddress.state)
-  }, [setValue, shippingAddress])
+    useEffect(() => {
+        setValue('name', shippingAddress.name)
+        setValue('postalCode', shippingAddress.postalCode)
+        setValue('number', shippingAddress.number)
+        setValue('address', shippingAddress.address)
+        setValue('neighborhood', shippingAddress.neighborhood)
+        setValue('city', shippingAddress.city)
+        setValue('state', shippingAddress.state)
+    }, [setValue, shippingAddress])
 
-  const submitHandler = ({ name, postalCode, number, address, neighborhood, city, state }) => {
-    dispatch({
-      type: 'SAVE_SHIPPING_ADDRESS',
-      payload: { name, postalCode, number, address, neighborhood, city, state }
-    })
-    Cookies.set(
-      'cart',
-      JSON.stringify({
-        ...cart,
-        shippingAddress: {
-          name,
-          postalCode,
-          number,
-          address,
-          neighborhood,
-          city,
-          state,
-        }
-      })
-    )
-    router.push('/payment')
-  }
-  const checkCEP = (e) => {
-    const cep = e.target.value.replace(/\D/g, '')
-    fetch(`https://viacep.com.br/ws/${cep}/json/`).then(res => res.json()).then(data => {
-      console.log(data)
-      setValue('address', data.logradouro)
-      setValue('neighborhood', data.bairro)
-      setValue('city', data.localidade)
-      setValue('state', data.uf)
-    })
-  }
-  return (
-    <Layout title="Endereço da Entrega">
-      <CheckoutWizard activeStep={1} />
-      <div className='card w-full'>
+    const submitHandler = ({ name, postalCode, number, address, neighborhood, city, state }) => {
+        dispatch({
+            type: 'SAVE_SHIPPING_ADDRESS',
+            payload: { name, postalCode, number, address, neighborhood, city, state }
+        })
+        Cookies.set(
+            'cart',
+            JSON.stringify({
+                ...cart,
+                shippingAddress: {
+                    name,
+                    postalCode,
+                    number,
+                    address,
+                    neighborhood,
+                    city,
+                    state,
+                }
+            })
+        )
+        router.push('/payment')
+    }
+    const checkCEP = (e) => {
+        const cep = e.target.value.replace(/\D/g, '')
+        fetch(`https://viacep.com.br/ws/${cep}/json/`).then(res => res.json()).then(data => {
+            console.log(data)
+            setValue('address', data.logradouro)
+            setValue('neighborhood', data.bairro)
+            setValue('city', data.localidade)
+            setValue('state', data.uf)
+        })
+    }
+    return (
+        <Layout title="Endereço da Entrega">
+            <CheckoutWizard activeStep={1} />
+            <div className='card w-full'>
                 <form
                     className="mx-auto p-3 justify-center max-w-screen-md container"
                     onSubmit={handleSubmit(submitHandler)}
                 >
                     <h1 className="mb-4 text-2xl text-center text-indigo-600">Formulário para Entrega do Produto</h1>
-                    <div className="mb-4 grid col-span-1">
-                        <label className='text-xl text-indigo-700' htmlFor="name">Nome completo</label>
-                        <input
-                            className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-white focus:shadow-md focus:shadow-slate-500 focus:bg-indigo-300 focus:border-blue-600 focus:outline-none"
-                            id="name"
-                            label="Nome completo"
-                            autoFocus
-                            {...register('name', {
-                                required: 'Por favor, digite seu nome completo',
-                                minLength: { value: 10, message: 'Por favor, digite também seu sobrenome' },
-                            })}
-                        />
-                        {errors.name && (
-                            <div className="text-red-500">{errors.name.message}</div>
-                        )}
+                    <div className='flex gap-10 justify-between'>
+                        <div className="mb-4 grid col-span-1">
+                            <label className='text-xl text-indigo-700' htmlFor="name">Nome completo</label>
+                            <input
+                                className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-white focus:shadow-md focus:shadow-slate-500 focus:bg-indigo-300 focus:border-blue-600 focus:outline-none"
+                                id="name"
+                                label="Nome completo"
+                                autoFocus
+                                {...register('name', {
+                                    required: 'Por favor, digite seu nome completo',
+                                    minLength: { value: 4, message: 'Por favor, digite também seu sobrenome' },
+                                })}
+                            />
+                            {errors.name && (
+                                <div className="text-red-500">{errors.name.message}</div>
+                            )}
+                        </div>
+                        <div className="mb-4 grid col-span-1">
+                            <label className='text-xl text-indigo-700' htmlFor="lastName">Sobrenome</label>
+                            <input
+                                className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-white focus:shadow-md focus:shadow-slate-500 focus:bg-indigo-300 focus:border-blue-600 focus:outline-none"
+                                id="lastName"
+                                label="Sobrenome"
+                                autoFocus
+                                {...register('lastName', {
+                                    required: 'Por favor, digite seu nome completo',
+                                    minLength: { value: 4, message: 'Por favor, digite também seu sobrenome' },
+                                })}
+                            />
+                            {errors.lastName && (
+                                <div className="text-red-500">{errors.lastName.message}</div>
+                            )}
+                        </div>
                     </div>
                     <div className='flex gap-10 justify-between'>
                         <div className="mb-4 grid col-span-1">
@@ -184,8 +202,8 @@ export default function ShippingScreen() {
                     </div>
                 </form>
             </div>
-    </Layout>
-  )
+        </Layout>
+    )
 }
 
 ShippingScreen.auth = true

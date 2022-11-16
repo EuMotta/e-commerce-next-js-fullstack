@@ -4,6 +4,9 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import React, { useContext, useEffect, useState } from 'react'
+import { BsPaypal } from 'react-icons/bs'
+import { FaBarcode, FaStripe } from 'react-icons/fa'
+import { GiReceiveMoney } from 'react-icons/gi'
 import { toast } from 'react-toastify'
 import CheckoutWizard from '../components/CheckoutWizard'
 import Layout from '../components/Layout'
@@ -148,7 +151,18 @@ export default function PlaceOrderScreen() {
                                     <h2 className="mb-2 text-center text-2xl text-indigo-800">Método de pagamento</h2>
                                     <div className="mt-8 text-center text-xl ">
                                         <span className=''>
-                                            {paymentMethod}
+                                            {
+                                                paymentMethod === 'Paypal' ?
+                                                    (<div className='flex  justify-center '><BsPaypal /> {paymentMethod} </div>)
+                                                    : paymentMethod === 'Stripe' ?
+                                                        (<div className='flex   justify-center'><FaStripe />{paymentMethod} </div>)
+                                                        : paymentMethod === 'PIX' ?
+                                                            (<div className='flex   justify-center'><GiReceiveMoney /> {paymentMethod}</div>)
+                                                            : paymentMethod === 'Boleto' ?
+                                                                (<div className='flex  justify-center '><FaBarcode />{paymentMethod} </div>)
+                                                                : ''
+
+                                            }
                                         </span>
                                     </div>
                                     <div className="mt-10 grid text-center text-xl">

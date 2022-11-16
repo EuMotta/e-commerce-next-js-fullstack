@@ -144,7 +144,7 @@ export default function AdminProductEditScreen() {
             toast.error(getError(err))
         }
     }
-    
+
     return (
         <Layout title={`Edit Product ${productId}`}>
             <div className="grid md:grid-cols-6 md:gap-5">
@@ -346,7 +346,7 @@ export default function AdminProductEditScreen() {
 
                                     </div>
                                     <div className='card p-10'>
-                                    <h1 className='text-3xl mb-5'>Organizações</h1>
+                                        <h1 className='text-3xl mb-5'>Organizações</h1>
                                         <div className="flex gap-3">
                                             <div className="mb-4">
                                                 <label htmlFor="publisher" className="text-xl text-indigo-700">
@@ -416,9 +416,16 @@ export default function AdminProductEditScreen() {
                                 >
                                     Voltar
                                 </button>
+                                {/* <button
+                                   onClick={() => deleteHandler(product._id)}
+                                    className="primary-button bg-white border border-solid border-red-600"
+                                >
+                                    Deletar
+                                </button> */}
+                               
                                 <button
                                     disabled={loadingUpdate}
-                                    className="primary-button bg-white border border-solid border-gray-300"
+                                    className=" bg-white border border-solid border-gray-300"
                                 >
                                     {loadingUpdate ? "Carregando" : "Atualizar"}
                                 </button>

@@ -216,6 +216,11 @@
     "@babel/helper-validator-identifier" "^7.19.1"
     "to-fast-properties" "^2.0.0"
 
+"@badrap/bar-of-progress@^0.2.2":
+  "integrity" "sha512-Ig7MdFQM3OA7Ror5UB1ZutXNZFwxh6YExZvcd6EZloOgcXUR8PKNLH2wUVoeh92NMPnPWr6J/l9Mp+f3z7O7MQ=="
+  "resolved" "https://registry.npmjs.org/@badrap/bar-of-progress/-/bar-of-progress-0.2.2.tgz"
+  "version" "0.2.2"
+
 "@emotion/babel-plugin@^11.10.0":
   "integrity" "sha512-xNQ57njWTFVfPAc3cjfuaPdsgLp5QOSuRsj9MA6ndEhH/AzuZM86qIQzt6rq+aGBwj3n5/TkLmU5lhAfdRmogA=="
   "resolved" "https://registry.npmjs.org/@emotion/babel-plugin/-/babel-plugin-11.10.2.tgz"

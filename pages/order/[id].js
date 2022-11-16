@@ -8,6 +8,9 @@ import Layout from '../../components/Layout'
 import { getError } from '../../utils/error'
 import { PayPalButtons, usePayPalScriptReducer } from '@paypal/react-paypal-js'
 import { toast } from 'react-toastify'
+import { BsPaypal } from 'react-icons/bs';
+import { FaBarcode, FaStripe } from 'react-icons/fa';
+import { GiReceiveMoney } from 'react-icons/gi';
 
 function reducer(state, action) {
     switch (action.type) {
@@ -100,7 +103,7 @@ function OrderScreen() {
             .create({
                 purchase_units: [
                     {
-                        amount: { value: descount },
+                        amount: { value: totalDescount },
                     },
                 ],
             })
@@ -150,16 +153,15 @@ function OrderScreen() {
         taxPrice,
         shippingPrice,
         totalPrice,
-        descount,
         isPaid,
         paidAt,
         isDelivered,
         deliveredAt,
     } = order
-
+    const totalDescount = (totalPrice * 0.95).toFixed(2)
     return (
         <Layout title={`Pedido ${orderId}`}>
-            <h1 className="mb-4 text-center text-blue-700 text-3xl">{`ID: ${orderId}`}</h1>
+            <h1 className="mb-4 text-center text-indigo-800 text-3xl">{`ID: ${orderId}`}</h1>
             {loading ? (
                 <div>Carregando...</div>
             ) : error ? (
@@ -167,14 +169,16 @@ function OrderScreen() {
             ) : (
                 <div className="grid md:grid-cols-4 md:gap-5">
                     <div className="overflow-x-auto md:col-span-3">
-                        <div className=" bg-white text-center mx-1 overflow-x-auto p-5">
-                            <h2 className="mb-2 text-blue-600 text-3xl">Lista dos Produtos</h2>
+                        <div className=" card  text-center mx-1 overflow-x-auto p-5">
+                            <h2 className="mb-2 text-indigo-800 text-3xl">Lista dos Produtos</h2>
                             <table className="min-w-full">
-                                <thead className="border-b">
-                                    <tr className='text-blue-700 text-2xl'>
+                                <thead className="border-y border-indigo-800">
+                                    <tr className='text-indigo-800 text-1xl'>
                                         <th className="px-5 text-center">Item</th>
                                         <th className="p-5 text-center">Quantidade</th>
                                         <th className="p-5 text-center">Preço</th>
+                                        <th className="p-5 text-center">Preço Un.</th>
+                                        
                                         <th className="p-5 text-center">Total</th>
                                     </tr>
                                 </thead>
@@ -196,6 +200,7 @@ function OrderScreen() {
                                                 </Link>
                                             </td>
                                             <td className="p-5 only:text-center">{item.quantity}</td>
+                                            <td className="p-5 text-center">R$ {item.price * item.quantity}</td>
                                             <td className="p-5 text-center">R$ {item.price}</td>
                                             <td className="p-5 text-center">
                                                 R$ {item.quantity * item.price}
@@ -205,8 +210,8 @@ function OrderScreen() {
                                 </tbody>
                             </table>
                         </div>
-                        <div className='flex justify-between gap-x-5'>
-                            <div className="border rounded-xl bg-white w-1/2 p-5">
+                        <div className='flex  mx-12 justify-between gap-x-5'>
+                            <div className="card rounded-xl bg-white w-1/2 p-5">
                                 <h2 className="mb-2 text-indigo-600 text-center text-3xl">Endereço para entrega</h2>
                                 <div className=' items-left grid grid-cols-2 gap-4 flex-col  mb-2'>
                                     <div className="col-span-1">
@@ -244,10 +249,21 @@ function OrderScreen() {
                                     )}
                                 </div>
                             </div>
-                            <div className="border rounded-xl bg-white mx-1 w-1/2 p-5">
+                            <div className="card rounded-xl bg-white mx-1 w-1/2 p-5">
                                 <div className='flex flex-col justify-between h-full'>
-                                    <h2 className="mb-2 text-blue-600 text-center text-3xl">Método de pagamento</h2>
-                                    <div className='mb-2 text-xl text-center'>{paymentMethod}</div>
+                                    <h2 className="mb-2 text-indigo-800 text-center text-3xl">Método de pagamento</h2>
+                                    <div className='mb-2 text-xl text-center'>{
+                                            paymentMethod === 'Paypal' ?
+                                                (<div className='flex  justify-center '><BsPaypal /> {paymentMethod} </div>)
+                                                : paymentMethod === 'Stripe' ?
+                                                   (<div className='flex   justify-center'><FaStripe />{paymentMethod} </div>)
+                                                    : paymentMethod === 'PIX' ?
+                                                        (<div className='flex   justify-center'><GiReceiveMoney /> {paymentMethod}</div>)
+                                                        : paymentMethod === 'Boleto' ?
+                                                           (<div className='flex  justify-center '><FaBarcode />{paymentMethod} </div>)
+                                                            : ''
+
+                                        }</div>
                                     <div className='flex items-center flex-col'>
                                         {isPaid ? (
                                             
@@ -262,7 +278,7 @@ function OrderScreen() {
                     </div>
                     <div>
                         <div className="bg-blue-100 shadow-md rounded-lg p-5 border border-green-700">
-                            <h2 className="mb-2 text-blue-600 text-center text-3xl">Resumo do Pedido</h2>
+                            <h2 className="mb-2 text-indigo-800 text-center text-3xl">Resumo do Pedido</h2>
                             <ul>
                                 <li>
                                     <div className="mb-2 gap-5 text-xl flex justify-between">
@@ -284,12 +300,18 @@ function OrderScreen() {
                                 </li>
                                 <li>
                                     <div className="mb-2 flex text-xl justify-between">
+                                        <div>NfDesconto</div>
+                                        <div>5%</div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div className="mb-2 flex text-xl justify-between">
                                         <div className='mt-3cpmst'>Total</div>
                                         <div className='flex flex-col align-middle items-end'>
                                             <span className='text-md text-red-500 line-through'>de: R$&nbsp;
                                                 {totalPrice}</span>
                                             <span className='text-xl text-green-600'>por: R$&nbsp;
-                                                {descount}</span>
+                                                {totalDescount}</span>
                                         </div>
                                     </div>
                                 </li>

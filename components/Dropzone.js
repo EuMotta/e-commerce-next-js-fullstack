@@ -48,6 +48,7 @@ export default function Dropzone() {
     const fileRemove = (file) => {
         const updatedList = [...images]
         updatedList.splice(images.indexOf(file), 1)
+        toast.error('Imagem removida')
         setImages(updatedList)
     }
     return (

@@ -10,6 +10,7 @@ import imgErro from '../../public/img/404.svg'
 import axios from 'axios'
 import { toast } from 'react-toastify'
 import { GrContact } from 'react-icons/gr'
+import { FcPaid } from 'react-icons/fc'
 
 export default function ProductScreen(props) {
     const { state, dispatch } = useContext(Store)
@@ -125,7 +126,7 @@ export default function ProductScreen(props) {
                                 </div>
                                 <div className='flex mt-7 text-center '>
                                     <button onClick={addToCartHandler} className='w-full gap-1 primary-button  flex justify-center'>
-                                        <i className="ri-shopping-cart-line"></i> Carrinho
+                                    <FcPaid className="text-xl"/>  Carrinho
                                     </button>
                                 </div>
                             </div>

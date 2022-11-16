@@ -5,6 +5,7 @@ import Link from "next/link"
 import moment from "moment"
 import React, { useEffect, useReducer } from "react"
 import "remixicon/fonts/remixicon.css"
+import { FcViewDetails, FcTodoList, FcInspection } from 'react-icons/fc'
 
 function reducer(state, action) {
     switch (action.type) {
@@ -14,18 +15,25 @@ function reducer(state, action) {
             return { ...state, loading: false, orders: action.payload, error: "" }
         case "FETCH_FAIL":
             return { ...state, loading: false, error: action.payload }
+        case 'FETCH_REQUEST_ID':
+            return { ...state, loading: true, error: '' }
+        case 'FETCH_SUCCESS_ID':
+            return { ...state, loading: false, order: action.payload, error: '' }
+        case 'FETCH_FAIL_ID':
+            return { ...state, loading: false, error: action.payload }
         default:
             state
     }
 }
 
 export default function AdminOrderScreen() {
-    const [{ loading, error, orders }, dispatch] = useReducer(reducer, {
+    // const { query } = useRouter()
+    // const orderId = query.id
+    const [{ loading, error, orders, }, dispatch] = useReducer(reducer, {
         loading: true,
         orders: [],
         error: "",
     })
-
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -38,12 +46,15 @@ export default function AdminOrderScreen() {
         }
         fetchData()
     }, [])
+
+
+
     return (
         <Layout title="Pedidos">
             <div className="grid md:grid-cols-6 md:gap-5">
                 <div className="overflow-x-auto md:col-span-6">
-                    <h1 className="mb-4 text-center text-indigo-600  text-4xl">
-                        Pedidos
+                    <h1 className="mb-4 flex justify-center text-indigo-600   text-4xl">
+                        <FcTodoList className="" />&nbsp;Pedidos
                     </h1>
                     {loading ? (
                         <div>Carregando..</div>
@@ -67,10 +78,11 @@ export default function AdminOrderScreen() {
                                 <tbody className="text-center">
                                     {orders.map((order) => (
                                         <tr
+                                            title="Exibir ID completo"
                                             key={order._id}
-                                            className=" rounded text-md shadow-sm shadow-slate-500 hover:translate-x-1 ease-in-out transition-all  hover:shadow-md hover:shadow-slate-700"
+                                            className=" rounded cursor-pointer text-md shadow-sm shadow-slate-500 hover:translate-x-1 ease-in-out transition-all  hover:shadow-md hover:shadow-slate-700"
                                         >
-                                            <td className="p-5">{order._id.substring(20, 24)}</td>
+                                            <td className="p-5" title={order._id}>{order._id.substring(20, 24)}</td>
                                             <td className="p-5">
                                                 {order.user ? order.user.name :
                                                     <span className="text-red-600">
@@ -87,12 +99,12 @@ export default function AdminOrderScreen() {
                                             <td className="p-5">{order.paymentMethod}</td>
                                             <td className="p-5">
                                                 {order.isPaid ? (
-                                                    <span className=" p-2 text-sm rounded-xl">
-                                                        <i className="ri-checkbox-blank-circle-fill mx-1 text-green-400"></i>{order.paidAt.substring(11, 19)}
+                                                    <span className=" p-2 text-sm rounded-xl flex justify-center items-center">
+                                                        <FcInspection className="text-2xl" />{order.paidAt.substring(11, 19)}
                                                     </span>
                                                 ) : (
                                                     <span className=" cursor-pointer p-1 px-2 text-sm rounded">
-                                                       <i className="ri-checkbox-blank-circle-fill mx-1 text-red-400"></i> Não Pago
+                                                        <i className="ri-checkbox-blank-circle-fill mx-1 text-red-400"></i> Não Pago
                                                     </span>
                                                 )}
                                             </td>
@@ -113,17 +125,17 @@ export default function AdminOrderScreen() {
                                                                 .substring(3, 10)}
                                                         </span>
                                                         <span className="text-red-400 flex cursor-pointer p-1 px-2 text-sm rounded">
-                                                        <i className="ri-checkbox-blank-circle-fill mx-1 text-red-400"></i> Não Entregue
+                                                            <i className="ri-checkbox-blank-circle-fill mx-1 text-red-400"></i> Não Entregue
                                                         </span>
                                                     </div>
                                                 )}
                                             </td>
                                             <td className="p-5 text-center">
-                                                <Link href={`/order/${order._id}`} passHref>
-                                                    <span className="cursor-pointer ">
-                                                        <i className='ri-file-list-3-line text-2xl '></i>
-                                                    </span>
-                                                </Link>
+                                                <span className=" flex justify-center">
+                                                    <Link href={`/order/${order._id}`} passHref>
+                                                        <FcViewDetails className="cursor-pointer text-3xl" />
+                                                    </Link>
+                                                </span>
                                             </td>
                                         </tr>
                                     ))}
