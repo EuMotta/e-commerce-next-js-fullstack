@@ -1,12 +1,15 @@
 import React from 'react'
 import Layout from '../../components/Layout'
 import { useForm } from 'react-hook-form'
+import { HiOutlineSearchCircle } from 'react-icons/hi'
 
 export default function InformationSearch() {
     const { handleSubmit, register, setValue } = useForm()
 
-    const checkCNPJ = (e) => {
-        const cnpj = e.target.value.replace(/\D/g, '')
+    const checkCNPJ = (/* e */) => {
+        const campo = (document.getElementById("campo").value)
+        console.log(campo)
+        var cnpj = campo.replace(/\D/g, '')
         fetch(`https://brasilapi.com.br/api/cnpj/v1/${cnpj}`).then(res => res.json())
             .then(data => {
                 console.log(data)
@@ -31,17 +34,18 @@ export default function InformationSearch() {
                 setValue('email', data.email)
             })
     }
-    const checkTaxa = (e) => {
-        const sigla = e.target.value.replace()
-        fetch(`https://brasilapi.com.br/api/taxas/v1/${sigla}`).then(res => res.json())
+    const checkTaxa = (/* e */) => {
+        const taxa = (document.getElementById("taxa").value)
+        console.log(taxa)
+        fetch(`https://brasilapi.com.br/api/taxas/v1/${taxa}`).then(res => res.json())
             .then(data => {
                 console.log(data)
                 setValue('nome', data.nome)
                 setValue('valor', data.valor)
             })
     }
-    const checkDomain = (e) => {
-        const domain = e.target.value.replace()
+    const checkDomain = (/* e */) => {
+        const domain = (document.getElementById("domain").value)
         fetch(`https://brasilapi.com.br/api/registrobr/v1/${domain}`).then(res => res.json())
             .then(data => {
                 console.log(data)
@@ -64,11 +68,19 @@ export default function InformationSearch() {
                             <h2 className='text-5xl'><span className='text-indigo-600'>Pesquisar </span> Empresas</h2>
                         </span>
                         <div className='flex justify-center mt-5'>
-                            <input
-                                placeholder='insira o CNPJ'
-                                className="form-control  block w-1/3 px-4 text-center py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-white focus:shadow-md focus:shadow-slate-500 focus:bg-indigo-300 focus:border-blue-600 focus:outline-none"
-                                onBlurCapture={checkCNPJ}
-                            />
+                            <div className="mb-4 flex justify-center">
+                                <input
+                                    id='campo'
+                                    placeholder='CNPJ'
+                                    className="form-control z-0  block px-4 text-center py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-white focus:shadow-md focus:shadow-slate-500 focus:bg-indigo-300 focus:border-blue-600 focus:outline-none"
+                                    {...register("checkCNPJ")}
+                                />
+                                <span
+                                    className=" relative right-10 top-2 cursor-pointer !px-0 z-10"
+                                    id="campo"
+                                    onClick={checkCNPJ}
+                                ><HiOutlineSearchCircle className='text-3xl' /></span>
+                            </div>
                         </div>
                         <div>
                             <form onSubmit={handleSubmit((data) => console.log(data))}>
@@ -79,6 +91,7 @@ export default function InformationSearch() {
                                             <label className='text-md text-indigo-700' htmlFor="razao_social">Razão Social</label>
                                             <input
                                                 {...register("razao_social")}
+                                                readOnly
                                                 placeholder='Não encontrado'
                                                 className="form-control text-sm w-full block text-center font-normal text-gray-700 bg-white "
                                             />
@@ -87,6 +100,7 @@ export default function InformationSearch() {
                                             <label className='text-md text-indigo-700' htmlFor="nome_fantasia">Nome fantasia</label>
                                             <input
                                                 {...register("nome_fantasia")}
+                                                readOnly
                                                 placeholder='Não encontrado'
                                                 className="form-control text-sm w-full block text-center font-normal text-gray-700 bg-white  "
                                             />
@@ -95,6 +109,7 @@ export default function InformationSearch() {
                                             <label className='text-md text-indigo-700' htmlFor="cnpj">CNPJ</label>
                                             <input
                                                 {...register("cnpj")}
+                                                readOnly
                                                 placeholder='Não encontrado'
                                                 className="form-control text-sm w-full block text-center font-normal text-gray-700 bg-white  "
                                             />
@@ -108,6 +123,7 @@ export default function InformationSearch() {
                                             <label className='text-md text-indigo-700' htmlFor="cnae_fiscal">CNAE Fiscal</label>
                                             <input
                                                 {...register("cnae_fiscal")}
+                                                readOnly
                                                 placeholder='Não encontrado'
                                                 className="form-control text-sm w-full  block text-center font-normal text-gray-700 bg-white  "
                                             />
@@ -116,6 +132,7 @@ export default function InformationSearch() {
                                             <label className='text-md text-indigo-700' htmlFor="cnae_fiscal_descricao">CNAE Fiscal Descrição</label>
                                             <input
                                                 {...register("cnae_fiscal_descricao")}
+                                                readOnly
                                                 placeholder='Não encontrado'
                                                 className="form-control text-sm w-full  block text-center font-normal text-gray-700 bg-white  "
                                             />
@@ -130,6 +147,7 @@ export default function InformationSearch() {
                                             <label className='text-md text-indigo-700' htmlFor="natureza_juridica">Natureza Juridíca</label>
                                             <input
                                                 {...register("natureza_juridica")}
+                                                readOnly
                                                 placeholder='Não encontrado'
                                                 className="form-control text-sm w-full  block text-center font-normal text-gray-700 bg-white  "
                                             />
@@ -139,12 +157,14 @@ export default function InformationSearch() {
                                             <div className='flex'>
                                                 <input
                                                     {...register("situacao_cadastral")}
+                                                    readOnly
                                                     placeholder='Não encontrado'
                                                     className="form-control text-sm w-1/2  block text-center font-normal text-gray-700 bg-white  "
                                                 />
                                                 <span>:</span>
                                                 <input
                                                     {...register("descricao_situacao_cadastral")}
+                                                    readOnly
                                                     placeholder='Não encontrado'
                                                     className="form-control text-sm w-1/2  block text-center font-normal text-gray-700 bg-white  "
                                                 />
@@ -154,6 +174,7 @@ export default function InformationSearch() {
                                             <label className='text-md text-indigo-700' htmlFor="data_situacao_cadastral">Situação cadastral Data</label>
                                             <input
                                                 {...register("data_situacao_cadastral")}
+                                                readOnly
                                                 placeholder='Não encontrado'
                                                 className="form-control text-sm w-full  block text-center font-normal text-gray-700 bg-white  "
                                             />
@@ -168,6 +189,7 @@ export default function InformationSearch() {
                                             <div className='flex'>
                                                 <input
                                                     {...register("descricao_tipo_de_logradouro")}
+                                                    readOnly
                                                     placeholder='Não encontrado'
                                                     className="form-control text-sm w-full  block text-center font-normal text-gray-700 bg-white  "
                                                 />
@@ -178,6 +200,7 @@ export default function InformationSearch() {
                                             <div className='flex'>
                                                 <input
                                                     {...register("logradouro")}
+                                                    readOnly
                                                     placeholder='Não encontrado'
                                                     className="form-control text-sm w-full  block text-center font-normal text-gray-700 bg-white  "
                                                 />
@@ -188,6 +211,7 @@ export default function InformationSearch() {
                                             <div className='flex'>
                                                 <input
                                                     {...register("complemento")}
+                                                    readOnly
                                                     placeholder='Não encontrado'
                                                     className="form-control text-sm w-full  block text-center font-normal text-gray-700 bg-white  "
                                                 />
@@ -200,6 +224,7 @@ export default function InformationSearch() {
                                             <div className='flex'>
                                                 <input
                                                     {...register("bairro")}
+                                                    readOnly
                                                     placeholder='Não encontrado'
                                                     className="form-control text-sm w-full  block text-center font-normal text-gray-700 bg-white  "
                                                 />
@@ -210,6 +235,7 @@ export default function InformationSearch() {
                                             <div className='flex'>
                                                 <input
                                                     {...register("cep")}
+                                                    readOnly
                                                     placeholder='Não encontrado'
                                                     className="form-control text-sm w-full  block text-center font-normal text-gray-700 bg-white  "
                                                 />
@@ -220,6 +246,7 @@ export default function InformationSearch() {
                                             <div className='flex'>
                                                 <input
                                                     {...register("uf")}
+                                                    readOnly
                                                     placeholder='Não encontrado'
                                                     className="form-control text-sm w-full  block text-center font-normal text-gray-700 bg-white  "
                                                 />
@@ -235,6 +262,7 @@ export default function InformationSearch() {
                                             <div className='flex'>
                                                 <input
                                                     {...register("ddd_telefone_1")}
+                                                    readOnly
                                                     placeholder='Não encontrado'
                                                     className="form-control text-sm w-full  block text-center font-normal text-gray-700 bg-white  "
                                                 />
@@ -245,6 +273,7 @@ export default function InformationSearch() {
                                             <div className='flex'>
                                                 <input
                                                     {...register("ddd_telefone_2")}
+                                                    readOnly
                                                     placeholder='Não encontrado'
                                                     className="form-control text-sm w-full  block text-center font-normal text-gray-700 bg-white  "
                                                 />
@@ -255,6 +284,7 @@ export default function InformationSearch() {
                                             <div className='flex'>
                                                 <input
                                                     {...register("email")}
+                                                    readOnly
                                                     placeholder='Não encontrado'
                                                     className="form-control text-sm w-full  block text-center font-normal text-gray-700 bg-white  "
                                                 />
@@ -271,12 +301,18 @@ export default function InformationSearch() {
                             <span className='text-center my-2'>
                                 <h2 className='text-5xl'><span className='text-indigo-600'></span>Taxas</h2>
                             </span>
-                            <div className='flex justify-center mt-5'>
+                            <div className="mb-4 flex justify-center">
                                 <input
-                                    placeholder='Nome/tipo'
-                                    className="form-control  block w-full px-4 text-center py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-white focus:shadow-md focus:shadow-slate-500 focus:bg-indigo-300 focus:border-blue-600 focus:outline-none"
-                                    onBlurCapture={checkTaxa}
+                                    id='taxa'
+                                    placeholder='taxa'
+                                    className="form-control z-0  block px-4 text-center py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-white focus:shadow-md focus:shadow-slate-500 focus:bg-indigo-300 focus:border-blue-600 focus:outline-none"
+                                    {...register("checkTaxa")}
                                 />
+                                <span
+                                    className=" relative right-10 top-2 cursor-pointer !px-0 z-10"
+                                    id="taxa"
+                                    onClick={checkTaxa}
+                                ><HiOutlineSearchCircle className='text-3xl' /></span>
                             </div>
                             <div>
                                 <form onSubmit={handleSubmit((data) => console.log(data))}>
@@ -287,6 +323,7 @@ export default function InformationSearch() {
                                                 <label className='text-md text-indigo-700' htmlFor="valor">Nome</label>
                                                 <input
                                                     {...register("nome")}
+                                                    readOnly
                                                     placeholder='Não Encontrado'
                                                     className="form-control text-sm w-full block text-center font-normal text-gray-700 bg-white  "
                                                 />
@@ -295,6 +332,7 @@ export default function InformationSearch() {
                                                 <label className='text-md text-indigo-700' htmlFor="valor">Taxa</label>
                                                 <input
                                                     {...register("valor")}
+                                                    readOnly
                                                     placeholder='Não Encontrado'
                                                     className="form-control text-sm w-full block text-center font-normal text-gray-700 bg-white  "
                                                 />
@@ -308,12 +346,18 @@ export default function InformationSearch() {
                             <span className='text-center my-2'>
                                 <h2 className='text-5xl'><span className='text-indigo-600'></span>Domínio</h2>
                             </span>
-                            <div className='flex justify-center mt-5'>
+                            <div className="mb-4 flex justify-center">
                                 <input
-                                    placeholder='Nome/tipo'
-                                    className="form-control  block w-full px-4 text-center py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-white focus:shadow-md focus:shadow-slate-500 focus:bg-indigo-300 focus:border-blue-600 focus:outline-none"
-                                    onBlurCapture={checkDomain}
+                                    id='domain'
+                                    placeholder='domain'
+                                    className="form-control z-0  block px-4 text-center py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-white focus:shadow-md focus:shadow-slate-500 focus:bg-indigo-300 focus:border-blue-600 focus:outline-none"
+                                    {...register("checkDomain")}
                                 />
+                                <span
+                                    className=" relative right-10 top-2 cursor-pointer !px-0 z-10"
+                                    id="domain"
+                                    onClick={checkDomain}
+                                ><HiOutlineSearchCircle className='text-3xl' /></span>
                             </div>
                             <div>
                                 <form onSubmit={handleSubmit((data) => console.log(data))}>
@@ -324,6 +368,7 @@ export default function InformationSearch() {
                                                 <label className='text-md text-indigo-700' htmlFor="valor">Status</label>
                                                 <input
                                                     {...register("status")}
+                                                    readOnly
                                                     placeholder='Não Encontrado'
                                                     className="form-control text-sm w-full block text-center font-normal text-gray-700 bg-white  "
                                                 />
@@ -332,6 +377,7 @@ export default function InformationSearch() {
                                                 <label className='text-md text-indigo-700' htmlFor="valor">Dominio</label>
                                                 <input
                                                     {...register("fqdn")}
+                                                    readOnly
                                                     placeholder='Não Encontrado'
                                                     className="form-control text-sm w-full block text-center font-normal text-gray-700 bg-white  "
                                                 />

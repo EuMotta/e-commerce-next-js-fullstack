@@ -3,6 +3,7 @@ import Image from 'next/image'
 import React from 'react'
 import Layout from '../../components/Layout'
 import { MdAdminPanelSettings } from 'react-icons/md'
+import { HiOutlineSearchCircle } from 'react-icons/hi'
 import { useForm } from 'react-hook-form'
 
 export default function AdminProfileScreen() {
@@ -11,11 +12,14 @@ export default function AdminProfileScreen() {
     const { handleSubmit, register, setValue } = useForm()
 
     const checkCNPJ = (/* e */) => {
-        const cnpjEmpresa = "60316817000103"
-        // const cnpj = e.target.value.replace(/\D/g, '')
-        fetch(`https://brasilapi.com.br/api/cnpj/v1/${cnpjEmpresa}`).then(res => res.json())
+        const campo = (document.getElementById("campo").value)
+        console.log(campo)
+        /* const cnpjEmpresa = "60316817000103" */
+        var cnpj = campo.replace(/\D/g, '')
+        fetch(`https://brasilapi.com.br/api/cnpj/v1/${cnpj}`).then(res => res.json())
             .then(data => {
                 console.log(data)
+                setValue('checkCNPJ', data.checkCNPJ)
                 setValue('razao_social', data.razao_social)
                 setValue('nome_fantasia', data.nome_fantasia)
                 setValue('cnpj', data.cnpj)
@@ -41,14 +45,6 @@ export default function AdminProfileScreen() {
     return (
         <Layout title='Perfil Admin'>
             <div className=''>
-                <div className="mb-4 grid col-span-1">
-
-                    <button
-                        className="form-control primary-button"
-                        id="razao_social"
-                        onClick={checkCNPJ}
-                    >Ver Dados</button>
-                </div>
 
                 <div className='grid grid-cols-6 gap-5'>
                     <div className='border-4 col-span-4 rounded-lg p-10 bg-slate-50 shadow-sm shadow-slate-600'>
@@ -56,6 +52,20 @@ export default function AdminProfileScreen() {
                             <h2 className='text-5xl'><span className='text-indigo-600'>Informações </span> da Empresa</h2>
                         </span>
                         <div>
+                            <div className="mb-4 flex justify-center">
+                                <input
+                                    id='campo'
+                                    placeholder='CNPJ'
+                                    className="form-control z-0  block w-2/3 px-4 text-center py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-white focus:shadow-md focus:shadow-slate-500 focus:bg-indigo-300 focus:border-blue-600 focus:outline-none"
+                                    {...register("checkCNPJ")}
+                                />
+                                <span
+                                    className=" relative right-10 top-2 cursor-pointer !px-0 z-10"
+                                    id="campo"
+                                    onClick={checkCNPJ}
+                                ><HiOutlineSearchCircle className='text-3xl' /></span>
+                            </div>
+
                             <form onSubmit={handleSubmit((data) => console.log(data))}>
                                 <div className='mt-4 pb-5  border border-slate-400  shadow-sm shadow-slate-600  p-2'>
                                     <div className='text-center text-md mb-2 '>Nome/CNPJ</div>
@@ -65,6 +75,7 @@ export default function AdminProfileScreen() {
                                             <input
                                                 {...register("razao_social")}
                                                 placeholder='Não encontrado'
+                                                readOnly
                                                 className="form-control text-sm w-full block text-center font-normal text-gray-700 bg-white "
                                             />
                                         </div>
@@ -73,6 +84,7 @@ export default function AdminProfileScreen() {
                                             <input
                                                 {...register("nome_fantasia")}
                                                 placeholder='Não encontrado'
+                                                readOnly
                                                 className="form-control text-sm w-full block text-center font-normal text-gray-700 bg-white  "
                                             />
                                         </div>
@@ -81,6 +93,7 @@ export default function AdminProfileScreen() {
                                             <input
                                                 {...register("cnpj")}
                                                 placeholder='Não encontrado'
+                                                readOnly
                                                 className="form-control text-sm w-full block text-center font-normal text-gray-700 bg-white  "
                                             />
                                         </div>
@@ -94,6 +107,7 @@ export default function AdminProfileScreen() {
                                             <input
                                                 {...register("cnae_fiscal")}
                                                 placeholder='Não encontrado'
+                                                readOnly
                                                 className="form-control text-sm w-full  block text-center font-normal text-gray-700 bg-white  "
                                             />
                                         </div>
@@ -102,6 +116,7 @@ export default function AdminProfileScreen() {
                                             <input
                                                 {...register("cnae_fiscal_descricao")}
                                                 placeholder='Não encontrado'
+                                                readOnly
                                                 className="form-control text-sm w-full  block text-center font-normal text-gray-700 bg-white  "
                                             />
                                         </div>
@@ -115,6 +130,7 @@ export default function AdminProfileScreen() {
                                             <input
                                                 {...register("natureza_juridica")}
                                                 placeholder='Não encontrado'
+                                                readOnly
                                                 className="form-control text-sm w-full  block text-center font-normal text-gray-700 bg-white  "
                                             />
                                         </div>
@@ -124,12 +140,14 @@ export default function AdminProfileScreen() {
                                                 <input
                                                     {...register("situacao_cadastral")}
                                                     placeholder='Não encontrado'
+                                                    readOnly
                                                     className="form-control text-sm w-1/2  block text-center font-normal text-gray-700 bg-white  "
                                                 />
                                                 <span>:</span>
                                                 <input
                                                     {...register("descricao_situacao_cadastral")}
                                                     placeholder='Não encontrado'
+                                                    readOnly
                                                     className="form-control text-sm w-1/2  block text-center font-normal text-gray-700 bg-white  "
                                                 />
                                             </div>
@@ -139,6 +157,7 @@ export default function AdminProfileScreen() {
                                             <input
                                                 {...register("data_situacao_cadastral")}
                                                 placeholder='Não encontrado'
+                                                readOnly
                                                 className="form-control text-sm w-full  block text-center font-normal text-gray-700 bg-white  "
                                             />
                                         </div>
@@ -153,6 +172,7 @@ export default function AdminProfileScreen() {
                                                 <input
                                                     {...register("descricao_tipo_de_logradouro")}
                                                     placeholder='Não encontrado'
+                                                    readOnly
                                                     className="form-control text-sm w-full  block text-center font-normal text-gray-700 bg-white  "
                                                 />
                                             </div>
@@ -163,6 +183,7 @@ export default function AdminProfileScreen() {
                                                 <input
                                                     {...register("logradouro")}
                                                     placeholder='Não encontrado'
+                                                    readOnly
                                                     className="form-control text-sm w-full  block text-center font-normal text-gray-700 bg-white  "
                                                 />
                                             </div>
@@ -173,6 +194,7 @@ export default function AdminProfileScreen() {
                                                 <input
                                                     {...register("complemento")}
                                                     placeholder='Não encontrado'
+                                                    readOnly
                                                     className="form-control text-sm w-full  block text-center font-normal text-gray-700 bg-white  "
                                                 />
                                             </div>
@@ -185,6 +207,7 @@ export default function AdminProfileScreen() {
                                                 <input
                                                     {...register("bairro")}
                                                     placeholder='Não encontrado'
+                                                    readOnly
                                                     className="form-control text-sm w-full  block text-center font-normal text-gray-700 bg-white  "
                                                 />
                                             </div>
@@ -195,6 +218,7 @@ export default function AdminProfileScreen() {
                                                 <input
                                                     {...register("cep")}
                                                     placeholder='Não encontrado'
+                                                    readOnly
                                                     className="form-control text-sm w-full  block text-center font-normal text-gray-700 bg-white  "
                                                 />
                                             </div>
@@ -205,6 +229,7 @@ export default function AdminProfileScreen() {
                                                 <input
                                                     {...register("uf")}
                                                     placeholder='Não encontrado'
+                                                    readOnly
                                                     className="form-control text-sm w-full  block text-center font-normal text-gray-700 bg-white  "
                                                 />
                                             </div>
@@ -220,6 +245,7 @@ export default function AdminProfileScreen() {
                                                 <input
                                                     {...register("ddd_telefone_1")}
                                                     placeholder='Não encontrado'
+                                                    readOnly
                                                     className="form-control text-sm w-full  block text-center font-normal text-gray-700 bg-white  "
                                                 />
                                             </div>
@@ -230,6 +256,7 @@ export default function AdminProfileScreen() {
                                                 <input
                                                     {...register("ddd_telefone_2")}
                                                     placeholder='Não encontrado'
+                                                    readOnly
                                                     className="form-control text-sm w-full  block text-center font-normal text-gray-700 bg-white  "
                                                 />
                                             </div>
@@ -240,20 +267,21 @@ export default function AdminProfileScreen() {
                                                 <input
                                                     {...register("email")}
                                                     placeholder='Não encontrado'
+                                                    readOnly
                                                     className="form-control text-sm w-full  block text-center font-normal text-gray-700 bg-white  "
                                                 />
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                
+
                             </form>
                         </div>
                     </div>
                     <div className='col-span-2 h-auto bg-slate-900 shadow-sm shadow-slate-600'>
                         <div className=' '>
                             {session?.user.isAdmin ?
-                            (
+                                (
                                     <div className='p-10'>
                                         <div className='flex justify-center '>
                                             <Image
