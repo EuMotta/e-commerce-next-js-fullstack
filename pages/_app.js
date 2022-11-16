@@ -1,15 +1,28 @@
-import '../styles/globals.css'
-import { StoreProvider } from '../utils/Store'
-import { SessionProvider, useSession } from 'next-auth/react'
-import { useRouter } from 'next/router'
-import { PayPalScriptProvider } from '@paypal/react-paypal-js'
+import { PayPalScriptProvider } from "@paypal/react-paypal-js";
+import ProgressBar from "@badrap/bar-of-progress";
+import { Router, useRouter } from "next/router";
+import { SessionProvider, useSession } from "next-auth/react";
+import { StoreProvider } from "../utils/Store";
+import "../styles/globals.css";
+
+const progress = new ProgressBar({
+  size: 4,
+  color: "#1e40af",
+  className: "z-50",
+  delay: 100,
+});
+
+Router.events.on("routeChangeStart", progress.start);
+Router.events.on("routeChangeComplete", progress.finish);
+Router.events.on("routeChangeError", progress.finish);
+
 function MyApp({ Component, pageProps: { session, ...pageProps } }) {
   return (
     <SessionProvider session={session}>
       <StoreProvider>
         <PayPalScriptProvider deferLoading={true}>
           {Component.auth ? (
-            <Auth adminOnly={Component.auth.adminOnly}>
+            <Auth>
               <Component {...pageProps} />
             </Auth>
           ) : (
@@ -18,23 +31,25 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
         </PayPalScriptProvider>
       </StoreProvider>
     </SessionProvider>
-  )
+  );
 }
 
 function Auth({ children, adminOnly }) {
-  const router = useRouter()
+  const router = useRouter();
   const { status, data: session } = useSession({
     required: true,
     onUnauthenticated() {
-      router.push('/unauthorized?message=login required')
-    }
-  })
-  if (status === 'loading') {
-    return <div>Carregando...</div>
+      router.push("/unauthorized?message=Por favor, acesse sua conta.");
+    },
+  });
+  if (status === "loading") {
+    return <div>Carregando...</div>;
   }
   if (adminOnly && !session.user.isAdmin) {
-router.push('/unauthorized?message: Administrador requerido')
+    router.push("/unauthorized?message=Administrador, por favor, acesse sua conta.");
   }
-  return children
+
+  return children;
 }
-export default MyApp
+
+export default MyApp;
