@@ -110,7 +110,7 @@ export default function ProductScreen(props) {
                                             <span className='text-sm text-red-600 line-through'>de: R$&nbsp;
                                                 {product.price}</span>
                                             <span className='text-xl  text-green-600'>por: R$&nbsp;
-                                                {product.price * 0.9}</span>
+                                            {(product.price - (product.price * product.descount) / 100).toFixed(2)}</span>
                                         </div> : "Vendido"}
                                     </div>
                                 </div>
@@ -119,7 +119,8 @@ export default function ProductScreen(props) {
                                     <div>
                                         {
                                             product.countInStock ?
-                                                `Restantes ${product.countInStock}` :
+                                                <span> <span className='text-green-600'>Disponível</span>
+                                               <div className='text-sm'>Restantes{product.countInStock} </div></span> :
                                                 <span className='text-red-500'> Indisponível</span>
                                         }
                                     </div>
