@@ -5,6 +5,7 @@ import Layout from "../../components/Layout"
 import Link from "next/link"
 import React, { useEffect, useReducer } from "react"
 import { FcInfo,FcConferenceCall } from 'react-icons/fc'
+import ReactTooltip from "react-tooltip"
 
 function reducer(state, action) {
   switch (action.type) {
@@ -52,21 +53,6 @@ function AdminUsersScreen() {
     }
   }, [successDelete])
 
-  // const deleteHandler = async (userId) => {
-  //   if (!window.confirm("Você tem certeza?")) {
-  //     return
-  //   }
-  //   try {
-  //     dispatch({ type: "DELETE_REQUEST" })
-  //     await axios.delete(`/api/admin/users/${userId}`)
-  //     dispatch({ type: "DELETE_SUCCESS" })
-  //     toast.success("Usuario deletado.")
-  //   } catch (err) {
-  //     dispatch({ type: "DELETE_FAIL" })
-  //     toast.error(getError(err))
-  //   }
-  // }
-
   return (
     <Layout title="Usuários">
       <div className="grid md:grid-cols-6 md:gap-5">
@@ -81,6 +67,7 @@ function AdminUsersScreen() {
             <div className="alert-error">{error}</div>
           ) : (
             <div className="flex mb-5 justify-center">
+               
               <table className="w-full mx-2">
                 <thead className="border-b-8  border-2 border-b-indigo-500">
                   <tr className="text-sm text-slate-800">
@@ -98,7 +85,7 @@ function AdminUsersScreen() {
                       key={user._id}
                       className="rounded text-md shadow-sm shadow-slate-500 hover:translate-x-1 ease-in-out transition-all  hover:shadow-md hover:shadow-slate-700"
                     >
-                      <td className="p-5">{user._id.substring(20, 24)}</td>
+                      <td className="p-5 cursor-pointer" data-event='click focus' data-tip={user._id}>{user._id.substring(20, 24)}</td>
                       <td className="p-5">{user.name}</td>
                       <td className="p-5">{user.lastName}</td>
                       <td className="p-5">{user.email}</td>
@@ -106,19 +93,10 @@ function AdminUsersScreen() {
                       <td className="p-5">
                         <span className=" flex justify-center">
                           <Link href={`/admin/user/${user._id}`} passHref>
-
                             <FcInfo className='text-3xl cursor-pointer' />
-
                           </Link>
                         </span>
-                        &nbsp;
-                        {/* <button
-                          type="button"
-                          className="cursor-pointer  !bg-red-400"
-                          onClick={() => deleteHandler(user._id)}
-                        >
-                          <i className="ri-delete-bin-2-line text-lg"></i>
-                        </button> */}
+                        &nbsp; 
                       </td>
                     </tr>
                   ))}

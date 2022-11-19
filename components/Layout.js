@@ -14,6 +14,7 @@ import SideLinks from './SideLinks'
 import { AiOutlineLoading } from 'react-icons/ai'
 import {MdAdminPanelSettings} from 'react-icons/md'
 import {FcUp} from 'react-icons/fc'
+import ReactTooltip from 'react-tooltip'
 
 
 const nav_links = [
@@ -197,6 +198,7 @@ export default function Layout({ title, children }) {
                     (
                         <div className="fixed  z-50 top-52">
                             <SideLinks />
+                            <ReactTooltip place="top" type="info" effect="solid" backgroundColor='#3949ab' globalEventOff='click' />
                         </div>
                     ) : ("")
                 }

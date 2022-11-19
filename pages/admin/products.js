@@ -7,6 +7,7 @@ import { toast } from 'react-toastify'
 import Layout from '../../components/Layout'
 import { getError } from '../../utils/error'
 import { FcInfo,FcPaid } from 'react-icons/fc'
+import ReactTooltip from 'react-tooltip'
 
 function reducer(state, action) {
     switch (action.type) {
@@ -91,40 +92,8 @@ export default function ProductsScreen() {
     }
     return (
         <Layout title='Produtos'>
-            <div className="grid md:grid-cols-6 md:gap-5">
-                {/* <div className="card md:col-span-1  text-center text-md py-5 px-1">
-                        <i className="ri-admin-fill text-4xl text-indigo-700"></i>
-                        <ul className=" mr-3">
-                            <li>
-                                <Link href="/admin/dashBoard">
-                                    <button className="cursor-pointer  w-full primary-button">
-                                        Visão geral
-                                    </button>
-                                </Link>
-                            </li>
-                            <li>
-                                <Link href="/admin/orders">
-                                    <button className="cursor-pointer w-full primary-button">
-                                        Pedidos
-                                    </button>
-                                </Link>
-                            </li>
-                            <li>
-                                <Link href="/admin/products">
-                                    <button className="cursor-pointer  w-full primary-button">
-                                        Produtos
-                                    </button>
-                                </Link>
-                            </li>
-                            <li>
-                                <Link href="/admin/users">
-                                    <button className="cursor-pointer w-full primary-button">
-                                        Usuários
-                                    </button>
-                                </Link>
-                            </li>
-                        </ul>
-                    </div> */}
+           
+            <div className="grid md:grid-cols-6 md:gap-5">       
                 <div className=" mx-2 md:col-span-6">
                     <div className='grid'>
                         <h1 className="mb-4 flex justify-center text-indigo-600 text-4xl">
@@ -141,8 +110,9 @@ export default function ProductsScreen() {
                         <div>Carregando...</div>
                     ) : error ? (
                         <div className="alert-error">{error}</div>
-                    ) : (
+                    ) : (                          
                         <div className="flex mb-5 justify-center">
+                             
                             <table className="w-full mx-2">
                                 <thead className="border-b-8  border-2 border-b-indigo-500">
                                     <tr className="text-sm text-slate-800">
@@ -159,12 +129,13 @@ export default function ProductsScreen() {
                                     </tr>
                                 </thead>
                                 <tbody className="text-center" >
-                                    {products.map((product) => (
+                                    {products.map((product) => ( 
                                         <tr
                                             key={product._id}
                                             className=" rounded text-md shadow-sm shadow-slate-500 hover:translate-x-1 ease-in-out transition-all  hover:shadow-md hover:shadow-slate-700"
                                         >
-                                            <td className="p-5">{product._id.substring(20, 24)}</td>
+                                           
+                                            <td className="p-5 cursor-pointer"  data-event='click focus' data-tip={product._id}>{product._id.substring(20, 24)}</td>
                                             <td className="flex  cursor-pointer mt-2 items-center">
                                                 <Image
                                                     src={product.image}

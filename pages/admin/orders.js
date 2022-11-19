@@ -6,6 +6,7 @@ import moment from "moment"
 import React, { useEffect, useReducer } from "react"
 import "remixicon/fonts/remixicon.css"
 import { FcViewDetails, FcTodoList, FcInspection } from 'react-icons/fc'
+import ReactTooltip from "react-tooltip"
 
 function reducer(state, action) {
     switch (action.type) {
@@ -75,14 +76,14 @@ export default function AdminOrderScreen() {
                                         <th className="p-5 text-center">Detalhes</th>
                                     </tr>
                                 </thead>
-                                <tbody className="text-center">
+                                <tbody className="text-center">      
                                     {orders.map((order) => (
                                         <tr
                                             title="Exibir ID completo"
-                                            key={order._id}
+                                            key={order._id}                                           
                                             className=" rounded cursor-pointer text-md shadow-sm shadow-slate-500 hover:translate-x-1 ease-in-out transition-all  hover:shadow-md hover:shadow-slate-700"
                                         >
-                                            <td className="p-5" title={order._id}>{order._id.substring(20, 24)}</td>
+                                            <td className="p-5" data-event='click focus' data-tip={order._id}>{order._id.substring(20, 24)}</td>
                                             <td className="p-5">
                                                 {order.user ? order.user.name :
                                                     <span className="text-red-600">

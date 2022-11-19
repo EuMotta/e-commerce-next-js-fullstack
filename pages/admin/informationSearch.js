@@ -2,6 +2,7 @@ import React from 'react'
 import Layout from '../../components/Layout'
 import { useForm } from 'react-hook-form'
 import { HiOutlineSearchCircle } from 'react-icons/hi'
+import { FcSearch } from 'react-icons/fc'
 
 export default function InformationSearch() {
     const { handleSubmit, register, setValue } = useForm()
@@ -57,11 +58,6 @@ export default function InformationSearch() {
     return (
         <Layout title='Perfil Admin'>
             <div className=''>
-                <div className="mb-4 grid col-span-1">
-
-
-                </div>
-
                 <div className='grid grid-cols-6 gap-5'>
                     <div className='border-4 col-span-4 rounded-lg p-10 bg-slate-50 shadow-sm shadow-slate-600'>
                         <span className='text-center my-2'>
@@ -79,7 +75,9 @@ export default function InformationSearch() {
                                     className=" relative right-10 top-2 cursor-pointer !px-0 z-10"
                                     id="campo"
                                     onClick={checkCNPJ}
-                                ><HiOutlineSearchCircle className='text-3xl' /></span>
+                                >
+                                    <FcSearch className='text-3xl' />
+                                </span>
                             </div>
                         </div>
                         <div>
@@ -312,7 +310,9 @@ export default function InformationSearch() {
                                     className=" relative right-10 top-2 cursor-pointer !px-0 z-10"
                                     id="taxa"
                                     onClick={checkTaxa}
-                                ><HiOutlineSearchCircle className='text-3xl' /></span>
+                                >
+                                    <FcSearch className='text-3xl' />
+                                </span>
                             </div>
                             <div>
                                 <form onSubmit={handleSubmit((data) => console.log(data))}>
@@ -357,7 +357,9 @@ export default function InformationSearch() {
                                     className=" relative right-10 top-2 cursor-pointer !px-0 z-10"
                                     id="domain"
                                     onClick={checkDomain}
-                                ><HiOutlineSearchCircle className='text-3xl' /></span>
+                                >
+                                    <FcSearch className='text-3xl' />
+                                </span>
                             </div>
                             <div>
                                 <form onSubmit={handleSubmit((data) => console.log(data))}>

@@ -26,7 +26,6 @@ export default function ProductItem({ product, addToCartHandler }) {
                     <a>
                         <h2 className="text-xl my-3 text-center text-indigo-600">{product.name}</h2>
                     </a>
-
                 </Link>
                 <a>
                     <h2 className="my-3 text-slate-800">{product.description.substring(0, 56)}...</h2>

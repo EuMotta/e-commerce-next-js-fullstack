@@ -5,6 +5,7 @@ import Layout from '../../components/Layout'
 import { MdAdminPanelSettings } from 'react-icons/md'
 import { HiOutlineSearchCircle } from 'react-icons/hi'
 import { useForm } from 'react-hook-form'
+import { FcSearch } from 'react-icons/fc'
 
 export default function AdminProfileScreen() {
     const { data: session } = useSession()
@@ -56,14 +57,17 @@ export default function AdminProfileScreen() {
                                 <input
                                     id='campo'
                                     placeholder='CNPJ'
-                                    className="form-control z-0  block w-2/3 px-4 text-center py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-white focus:shadow-md focus:shadow-slate-500 focus:bg-indigo-300 focus:border-blue-600 focus:outline-none"
+                                    className="form-control  z-0  block w-2/3 px-4 text-center py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-white focus:shadow-md focus:shadow-slate-500 focus:bg-indigo-300 focus:border-blue-600 focus:outline-none"
                                     {...register("checkCNPJ")}
+                                    inputSuffix={<span className="text-5xl">USD</span>}
                                 />
                                 <span
                                     className=" relative right-10 top-2 cursor-pointer !px-0 z-10"
                                     id="campo"
                                     onClick={checkCNPJ}
-                                ><HiOutlineSearchCircle className='text-3xl' /></span>
+                                >
+                                    <FcSearch className='text-3xl' />
+                                </span>
                             </div>
 
                             <form onSubmit={handleSubmit((data) => console.log(data))}>
