@@ -61,6 +61,7 @@ export default function ShippingScreen() {
             setValue('state', data.uf)
         })
     }
+
     return (
         <Layout title="Endereço da Entrega">
             <CheckoutWizard activeStep={1} />

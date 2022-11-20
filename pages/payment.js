@@ -63,7 +63,6 @@ export default function PaymentScreen() {
                                             checked={selectedPaymentMethod === payment}
                                             onChange={() => setSelectedPaymentMethod(payment)}
                                         />
-
                                         {
                                             payment === 'Paypal' ?
                                                 (<div className='flex gap-x-10 justify-between'>{payment}<BsPaypal /> </div>)
@@ -74,7 +73,6 @@ export default function PaymentScreen() {
                                                         : payment === 'Boleto' ?
                                                             (<div className='flex gap-x-10 justify-between'>{payment} <FaBarcode /></div>)
                                                             : ''
-
                                         }
                                     </span>
                                 </label>

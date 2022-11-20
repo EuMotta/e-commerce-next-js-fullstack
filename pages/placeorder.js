@@ -103,7 +103,6 @@ export default function PlaceOrderScreen() {
                                     ))}
                                 </tbody>
                             </table>
-
                             <div className='text-end mr-16 pr-2'>$ {itemsPrice}</div>
                         </div>
                         <div className='grid ml-12 mx-2 grid-cols-2'>
@@ -161,7 +160,6 @@ export default function PlaceOrderScreen() {
                                                             : paymentMethod === 'Boleto' ?
                                                                 (<div className='flex  justify-center '><FaBarcode />{paymentMethod} </div>)
                                                                 : ''
-
                                             }
                                         </span>
                                     </div>
@@ -175,7 +173,6 @@ export default function PlaceOrderScreen() {
                                 </div>
                             </div>
                         </div>
-
                     </div>
                     <div>
                         <div className='card p-5 mt-2'>

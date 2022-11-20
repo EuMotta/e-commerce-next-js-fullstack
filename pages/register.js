@@ -231,7 +231,8 @@ export default function LoginScreen() {
                                         Já possui uma conta?
                                         <Link href={`/login?redirect=${redirect || '/'} `}
                                             className="text-red-600 hover:text-red-700 focus:text-red-700 transition duration-200 ease-in-out"> Entrar</Link>
-                                    </p></div>
+                                    </p>
+                                    </div>
                                 </div>
                             </form>
                         </div>

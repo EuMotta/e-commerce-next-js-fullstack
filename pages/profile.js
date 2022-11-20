@@ -51,8 +51,7 @@ export default function ProfileScreen() {
         <Layout title={`Perfil de ${session.user.name}`}>
             {
                 session.user.isAdmin ? (
-                    <Link
-                        
+                    <Link  
                         onLoad={router.push('/unauthorizedProfile')} >
                     </Link>
                 ) : (
@@ -130,7 +129,6 @@ export default function ProfileScreen() {
                                     </div>
                                 </div>
                                 <div className='p-5  md:col-span-1 sm:col-span-2 col-span-2'>
-
                                     <div className="mb-4">
                                         <label
                                             htmlFor='password'

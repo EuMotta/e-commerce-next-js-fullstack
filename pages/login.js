@@ -44,9 +44,7 @@ export default function LoginScreen() {
         <Layout>
             <section className="h-full">
                 <div className="px-6 h-full text-gray-800">
-                    <div
-                        className="flex xl:justify-center lg:justify-between justify-center items-center flex-wrap h-full g-6"
-                    >
+                    <div className="flex xl:justify-center lg:justify-between justify-center items-center flex-wrap h-full g-6" >
                         {/* <div
                             className="grow-0 login_img shrink-1 md:shrink-0 basis-auto xl:w-6/12 lg:w-6/12 md:w-9/12 mb-12 md:mb-0"
                         >
@@ -154,7 +152,6 @@ export default function LoginScreen() {
                                         />
                                         <label className="form-check-label inline-block text-gray-800" htmlFor="checkbox">Lembrar-me</label>
                                     </div>
-                                    
                                 </div>
                                 <div className="text-center">
                                     <button
@@ -167,7 +164,8 @@ export default function LoginScreen() {
                                         Não possui uma conta?
                                         <Link href={`/register?redirect=${redirect || '/'} `}
                                             className="text-red-600 hover:text-red-700 focus:text-red-700 transition duration-200 ease-in-out"> Registre-se</Link>
-                                    </p></div>
+                                    </p>
+                                    </div>
                                 </div>
                             </form>
                         </div>

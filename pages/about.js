@@ -76,7 +76,6 @@ export default function AboutScreen() {
                             <button className='text-xl !px-10 primary-button'>Download CV</button>
                         </div>
                     </div>
-
                 </div>
             </div>
             <div className='my-36'>
@@ -135,7 +134,6 @@ export default function AboutScreen() {
                     </div>
                 </div>
             </div>
-
             <div className='grid grid-cols-5 '>
                 <div className='col-span-3'>
                     <h1 className='text-5xl mt-20'>Responsividade para todos os dispositivos!</h1>
