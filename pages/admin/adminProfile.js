@@ -46,7 +46,6 @@ export default function AdminProfileScreen() {
     return (
         <Layout title='Perfil Admin'>
             <div className=''>
-
                 <div className='grid grid-cols-6 gap-5'>
                     <div className='border-4 col-span-4 rounded-lg p-10 bg-slate-50 shadow-sm shadow-slate-600'>
                         <span className='text-center my-2'>

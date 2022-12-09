@@ -48,7 +48,6 @@ export default function AboutScreen() {
                         height={350}
                     />
                 </div>
-
                 <div className='col-span-3 '>
                     <div className='mt-10 mr-28'>
                         <h2 className='text-4xl abouth2'>Olá, eu sou</h2>
